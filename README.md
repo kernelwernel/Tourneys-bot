@@ -2,9 +2,9 @@
 
 A TypeScript bot for the Tourneys server
 
-<p align="center">
+<p>
 <br>
-========================== <br>
+============================================= <br>
 🚧 NOTE: THIS PROJECT IS UNDER CONSTRUCTION 🚧 <br>
-========================== <br>
+============================================= <br>
 </p>
