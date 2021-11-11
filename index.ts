@@ -2,7 +2,7 @@ import DiscordJS, { Intents } from 'discord.js'
 import WOKCommands from 'wokcommands'
 import dotenv from 'dotenv'
 import path from 'path'
-dotenv.config()
+import "dotenv/config"
 
 const client = new DiscordJS.Client({
     intents: [
