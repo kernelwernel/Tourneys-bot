@@ -102,3 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Personal
+stuff.md
+dev/
+inspirations
