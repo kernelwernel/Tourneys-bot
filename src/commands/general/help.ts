@@ -1,6 +1,8 @@
 import { Interaction, MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 import * as config from "../../config.json"
+import LOG_TAGS from "../../headers/logs"
+const LOG = new LOG_TAGS()
 
 export default {
     category: "General",
@@ -11,7 +13,7 @@ export default {
     ownerOnly: false,
     testOnly: false,
 
-    callback: async ({ message }) => {
+    callback: async ({ message, client, interaction }) => {
         const embed = new MessageEmbed()
             .setTitle("📜 Command List 📜")
             .setColor(`#${config.color}`)
@@ -33,49 +35,60 @@ export default {
                 },
                 {
                     name: `__**${config.prefix}links**__`,
-                    value: "> - Returns with the server's invite link",
+                    value: "> - Returns with relevant links",
                     inline: false    
                 },
             )
-
-            const newMessage = await message.channel.send({
-                embeds: [embed]
-            })
-
-            //if (config.admin_list.includes(message.author.id)) {
-
-                const newEmbed = newMessage.embeds[0]
-                newEmbed.setTitle("⚒️ Admin Command List ⚒️")
-                newEmbed.setColor(`#${config.admin_color}`)
-                newEmbed.addFields(
-                    {
-                        name: `__**${config.prefix}clear-console**__`, 
-                        value: "> - Clears the system and client logs in the terminal",
-                        inline: false,
-                    },
-                    {
-                        name: `__**${config.prefix}test**__`,
-                        value: "> - <:trollgod:855435721624256542>",
-                        inline: false,
-                    },
-                    {
-                        name: `__**${config.prefix}status**__`, 
-                        value: "> - Change the activity presence of the bot",
-                        inline: false,
-                    },
-                    {
-                        name: `__**${config.prefix}kill**__`,
-                        value: "> - Terminates the bot process, **ONLY** use this in an emergency situation",
-                        inline: false    
-                    },
-                    {
-                        name: `__**${config.prefix}reload**__`, 
-                        value: "> - Refreshes all the source files, basically a reload",
-                        inline: false,
-                    },
-                )
-                return newEmbed
+        message.channel.send({
+            embeds: [embed]
+        }).then(() => {
+            if (config.admin_list.includes(message.author.id)) {
+                const AdminEmbed = new MessageEmbed()
+                    .setTitle("⚒️ Admin Command List ⚒️")
+                    .setColor(`#${config.admin_color}`)
+                    .addFields(
+                        {
+                            name: `__**${config.prefix}clear-console**__`, 
+                            value: "> - Clears the system and client logs in the terminal",
+                            inline: false,
+                        },
+                        {
+                            name: `__**${config.prefix}test**__`,
+                            value: "> <:trollgod:855435721624256542>",
+                            inline: false,
+                        },
+                        {
+                            name: `__**${config.prefix}status**__`, 
+                            value: "> - Change the activity presence of the bot",
+                            inline: false,
+                        },
+                        {
+                            name: `__**${config.prefix}kill**__`,
+                            value: "> - Terminates the bot process, **ONLY** use this in an emergency situation",
+                            inline: false    
+                        },
+                        {
+                            name: `__**${config.prefix}reload**__`, 
+                            value: "> - Refreshes all the source files, basically a reload",
+                            inline: false,
+                        },
+                        {
+                            name: `__**${config.prefix}members**__`, 
+                            value: "> - Displays the server's member count",
+                            inline: false,
+                        },
+                        /*
+                        {
+                            name: `__**${config.prefix}reload**__`, 
+                            value: "> - Refreshes all the source files, basically a reload",
+                            inline: false,
+                        },
+                        */
+                    )
+                message.channel.send({
+                    embeds: [AdminEmbed]
+                })
             }
-        }
-    }
+        })
+    } 
 } as ICommand

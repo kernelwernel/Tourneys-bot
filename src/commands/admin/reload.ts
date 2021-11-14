@@ -1,21 +1,21 @@
 import { Interaction, MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
-import LOG_TAGS from "../../logs"
 import * as config from "../../config.json"
+import LOG_TAGS from "../../headers/logs"
+const LOG = new LOG_TAGS()
 
 
 export default {
     category: "Admin",
-    description: "Just a simple test command to see if the bot works",
+    description: "Reload all the commands and .ts files of the bot",
     
     slash: false,
     
-    permissions: ["ADMINISTRATOR"],
+    permissions: ["MANAGE_GUILD"],
     ownerOnly: true,
     testOnly: true,
 
     callback: ({ message }) => {
-        const LOG = new LOG_TAGS();
         console.log(`${LOG.SYSTEM_RELOADING}`)
 
         for (const path in require.cache) {
@@ -24,11 +24,17 @@ export default {
             }
         }
         
-        console.log(`${LOG.SYSTEM_RELOADED}`)
         const embed = new MessageEmbed()
             .setTitle(`🛠 Admin panel 🛠`)
             .setDescription(`\`\`\`> Commands have been reloaded\`\`\``)
             .setColor(`#${config.admin_color}`)
-        return embed
+        message.channel.send({
+            embeds: [embed]
+        }).catch((error) => {
+            console.log(`${LOG.SYSTEM_ERROR} - ${error}`)
+            process.exit(1)
+        })
+
+        console.log(`${LOG.SYSTEM_RELOADED}`)
     }
 } as ICommand

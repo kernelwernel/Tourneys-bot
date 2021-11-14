@@ -1,8 +1,8 @@
 import { ICommand } from "wokcommands";
 import { Interaction, MessageEmbed } from "discord.js";
-import LOG_TAGS from "../../logs"
-const LOG = new LOG_TAGS()
 import * as config from "../../config.json"
+import LOG_TAGS from "../../headers/logs"
+const LOG = new LOG_TAGS()
 
 export default {
     category: "Admin",
@@ -26,7 +26,7 @@ export default {
             embeds: [embed]
         })
 
-        await new Promise(resolve => setTimeout(resolve))
+        //await new Promise(resolve => setTimeout(resolve))
 
         const newEmbed = newMessage.embeds[0]
         newEmbed.setDescription("\`\`\`> Shutting down the bot...\n> Bot has been shut down\`\`\`")

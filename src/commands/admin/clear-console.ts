@@ -1,7 +1,8 @@
 import { Interaction, MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
-import LOG_TAGS from "../../logs"
 import * as config from "../../config.json"
+import LOG_TAGS from "../../headers/logs"
+const LOG = new LOG_TAGS()
 
 export default {
     category: "Admin",
@@ -10,7 +11,7 @@ export default {
 
     slash: false,
 
-    permissions: ["ADMINISTRATOR"],
+    permissions: ["MANAGE_GUILD"],
     ownerOnly: true,
     testOnly: true,
 
@@ -18,7 +19,7 @@ export default {
         const embed = new MessageEmbed()
             .setColor(`#${config.admin_color}`)
             .setTitle(config.admin_title)
-            .setDescription(`\`\`\`> Console has been cleared...\n\`\`\``)
+            .setDescription(`\`\`\`> Console has been cleared\n\`\`\``)
             console.clear()
         return embed
     }

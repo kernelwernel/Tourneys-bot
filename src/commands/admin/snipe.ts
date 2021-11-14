@@ -1,21 +1,21 @@
-import { Interaction, MessageEmbed } from "discord.js";
+import { text } from "stream/consumers";
 import { ICommand } from "wokcommands";
-import LOG_TAGS from "../../logs"
-const LOG = new LOG_TAGS()
 import * as config from "../../config.json"
+import LOG_TAGS from "../../headers/logs"
+const LOG = new LOG_TAGS()
+
 
 export default {
-    category: "",
-    description: "",
-    aliases: [""],
+    category: "General",
+    description: "snipe command",
 
-    slash: "both",
+    slash: false,
 
     permissions: ["ADMINISTRATOR"],
     ownerOnly: false,
     testOnly: false,
 
     callback: ({ message, client, interaction, text }) => {
-        
+        // TODO: add the snipe command functionality ffs
     }
 } as ICommand

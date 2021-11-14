@@ -1,12 +1,11 @@
-import DiscordJS, { Client, Collection, Intents, MessageEmbed } from "discord.js"
+import DiscordJS, { Client, Collection, Intents, Message, MessageEmbed } from "discord.js"
 import WOKCommands from "wokcommands"
 import path from "path"
 import testSchema from "./test-schema"
 import fs from "fs"
 
-
 import * as config from "./config.json"
-import LOG_TAGS from "./logs"
+import LOG_TAGS from "./headers/logs"
 const LOG = new LOG_TAGS()
 
 import "dotenv/config"
@@ -44,7 +43,8 @@ fs.readdir("./src/commands/general", (err, files) => {
 
 client.on('ready', async () => {
     
-    client.user?.setActivity(`${config.activity}`, { type: "WATCHING" });
+    client.user?.setActivity(`${config.activity}`, { type: "WATCHING" })
+    console.log(`${LOG.CLIENT_INFO} - Bot presence has been set`)
 
     new WOKCommands(client, {
         commandsDir: path.join(__dirname, 'commands'),
@@ -74,8 +74,6 @@ client.on('ready', async () => {
             message: "testing",
         }).save()
     }, 1000)
-
-    
 });
 
 client.on('messageCreate', (message) => {
@@ -92,27 +90,23 @@ client.on('messageCreate', (message) => {
     var commands = admin_commands.concat(general_commands)
     var evalcommand = message.content.slice(1, message.content.length)
     if (commands.includes(evalcommand)) {
-        console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`)
+        console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} in - ${message.content}`)
     }
 });
 
-client.on('messageDelete', (message) => {
-    
+client.on('messageDelete', async (message) => {
+    const fetchedLogs = await message.guild?.fetchAuditLogs({
+        limit: 6,
+        type: 'MESSAGE_DELETE'
+    }).catch(console.error);
+    // https://stackoverflow.com/questions/53328061/finding-who-deleted-the-message
 });
 
 client.login(process.env.TOKEN).then(() => {
-    console.log(`\n\t${LOG.SYSTEM_SUCCESS} - Logged into ${client.user?.tag}\n`);
-
-    /*
-    console.log(LOG.CLIENT_DM)
-    console.log(LOG.CLIENT_COMMAND)
-    console.log(LOG.SYSTEM_SUCCESS)
-    console.log(LOG.SYSTEM_ERROR)
-    console.log(LOG.SYSTEM_RELOADING)
-    console.log(LOG.SYSTEM_RELOADED)
-    */
+    console.log(`\n${LOG.SYSTEM_SUCCESS} - Logged into ${client.user?.tag}\n`);
 });
 
 process.on('unhandledRejection', (reason, promise) => {
     console.log(LOG.SYSTEM_ERROR + " - " + reason);
+    process.exit(1)
 });

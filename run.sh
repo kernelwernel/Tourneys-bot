@@ -1,2 +1,2 @@
 #!/bin/bash
-ts-node-dev --respawn --transpile-only --poll ./src/index.ts
+nodemon ./src/index.ts
