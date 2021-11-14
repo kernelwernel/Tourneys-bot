@@ -3,7 +3,7 @@ FROM nodemon:alpine
 WORKDIR /app
 COPY package.json ./
 
-RUN apk add --update \
+RUN apk add --no-cache \
 && apk add --no-cache nodejs-current nodejs-npm \
 && npm install -g npm@8.1.3 \
 && npm install
