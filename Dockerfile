@@ -3,11 +3,10 @@ FROM nodemon:alpine
 WORKDIR /app
 COPY package.json ./
 
-RUN apk add --update
-RUN apk upgrade --available && sync
-RUN apk add --no-cache nodejs-current nodejs-npm
-RUN npm install -g npm@8.1.3
-RUN npm install
+RUN apk add --update \
+&& apk add --no-cache nodejs-current nodejs-npm \
+&& npm install -g npm@8.1.3 \
+&& npm install
 
 COPY . .
 RUN npm run build
