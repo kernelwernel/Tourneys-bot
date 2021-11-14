@@ -7,6 +7,7 @@ const LOG = new LOG_TAGS()
 export default {
     category: "General",
     description: "Replies with the command list",
+    aliases: ["commands"],
 
     slash: "both",
 

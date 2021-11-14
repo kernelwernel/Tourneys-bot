@@ -7,6 +7,7 @@ const LOG = new LOG_TAGS()
 export default {
     category: "General",
     description: "Replies with pong",
+    aliases: ["membercount", "member"],
     
     slash: "both",
     
