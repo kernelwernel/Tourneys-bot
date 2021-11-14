@@ -20,7 +20,7 @@ export default {
             .setColor(`#${config.color}`)
             .addFields(
                 {
-                    name: `__**${config.prefix}info**__`, 
+                    name: `__**${config.prefix}info**__`,
                     value: "> - Displays all the bot's info",
                     inline: false,
                 },
@@ -30,14 +30,14 @@ export default {
                     inline: false,
                 },
                 {
-                    name: `__**${config.prefix}latency**__`, 
+                    name: `__**${config.prefix}latency**__`,
                     value: "> - Pings the API latency of the bot",
                     inline: false,
                 },
                 {
                     name: `__**${config.prefix}links**__`,
                     value: "> - Returns with relevant links",
-                    inline: false    
+                    inline: false
                 },
             )
         message.channel.send({
@@ -49,7 +49,7 @@ export default {
                     .setColor(`#${config.admin_color}`)
                     .addFields(
                         {
-                            name: `__**${config.prefix}clear-console**__`, 
+                            name: `__**${config.prefix}clear-console**__`,
                             value: "> - Clears the system and client logs in the terminal",
                             inline: false,
                         },
@@ -59,28 +59,28 @@ export default {
                             inline: false,
                         },
                         {
-                            name: `__**${config.prefix}status**__`, 
+                            name: `__**${config.prefix}status**__`,
                             value: "> - Change the activity presence of the bot",
                             inline: false,
                         },
                         {
                             name: `__**${config.prefix}kill**__`,
                             value: "> - Terminates the bot process, **ONLY** use this in an emergency situation",
-                            inline: false    
+                            inline: false
                         },
                         {
-                            name: `__**${config.prefix}reload**__`, 
+                            name: `__**${config.prefix}reload**__`,
                             value: "> - Refreshes all the source files, basically a reload",
                             inline: false,
                         },
                         {
-                            name: `__**${config.prefix}members**__`, 
+                            name: `__**${config.prefix}members**__`,
                             value: "> - Displays the server's member count",
                             inline: false,
                         },
                         /*
                         {
-                            name: `__**${config.prefix}reload**__`, 
+                            name: `__**${config.prefix}reload**__`,
                             value: "> - Refreshes all the source files, basically a reload",
                             inline: false,
                         },
@@ -91,5 +91,5 @@ export default {
                 })
             }
         })
-    } 
+    }
 } as ICommand
