@@ -11,9 +11,10 @@ export default {
     ownerOnly: false,
     testOnly: false,
 
-    callback: ({ message }) => {
+    callback: async ({ message }) => {
         const embed = new MessageEmbed()
             .setTitle("📜 Command List 📜")
+            .setColor(`#${config.color}`)
             .addFields(
                 {
                     name: `__**${config.prefix}info**__`, 
@@ -27,7 +28,7 @@ export default {
                 },
                 {
                     name: `__**${config.prefix}latency**__`, 
-                    value: "> - Pings the API latency of the bo",
+                    value: "> - Pings the API latency of the bot",
                     inline: false,
                 },
                 {
@@ -35,20 +36,46 @@ export default {
                     value: "> - Returns with the server's invite link",
                     inline: false    
                 },
-                /*
-                {
-                    name: `__**${config.prefix}**__`, 
-                    value: "> - ",
-                    inline: false,
-                },
-                */
             )
 
-            if (config.admin_list.includes(message.author.id)) {
-                const admin_embed = new MessageEmbed()
-                    .setTitle("⚒️ Admin Command List ⚒️")
-                return admin_embed
+            const newMessage = await message.channel.send({
+                embeds: [embed]
+            })
+
+            //if (config.admin_list.includes(message.author.id)) {
+
+                const newEmbed = newMessage.embeds[0]
+                newEmbed.setTitle("⚒️ Admin Command List ⚒️")
+                newEmbed.setColor(`#${config.admin_color}`)
+                newEmbed.addFields(
+                    {
+                        name: `__**${config.prefix}clear-console**__`, 
+                        value: "> - Clears the system and client logs in the terminal",
+                        inline: false,
+                    },
+                    {
+                        name: `__**${config.prefix}test**__`,
+                        value: "> - <:trollgod:855435721624256542>",
+                        inline: false,
+                    },
+                    {
+                        name: `__**${config.prefix}status**__`, 
+                        value: "> - Change the activity presence of the bot",
+                        inline: false,
+                    },
+                    {
+                        name: `__**${config.prefix}kill**__`,
+                        value: "> - Terminates the bot process, **ONLY** use this in an emergency situation",
+                        inline: false    
+                    },
+                    {
+                        name: `__**${config.prefix}reload**__`, 
+                        value: "> - Refreshes all the source files, basically a reload",
+                        inline: false,
+                    },
+                )
+                return newEmbed
             }
-        return embed
+        }
     }
 } as ICommand

@@ -1,11 +1,17 @@
 {
     "avatar": "./assets/logo.png",
+
     "status": "online",
+    "type": "WATCHING",
+    "activity": "for !help",
 
     "prefix": "!",
     "version": "1.0",
 
-    "color": "00ff00",
+    "color": "27E462",
+    "admin_color": "757575",
+    "admin_title": "🛠 Admin panel 🛠",
+
     "author": "nonce#7570",
     "license": "MIT",
     
@@ -15,6 +21,7 @@
         "683467496845606980",
         "593985080284676156",
         "351023689581461519", 
-        "299876224233373698"
+        "299876224233373698",
+        "270325321419587604"
     ]
 }
