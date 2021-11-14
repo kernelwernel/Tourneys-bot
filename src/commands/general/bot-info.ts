@@ -20,7 +20,7 @@ export default {
             .setColor(`#${config.color}`)
             .addFields(
                 { name: `__**Bot version**__`, value: `> 🏷 - 1.0`, inline: false },
-                { name: `__**Bot Admins**__`, 
+                { name: `__**Bot Admins**__`,
                     value: `>>> <:e63co024yh741:799633702590087238> - <@${config.admin_list[0]}>
                     <:e63co024yh741:799633702590087238> - <@${config.admin_list[1]}>
                     <:e63co024yh741:799633702590087238> - <@${config.admin_list[5]}>
@@ -42,6 +42,6 @@ export default {
                 */
             )
         return embed
-    } 
+    }
 } as ICommand
 
