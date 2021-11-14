@@ -17,7 +17,7 @@ export default {
 
     callback: ({ message, client, interaction, text }) => {
         const guild = client.guilds.cache.get(config.tourneys_id);
-        var memberCount = guild?.memberCount; 
+        var memberCount = guild?.memberCount;
         const embed = new MessageEmbed()
             .setColor(`#${config.color}`)
             .addFields(
