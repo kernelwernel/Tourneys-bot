@@ -20,8 +20,8 @@ export default {
             .setColor(`#${config.color}`)
             .addFields(
                 {
-                    name: `__**${config.prefix}info**__`,
-                    value: "> - Displays all the bot's info",
+                    name: `__**${config.prefix}help**__`,
+                    value: "> - Displays all the bot's commands",
                     inline: false,
                 },
                 {
@@ -30,13 +30,28 @@ export default {
                     inline: false,
                 },
                 {
-                    name: `__**${config.prefix}latency**__`,
-                    value: "> - Pings the API latency of the bot",
+                    name: `__**${config.prefix}links**__`,
+                    value: "> - Returns with relevant links",
+                    inline: false
+                },
+                {
+                    name: `__**${config.prefix}snipe**__`,
+                    value: "> - Snipe the most recently deleted message (work in progress)",
+                    inline: false
+                },
+                {
+                    name: `__**${config.prefix}members**__`,
+                    value: "> - Displays the member count of the server",
+                    inline: false
+                },
+                {
+                    name: `__**${config.prefix}bot-info**__`,
+                    value: "> - Displays the bot's info",
                     inline: false,
                 },
                 {
-                    name: `__**${config.prefix}links**__`,
-                    value: "> - Returns with relevant links",
+                    name: `__**${config.prefix}server-info**__`,
+                    value: "> - Displays the server's relevant links (work in progress)",
                     inline: false
                 },
             )
@@ -54,12 +69,7 @@ export default {
                             inline: false,
                         },
                         {
-                            name: `__**${config.prefix}test**__`,
-                            value: "> <:trollgod:855435721624256542>",
-                            inline: false,
-                        },
-                        {
-                            name: `__**${config.prefix}status**__`,
+                            name: `__**${config.prefix}status <status>**__`,
                             value: "> - Change the activity presence of the bot",
                             inline: false,
                         },
@@ -74,17 +84,10 @@ export default {
                             inline: false,
                         },
                         {
-                            name: `__**${config.prefix}members**__`,
-                            value: "> - Displays the server's member count",
+                            name: `__**${config.prefix}test**__`,
+                            value: "> <:trollgod:855435721624256542>",
                             inline: false,
                         },
-                        /*
-                        {
-                            name: `__**${config.prefix}reload**__`,
-                            value: "> - Refreshes all the source files, basically a reload",
-                            inline: false,
-                        },
-                        */
                     )
                 message.channel.send({
                     embeds: [AdminEmbed]

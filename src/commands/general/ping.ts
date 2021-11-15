@@ -17,6 +17,8 @@ export default {
         const embed = new MessageEmbed()
             .setDescription(`🏓 **Pong!** - ${Date.now() - message.createdTimestamp}ms`)
             .setColor(`#${config.color}`)
-        return embed
+        message.channel.send({
+            embeds: [embed]
+        })
     }
 } as ICommand

@@ -2,7 +2,9 @@
   "dependencies": {
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
+    "edit-json-file": "^1.6.2",
     "mongoose": "^6.0.12",
+    "nodemon": "^2.0.15",
     "ts-node": "^10.4.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.4.4",
@@ -14,9 +16,10 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node-dev --respawn --transpile-only --poll ./src/index.ts",
     "dev": "nodemon src/index.ts",
-    "reconfig": "rm -rf tsconfig.json && tsc -init"
+    "reconfig": "rm -rf tsconfig.json && tsc -init",
+    "build": "tsc -p .",
+    "start": "NODE_PATH=./build node build/src/index.js"
   },
   "repository": {
     "type": "git",
@@ -30,7 +33,7 @@
   },
   "homepage": "https://github.com/Existential-nonce/Tourneys-bot#readme",
   "devDependencies": {
-    "eslint": "^8.2.0",
-    "nodemon": "^2.0.15"
+    "@types/edit-json-file": "^1.6.1",
+    "eslint": "^8.2.0"
   }
 }

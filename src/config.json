@@ -3,9 +3,8 @@
 
     "status": "online",
     "type": "WATCHING",
-    "activity": "for !help",
 
-    "prefix": "!",
+    "prefix": ";",
     "version": "1.0",
 
     "color": "27E462",

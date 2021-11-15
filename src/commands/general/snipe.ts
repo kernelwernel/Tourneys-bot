@@ -11,7 +11,6 @@ export default {
 
     slash: false,
 
-    permissions: ["ADMINISTRATOR"],
     ownerOnly: false,
     testOnly: false,
 

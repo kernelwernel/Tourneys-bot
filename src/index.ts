@@ -3,12 +3,14 @@ import WOKCommands from "wokcommands"
 import path from "path"
 import testSchema from "./test-schema"
 import fs from "fs"
+import editJsonFile from "edit-json-file"
 
 import * as config from "./config.json"
 import LOG_TAGS from "./headers/logs"
 const LOG = new LOG_TAGS()
 
 import "dotenv/config"
+import help from "commands/general/help"
 
 
 const client = new DiscordJS.Client({
@@ -43,13 +45,13 @@ fs.readdir("./src/commands/general", (err, files) => {
 
 client.on('ready', async () => {
     
-    client.user?.setActivity(`${config.activity}`, { type: "WATCHING" })
-    console.log(`${LOG.CLIENT_INFO} - Bot presence has been set`)
+    client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" })
+    console.log(`${LOG.CLIENT_INFO} - Bot preconfigurations have been set`)
 
     new WOKCommands(client, {
         commandsDir: path.join(__dirname, 'commands'),
-        featuresDir: path.join(__dirname, 'features'),
-        typeScript: true,
+        //featuresDir: path.join(__dirname, 'features'),
+        typeScript: false,
         testServers: [
             "747913617344561194", // Personal server
             "688510763387715649", // Tourneys
@@ -67,7 +69,19 @@ client.on('ready', async () => {
             "270325321419587604", // reknT#6594
         ],
         mongoUri: process.env.MONGO_URI,
+        dbOptions: {
+            keepAlive: true
+        },
+        defaultLanguage: 'english',
+        ignoreBots: false,
+        ephemeral: true,
+        disabledDefaultCommands: [
+            'help', 'command', 'prefix', 'language', 'requiredrole'
+        ],
+        debug: true
     })
+    .setDefaultPrefix(config.prefix)
+    .setColor(config.color)
 
     setTimeout(async () => {
         await new testSchema({
@@ -90,7 +104,7 @@ client.on('messageCreate', (message) => {
     var commands = admin_commands.concat(general_commands)
     var evalcommand = message.content.slice(1, message.content.length)
     if (commands.includes(evalcommand)) {
-        console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} in - ${message.content}`)
+        console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`)
     }
 });
 

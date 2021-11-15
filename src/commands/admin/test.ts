@@ -15,9 +15,6 @@ export default {
     testOnly: true,
 
     callback: ({ message }) => {
-        const embed = new MessageEmbed()
-        .setDescription("<:trollgod:855435721624256542>")
-        .setColor(`#${config.color}`)
-    return embed
+        message.reply("<:trollgod:855435721624256542>")
     }
 } as ICommand
