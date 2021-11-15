@@ -2,7 +2,6 @@
   "dependencies": {
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
-    "edit-json-file": "^1.6.2",
     "mongoose": "^6.0.12",
     "nodemon": "^2.0.15",
     "ts-node": "^10.4.0",
