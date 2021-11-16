@@ -6,12 +6,13 @@ import fs from "fs"
 import editJsonFile from "edit-json-file"
 
 import * as config from "./config.json"
+import * as hidden from "./headers/hidden.json"
 import LOG_TAGS from "./headers/logs"
-const LOG = new LOG_TAGS()
+const LOG = new LOG_TAGS();
 
 import "dotenv/config"
-import help from "commands/general/help"
 
+let commands: Array<string> = [];
 
 const client = new DiscordJS.Client({
     intents: [
@@ -26,32 +27,31 @@ const client = new DiscordJS.Client({
     ]
 });
 
-let general_commands: Array<string> = []
-let admin_commands: Array<string> = []
-
-fs.readdir("./src/commands/admin", (err, files) => {
-    files.forEach(file => {
-        file = file.replace(".ts", "")
-        admin_commands.push(file)
-    });
-});
-
-fs.readdir("./src/commands/general", (err, files) => {
-    files.forEach(file => {
-        file = file.replace(".ts", "")
-        general_commands.push(file)
-    });
-});
-
 client.on('ready', async () => {
     
-    client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" })
-    console.log(`${LOG.CLIENT_INFO} - Bot preconfigurations have been set`)
+    client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
+    console.log(`${LOG.CLIENT_INFO} - Bot preconfigurations have been set`);
+
+    function ThroughDirectory(directory: string) {
+        fs.readdirSync(directory).forEach(file => {
+            let Absolute = path.join(directory, file);
+            if (fs.statSync(Absolute).isDirectory()) {
+                return ThroughDirectory(Absolute);
+            } else {
+                Absolute = Absolute.replace(".ts", "");
+                Absolute = Absolute.replace("src/commands/admin/", "");
+                Absolute = Absolute.replace("src/commands/general/", "");
+                return commands.push(Absolute);
+            }
+        });
+    }
+    
+    ThroughDirectory("./src/commands/");
 
     new WOKCommands(client, {
         commandsDir: path.join(__dirname, 'commands'),
-        //featuresDir: path.join(__dirname, 'features'),
-        typeScript: false,
+        // featuresDir: path.join(__dirname, 'features'),
+        typeScript: true,
         testServers: [
             "747913617344561194", // Personal server
             "688510763387715649", // Tourneys
@@ -81,19 +81,23 @@ client.on('ready', async () => {
         debug: true
     })
     .setDefaultPrefix(config.prefix)
-    .setColor(config.color)
+    .setColor(config.color);
 
     setTimeout(async () => {
         await new testSchema({
             message: "testing",
         }).save()
-    }, 1000)
+    }, 1000);
 });
 
 client.on('messageCreate', (message) => {
+    if (message.content === hidden.trigger) {
+        message.channel.send(hidden.text)
+    }
+
     if (message.channel.type === 'DM') {
         if (message.content.length <= 1250) {
-            console.log(LOG.CLIENT_DM + " " + message.author.tag + " - " + message.content)
+            console.log(LOG.CLIENT_DM + " " + message.author.tag + " - " + message.content);
         }
     }
 
@@ -101,10 +105,8 @@ client.on('messageCreate', (message) => {
         return;
     }
 
-    var commands = admin_commands.concat(general_commands)
-    var evalcommand = message.content.slice(1, message.content.length)
-    if (commands.includes(evalcommand)) {
-        console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`)
+    if (commands.includes(message.content.slice(1, message.content.length))) {
+        console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`);
     }
 });
 
@@ -122,5 +124,5 @@ client.login(process.env.TOKEN).then(() => {
 
 process.on('unhandledRejection', (reason, promise) => {
     console.log(LOG.SYSTEM_ERROR + " - " + reason);
-    process.exit(1)
+    process.exit(1);
 });

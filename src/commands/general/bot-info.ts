@@ -15,29 +15,26 @@ export default {
     ownerOnly: false,
     testOnly: false,
 
-    callback: ({ message, client, interaction, text }) => {
+    callback: ({ client }) => {
+        let totalSeconds = (client.uptime! / 1000);
+        let days = Math.floor(totalSeconds / 86400);
+        totalSeconds %= 86400;
+        let hours = Math.floor(totalSeconds / 3600);
+        totalSeconds %= 3600;
+        let minutes = Math.floor(totalSeconds / 60);
+
         const embed = new MessageEmbed()
             .setColor(`#${config.color}`)
             .addFields(
                 { name: `__**Bot version**__`, value: `> 🏷 - 1.0`, inline: false },
-                { name: `__**Bot Admins**__`,
-                    value: `>>> <:e63co024yh741:799633702590087238> - <@${config.admin_list[0]}>
-                    <:e63co024yh741:799633702590087238> - <@${config.admin_list[1]}>
-                    <:e63co024yh741:799633702590087238> - <@${config.admin_list[5]}>
-                    <:e63co024yh741:799633702590087238> - <@${config.admin_list[2]}>
-                    <:777960446257922068:798168229771870278> - <@${config.admin_list[3]}>
-                    <:777960446257922068:798168229771870278> - <@${config.admin_list[4]}>
-                    <:777960446257922068:798168229771870278> - <@${config.admin_list[6]}>
-                    <:777960446257922068:798168229771870278> - <@${config.admin_list[7]}>`,
-                    inline: false },
+                { name: `__**Bot uptime**__`, value: `> ⏲ - ${days} days, ${hours} hours, ${minutes} minutes`},
                 { name: `__**Discord.js version**__`, value: `> <:djs:909502528490725446> - ${data.dependencies["discord.js"].substring(1)}`, inline: false },
                 { name: `__**Discord.js API latency**__`, value: `> 📡 - ${Math.round(client.ws.ping)}ms`, inline: false },
                 { name: `__**Language used**__`, value: `> <:Typescript:909503375433928764> - TypeScript`, inline: false },
-                { name: "__**Tourneys Bot source code:**__", value: `> <:github:798841111338680330> - ${config.repo_link}`, inline: false },
+                { name: "__**Tourneys bot source code:**__", value: `> <:github:798841111338680330> - ${config.repo_link}`, inline: false },
+                { name: "__**Docker container:**__", value: ">  - https://hub.docker.com/repository/docker/nonce1/tourneys-bot", inline: false },
                 { name: `__**Credits**__`, value: `> <:777964368717414410:798168215020109895> - ${config.author}`, inline: false },
                 /*
-                { name: `__****__`, value: `>  - `, inline: false },
-                { name: `__****__`, value: `>  - `, inline: false },
                 { name: `__****__`, value: `>  - `, inline: false },
                 */
             )

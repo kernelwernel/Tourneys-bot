@@ -15,8 +15,10 @@ export default {
     ownerOnly: true,
     testOnly: true,
 
-    callback: ({ message }) => {
+    callback: ({ message, client }) => {
         console.log(`${LOG.SYSTEM_RELOADING}`)
+
+        client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
 
         for (const path in require.cache) {
             if (path.endsWith('.ts')) {

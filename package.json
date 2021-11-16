@@ -17,6 +17,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.ts",
     "reconfig": "rm -rf tsconfig.json && tsc -init",
+    "rebuild": "rm -rf ./build/* && npm run build",
     "build": "tsc -p .",
     "start": "NODE_PATH=./build node build/src/index.js"
   },

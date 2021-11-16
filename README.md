@@ -10,7 +10,7 @@
 <p align="center"> A TypeScript bot for the Tourneys server </p>
 
 
----
+- - -
 
 # Commands
 | Command | Description | Aliase(s)
@@ -23,6 +23,8 @@
 | **!bot-info** | This will display the bot's information, such as the version, language, bot admins, etc... | !botinfo, !bot |
 | **!server-info** | This will display the server's information, such as the creation date, channel count, etc... | !serverinfo, !server |
 
+- - -
+
 # Administrator commands
 | Command | Description | Aliase(s)
 |---|---|---|
@@ -31,10 +33,3 @@
 | **!reload** | This will refresh all the `.ts` files in the src directory. |---|
 | **!status <status>** | This will set the bot's activity status to the arguement that's given |---|
 | **!test** | :trollgod: |---|
-
-## Tourneys discord server
-```
-discord.gg/tourneys
-```
-or 
-https://discord.gg/tourneys

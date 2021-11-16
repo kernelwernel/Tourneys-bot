@@ -1,17 +1,16 @@
 version: "3.7"
 
 services: 
-  ts-node-docker:
+  tourneys-bot-docker:
     build:
       context: .
       dockerfile: Dockerfile
       target: base
     volumes:
-      - ./src:/home/node/app/src
       - ./nodemon.json:/home/node/app/nodemon.json
-    container_name: ts-node-docker
+    container_name: tourneys-bot-docker
     expose:
-      - "4000"
+      - 4000
     ports:
-      - "4000:4000"
+      - 4000
     command: npm run dev

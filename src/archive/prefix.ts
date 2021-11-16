@@ -1,8 +1,8 @@
 /*
 import { Interaction, MessageEmbed } from "discord.js"
 import { ICommand } from "wokcommands"
-import * as config from "../config.json"
-import LOG_TAGS from "../headers/logs"
+import * as config from "../../config.json"
+import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
 import fs from "fs"
 import editJsonFile from "edit-json-file"
@@ -33,6 +33,9 @@ export default {
               });
             }
         });
+
+        var json = JSON.parse(config);
+        
     }
 } as ICommand
 */
