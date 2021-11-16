@@ -27,6 +27,6 @@ jobs:
       
       - name: docker push
         run: |
-          docker push nonce1/tourneys-bot:latest
+          docker push tourneys-bot:latest
       
 
