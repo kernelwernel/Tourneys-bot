@@ -20,8 +20,13 @@ jobs:
         run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
-      - name: docker builder
+#      - name: docker builder
+#        run: |
+#          docker build . --file Dockerfile --tag tourneys-bot:$(date +%s)
+  
+      
+      - name: docker push
         run: |
-          docker build --tag tourneys-bot .
+          docker push nonce1/tourneys-bot:latest
       
 
