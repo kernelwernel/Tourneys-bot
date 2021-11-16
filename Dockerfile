@@ -6,11 +6,11 @@ COPY package.json ./
 
 RUN apk add --no-cache nodejs-current \
 && npm install -g nodemon \
-&& npm install -g npm@8.1.3 \
+&& npm install -g ts-node \
 && npm install
 
 COPY . .
 
 EXPOSE 4000
 
-CMD ["nodemon", "./src/index.ts"]
+CMD ["ts-node", "./src/index.ts"]
