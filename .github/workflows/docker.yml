@@ -1,0 +1,32 @@
+name: Docker builds
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: docker login
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+#      - name: docker builder
+#        run: |
+#          docker build . --file Dockerfile --tag tourneys-bot:$(date +%s)
+  
+      
+      - name: docker push
+        run: |
+          docker push nonce1/tourneys-bot:latest
+      
+
