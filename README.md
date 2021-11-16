@@ -4,6 +4,7 @@
     <img alt="GitHub last commit" align="center" src="https://img.shields.io/github/last-commit/existential-nonce/tourneys-bot">
     <img alt="GitHub code size in bytes" align="center" src="https://img.shields.io/github/languages/code-size/existential-nonce/tourneys-bot">
     <a href="https://www.codefactor.io/repository/github/existential-nonce/tourneys-bot"><img alt="codefactor" align="center" src="https://www.codefactor.io/repository/github/existential-nonce/tourneys-bot/badge?s=21c9d17dad3405b1a8947910ddd6fe5a3dfab838"></a>
+    <a href="https://actions-badge.atrox.dev/atrox/sync-dotenv/goto"><img alt="codefactor" align="center" src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fatrox%2Fsync-dotenv%2Fbadge"></a>
     <img alt="GitHub" align="center" src="https://img.shields.io/github/license/existential-nonce/tourneys-bot">
     <br>
 </p>
@@ -30,6 +31,6 @@
 |---|---|---|
 | **!clear-console** | This will clear the bot's console. Used if there are too many messages and want to clear the terminal | !console-clear |
 | **!kill** | This will terminate the bot process. **ONLY** used for emergency cases or for certain circumstances | !terminate, !abort, !terminate, !shutdown |
-| **!reload** | This will refresh all the `.ts` files in the src directory. |---|
+| **!reload** | This will refresh all the `.ts` files in the src directory and reconfigure's the bot to default settings. |---|
 | **!status <status>** | This will set the bot's activity status to the arguement that's given |---|
 | **!test** | :trollgod: |---|
