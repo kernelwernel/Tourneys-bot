@@ -18,15 +18,17 @@ jobs:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
+          docker logout
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
 
-      - name: docker builder
+      - name: docker build
         run: |
-          docker build -t tourneys-bot .
+          docker build --tag tourneys_img .
   
+      - name: docker tag
+        run: |
+          docker image tag tourneys_img nonce1/tourneys-bot
       
       - name: docker push
         run: |
-          docker push tourneys-bot:latest
-      
-
+          docker push nonce1/tourneys-bot
