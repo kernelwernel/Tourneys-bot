@@ -28,6 +28,6 @@ jobs:
       # Runs a single command using the runners shell
       - name: docker builder
         run: |
-          docker build -t nonce1/tourneys-bot:latest
+          docker build --tag tourneys-bot .
       
 
