@@ -43,3 +43,6 @@ jobs:
           heroku_app_name: "tourneys-bot"
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           usedocker: true
+          env_file: "/.env"
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
