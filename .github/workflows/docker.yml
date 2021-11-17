@@ -24,11 +24,11 @@ jobs:
       - name: docker build
         run: |
           docker build --tag tourneys_img .
-  
+
       - name: docker tag
         run: |
           docker image tag tourneys_img nonce1/tourneys-bot
-      
+
       - name: docker push
         run: |
           docker push nonce1/tourneys-bot

@@ -17,7 +17,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node ./src/index.ts",
     "reconfig": "rm -rf tsconfig.json && tsc -init",
-    "rebuild": "rm -rf ./build/* && npm run build",
+    "run": "docker run -p 4000:4000 nonce1/tourneys-bot",
     "build": "tsc -p .",
     "start": "NODE_PATH=./build node build/src/index.js"
   },
