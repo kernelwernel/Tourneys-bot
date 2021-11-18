@@ -18,7 +18,7 @@ export default {
         const guild = client.guilds.cache.get(config.tourneys_id);
         var memberCount = guild?.memberCount;
         const embed = new MessageEmbed()
-            .setDescription(`The server has **${memberCount}** members`)
+            .setDescription(`Tourneys has **${memberCount}** members`)
             .setColor(`#${config.color}`)
         message.channel.send({
             embeds: [embed]

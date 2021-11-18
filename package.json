@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@trevthedev/shell-harness": "^1.0.16",
     "child_process": "^1.0.2",
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
