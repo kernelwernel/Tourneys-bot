@@ -22,12 +22,21 @@ docker:
 docrun:
 	docker run -it $(CONTAINER)
 
+herokustart:
+	heroku ps:scale worker=1
+
+herokurestart:
+	heroku restart
+
 heroku:
 	heroku container:login
 	heroku container:push worker
 	heroku container:release worker
 	docker tag $(IMG) registry.heroku.com/$(CONTAINER)/worker
 	docker push registry.heroku.com/$(CONTAINER)/worker
+
+herokukill:
+	heroku ps:scale worker=0
 
 dockerkill:
 	docker system prune -f

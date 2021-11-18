@@ -12,7 +12,6 @@ const LOG = new LOG_TAGS();
 import "dotenv/config"
 
 let commands: Array<string> = [];
-const queue = new Map();
 
 const client = new DiscordJS.Client({
     intents: [
@@ -95,7 +94,7 @@ client.on('ready', async () => {
 client.on('messageCreate', async (message) => {
     if (message.channel.type === 'DM') {
         if (message.content.length <= 1250) {
-            console.log(LOG.CLIENT_DM + " " + message.author.tag + " - " + message.content);
+            console.log(`${LOG.CLIENT_DM} ${message.author.tag} - ${message.content}`);
         }
     }
 

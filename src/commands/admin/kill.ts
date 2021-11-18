@@ -3,6 +3,7 @@ import { Interaction, MessageEmbed } from "discord.js";
 import * as config from "../../config.json"
 import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
+const exec = require('child_process').exec
 
 export default {
     category: "Admin",
@@ -32,6 +33,15 @@ export default {
             embeds: [newEmbed]
         }).then(() => {
             console.log(`${LOG.SYSTEM_SHUTDOWN} by ${message.author.tag}`)
+
+            const myShellScript = exec('heroku ps:scale worker=0');
+            myShellScript.stdout.on('data', (data: any) => {
+                console.log(data); 
+            });
+            myShellScript.stderr.on('data', (data: any) => {
+                console.error(data);
+            });
+
             client.user?.setStatus('invisible')
             process.exit(1)
         })

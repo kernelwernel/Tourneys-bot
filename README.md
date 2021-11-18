@@ -4,7 +4,13 @@
     <img alt="GitHub last commit" align="center" src="https://img.shields.io/github/last-commit/existential-nonce/tourneys-bot">
     <img alt="GitHub code size in bytes" align="center" src="https://img.shields.io/github/languages/code-size/existential-nonce/tourneys-bot">
     <a href="https://www.codefactor.io/repository/github/existential-nonce/tourneys-bot"><img alt="codefactor" align="center" src="https://www.codefactor.io/repository/github/existential-nonce/tourneys-bot/badge?s=21c9d17dad3405b1a8947910ddd6fe5a3dfab838"></a>
-    <a href="https://actions-badge.atrox.dev/atrox/sync-dotenv/goto"><img alt="codefactor" align="center" src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fatrox%2Fsync-dotenv%2Fbadge"></a>
+    <a href="https://actions-badge.atrox.dev/atrox/sync-dotenv/goto"><img alt="github actions" align="center" src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fatrox%2Fsync-dotenv%2Fbadge"></a>
+    <a href="https://discord.gg/vpEv3HJ">
+    <img alt="discord" align="center" src="https://img.shields.io/discord/591914197219016707.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2"></a>
+    <a href="https://GitHub.com/Existential-nonce/Tourneys-bot/graphs/commit-activity">
+    <img alt="maintainance" align="center" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg"></a>
+    <a href="https://GitHub.com/Existential-nonce/Tourneys-bot">
+    <img alt="release" align="center" src="https://img.shields.io/github/release/Existential-nonce/Tourneys-bot"></a>
     <img alt="GitHub" align="center" src="https://img.shields.io/github/license/existential-nonce/tourneys-bot">
     <br>
 </p>

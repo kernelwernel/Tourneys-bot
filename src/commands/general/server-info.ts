@@ -25,7 +25,7 @@ export default {
                 //{ name: `__**Creation date**__`, value: `> - `, inline: false },
                 //{ name: `__****__`, value: `>  - `, inline: false },
             )
-            .setFooter("More features will be added in the future, this is temporary")
+            .setFooter("More features will be added in the future, this is temporary lol")
         message.channel.send({
             embeds: [embed]
         })
