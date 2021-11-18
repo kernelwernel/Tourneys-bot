@@ -62,6 +62,6 @@ jobs:
         PAT: ${{ secrets.PAT }}
 
       run: |
-                docker build . --tag ghcr.io/Existential-nonce/tourneys-bot:latest
+        docker build . --tag ghcr.io/Existential-nonce/tourneys-bot:latest
         docker run ghcr.io/Existential-nonce/tourneys-bot:latest
         docker push ghcr.io/Existential-nonce/tourneys-bot:latest
