@@ -32,7 +32,7 @@ export default {
                 { name: `__**Discord.js API latency**__`, value: `> 📡 - ${Math.round(client.ws.ping)}ms`, inline: false },
                 { name: `__**Language used**__`, value: `> <:Typescript:909503375433928764> - TypeScript`, inline: false },
                 { name: "__**Tourneys bot source code:**__", value: `> <:github:798841111338680330> - ${config.repo_link}`, inline: false },
-                { name: "__**Docker container:**__", value: "> <:docker:910267595045883914> - https://hub.docker.com/repository/docker/nonce1/tourneys-bot", inline: false },
+                { name: "__**Docker container:**__", value: "> <:docker:910267595045883914> - https://hub.docker.com/r/nonce1/tourneys-bot", inline: false },
                 { name: `__**Credits**__`, value: `> <:777964368717414410:798168215020109895> - ${config.author}`, inline: false },
                 /*
                 { name: `__****__`, value: `>  - `, inline: false },
@@ -43,4 +43,3 @@ export default {
         })
     }
 } as ICommand
-
