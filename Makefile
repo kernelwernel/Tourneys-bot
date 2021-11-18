@@ -1,4 +1,6 @@
-# ik makefiles shouldn't be used for typescript projects and it's not designed for something like this, but shut up
+# ik makefiles shouldn't be used for typescript projects 
+# and it's not designed for something like this, 
+# but do me a favour and please shut up
 
 SRC=./src/index.ts
 USR=nonce1

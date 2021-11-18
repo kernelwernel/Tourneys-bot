@@ -11,6 +11,8 @@ RUN apk add --no-cache nodejs-current \
 
 COPY . .
 
+EXPOSE 4000
+
 RUN adduser -D tourneys-bot
 USER tourneys-bot
 
