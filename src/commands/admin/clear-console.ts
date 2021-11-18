@@ -15,12 +15,21 @@ export default {
     ownerOnly: true,
     testOnly: true,
 
-    callback: ({ }) => {
+    callback: async ({ client, message }) => {
         const embed = new MessageEmbed()
             .setColor(`#${config.admin_color}`)
             .setTitle(config.admin_title)
-            .setDescription(`\`\`\`> Console has been cleared\n\`\`\``)
+            .setDescription(`\`\`\`> Clearing console...\`\`\``)
             console.clear()
-        return embed
+        
+        const newMessage = await message.reply({
+            embeds: [embed]
+        })
+
+        const newEmbed = newMessage.embeds[0]
+        newEmbed.setDescription("\`\`\`> Clearing console...\n> Console has been cleared\`\`\`")
+        newMessage.edit({
+            embeds: [newEmbed]
+        })
     }
 } as ICommand

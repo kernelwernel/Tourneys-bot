@@ -18,17 +18,25 @@ reconfig:
 
 build:
 	docker build --tag $(IMG) .
-
-tag:
 	docker image tag $(IMG) $(USR)/$(CONTAINER)
 
 docrun:
-	docker run -it -p 4000:4000 $(CONTAINER)
+	docker run -it $(CONTAINER)
 
 push:
 	docker push $(USR)/$(CONTAINER)
 
+heroku:
+	heroku container:login
+	heroku container:push worker
+	heroku container:release worker
+	docker tag $(IMG) registry.heroku.com/$(CONTAINER)/worker
+	docker push registry.heroku.com/$(CONTAINER)/worker
+
+
 docker:
 	make build
-	make tag
 	make push
+
+
+	

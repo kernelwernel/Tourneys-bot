@@ -9,16 +9,17 @@ import * as config from "./config.json"
 //import * as hidden from "./headers/hidden.json"
 import LOG_TAGS from "./headers/logs"
 const LOG = new LOG_TAGS();
-
 import "dotenv/config"
 
 let commands: Array<string> = [];
+const queue = new Map();
 
 const client = new DiscordJS.Client({
     intents: [
         Intents.FLAGS.GUILDS,
         Intents.FLAGS.GUILD_MESSAGES,
         Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+        Intents.FLAGS.GUILD_VOICE_STATES,
         Intents.FLAGS.GUILD_PRESENCES,
         Intents.FLAGS.DIRECT_MESSAGES,
     ],
@@ -41,6 +42,7 @@ client.on('ready', async () => {
                 Absolute = Absolute.replace(".ts", "");
                 Absolute = Absolute.replace("src/commands/admin/", "");
                 Absolute = Absolute.replace("src/commands/general/", "");
+                Absolute = Absolute.replace("src/commands/music/", "");
                 return commands.push(Absolute);
             }
         });
@@ -90,13 +92,7 @@ client.on('ready', async () => {
     }, 1000);
 });
 
-client.on('messageCreate', (message) => {
-    /*
-    if (message.content === hidden.trigger) {
-        message.channel.send(hidden.text)
-    }
-    */
-
+client.on('messageCreate', async (message) => {
     if (message.channel.type === 'DM') {
         if (message.content.length <= 1250) {
             console.log(LOG.CLIENT_DM + " " + message.author.tag + " - " + message.content);
@@ -120,9 +116,21 @@ client.on('messageDelete', async (message) => {
     // https://stackoverflow.com/questions/53328061/finding-who-deleted-the-message
 });
 
+client.once('reconnecting', () => {
+    console.log(`${LOG.CLIENT_INFO} - Client is reconnecting...`);
+});
+
+client.once('disconnect', () => {
+    console.log(`${LOG.CLIENT_INFO} - Client has disconnected`);
+});
+
 client.login(process.env.TOKEN).then(() => {
     console.log(`\n${LOG.SYSTEM_SUCCESS} - Logged into ${client.user?.tag}\n`);
 });
+
+client.on("warn", (info) => {
+    console.log(info)
+})
 
 process.on('unhandledRejection', (reason, promise) => {
     console.log(LOG.SYSTEM_ERROR + " - " + reason);

@@ -20,6 +20,8 @@ export default {
         const embed = new MessageEmbed()
             .setDescription(`The server has **${memberCount}** members`)
             .setColor(`#${config.color}`)
-        return embed
+        message.channel.send({
+            embeds: [embed]
+        })
     }
 } as ICommand

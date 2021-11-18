@@ -26,8 +26,6 @@ export default {
             embeds: [embed]
         })
 
-        //await new Promise(resolve => setTimeout(resolve))
-
         const newEmbed = newMessage.embeds[0]
         newEmbed.setDescription("\`\`\`> Shutting down the bot...\n> Bot has been shut down\`\`\`")
         newMessage.edit({

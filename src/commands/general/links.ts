@@ -24,6 +24,8 @@ export default {
                 {name: "__**Tourneys Bot source code:**__", value: "> https://github.com/Existential-nonce/Tourneys-bot"}
             )
             .setColor(`#${config.color}`)
-        return embed
+        message.channel.send({
+            embeds: [embed]
+        })
     }
 } as ICommand

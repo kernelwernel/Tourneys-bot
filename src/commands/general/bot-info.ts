@@ -1,4 +1,4 @@
-import { Interaction, MessageEmbed } from "discord.js";
+import { Interaction, Message, MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 import * as config from "../../config.json"
 import * as data from "../../../package.json"
@@ -15,7 +15,7 @@ export default {
     ownerOnly: false,
     testOnly: false,
 
-    callback: ({ client }) => {
+    callback: ({ client, message }) => {
         let totalSeconds = (client.uptime! / 1000);
         let days = Math.floor(totalSeconds / 86400);
         totalSeconds %= 86400;
@@ -38,7 +38,9 @@ export default {
                 { name: `__****__`, value: `>  - `, inline: false },
                 */
             )
-        return embed
+        message.channel.send({
+            embeds: [embed]
+        })
     }
 } as ICommand
 

@@ -26,6 +26,8 @@ export default {
                 //{ name: `__****__`, value: `>  - `, inline: false },
             )
             .setFooter("More features will be added in the future, this is temporary")
-        return embed
+        message.channel.send({
+            embeds: [embed]
+        })
     }
 } as ICommand
