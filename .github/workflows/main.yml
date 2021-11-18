@@ -66,5 +66,5 @@ jobs:
     - name : Build and push to github container registry
       run: |
         docker build . --tag ghcr.io/existential-nonce/tourneys-bot:latest
-        docker run -e TOKEN=$TOKEN MONGO_URI=$MONGO_URI ghcr.io/existential-nonce/tourneys-bot:latest
+        docker run --env TOKEN=$TOKEN --env MONGO_URI=$MONGO_URI ghcr.io/existential-nonce/tourneys-bot:latest
         docker push ghcr.io/existential-nonce/tourneys-bot:latest
