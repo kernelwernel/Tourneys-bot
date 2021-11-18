@@ -55,12 +55,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build the docker image
+    - name: Docker login
       run: |
         echo $PAT | docker login ghcr.io -u Existential-nonce --password-stdin
       env:
         PAT: ${{ secrets.PAT }}
 
+    - name : Build and push to github container registry
       run: |
         docker build . --tag ghcr.io/Existential-nonce/tourneys-bot:latest
         docker run ghcr.io/Existential-nonce/tourneys-bot:latest
