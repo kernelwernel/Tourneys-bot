@@ -55,16 +55,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Docker login and add credentials
+    - name: Docker login
       run: |
         echo $PAT | docker login ghcr.io -u Existential-nonce --password-stdin
       env:
         PAT: ${{ secrets.PAT }}
-        TOKEN: ${{ secrets.TOKEN }}
-        MONGO_URI: ${{ secrets.MONGO_URI }}
 
     - name : Build and push to github container registry
       run: |
         docker build . --tag ghcr.io/existential-nonce/tourneys-bot:latest
-        docker run --env TOKEN=$TOKEN ghcr.io/existential-nonce/tourneys-bot:latest
         docker push ghcr.io/existential-nonce/tourneys-bot:latest
