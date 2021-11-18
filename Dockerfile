@@ -13,6 +13,8 @@ COPY . .
 
 EXPOSE 4000
 
+LABEL org.opencontainers.image.source="https://github.com/Existential-nonce/tourneys-bot"
+
 RUN adduser -D tourneys-bot
 USER tourneys-bot
 

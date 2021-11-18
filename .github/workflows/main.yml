@@ -33,33 +33,14 @@ jobs:
         run: |
           docker push nonce1/tourneys-bot
 
-  #heroku:
-  #  runs-on: ubuntu-latest
-  #  steps:
-  #    - uses: actions/checkout@v2
-  #    - uses: akhileshns/heroku-deploy@v3.12.12
-  #      with:
-  #        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-  #        heroku_app_name: "tourneys-bot"
-  #        heroku_email: ${{ secrets.HEROKU_EMAIL }}
-  #        usedocker: true
-  #        docker_heroku_process_type: worker
-  #      env:
-  #        TOKEN: ${{ secrets.TOKEN }}
-  # Your workflow name.
-
   heroku:
     runs-on: ubuntu-latest
     steps:
-      # Check-out your repository.
       - name: Checkout
         uses: actions/checkout@v2
 
-
-### ⬇ IMPORTANT PART ⬇ ###
-
-      - name: Build, Push and Release a Docker container to Heroku. # Your custom step name
-        uses: gonuit/heroku-docker-deploy@v1.3.3 # GitHub action name (leave it as it is).
+      - name: Build, Push and Release a Docker container to Heroku.
+        uses: gonuit/heroku-docker-deploy@v1.3.3
         with:
           email: ${{ secrets.HEROKU_EMAIL }}
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
@@ -68,3 +49,19 @@ jobs:
           dockerfile_name: Dockerfile
           docker_options: "--no-cache"
           process_type: worker
+
+  gh-registry:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build the docker image
+      run: |
+        echo $PAT | docker login ghcr.io -u Existential-nonce --password-stdin
+      env:
+        PAT: ${{ secrets.PAT }}
+
+      run: |
+                docker build . --tag ghcr.io/Existential-nonce/tourneys-bot:latest
+        docker run ghcr.io/Existential-nonce/tourneys-bot:latest
+        docker push ghcr.io/Existential-nonce/tourneys-bot:latest

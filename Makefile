@@ -1,7 +1,3 @@
-# ik makefiles shouldn't be used for typescript projects 
-# and it's not designed for something like this, 
-# but do me a favour and please shut up
-
 SRC=./src/index.ts
 USR=nonce1
 CONTAINER=tourneys-bot
@@ -18,15 +14,13 @@ nodemon:
 reconfig:
 	rm -rf tsconfig.json && tsc -init
 
-build:
+docker:
 	docker build --tag $(IMG) .
 	docker image tag $(IMG) $(USR)/$(CONTAINER)
+	docker push $(USR)/$(CONTAINER)
 
 docrun:
 	docker run -it $(CONTAINER)
-
-push:
-	docker push $(USR)/$(CONTAINER)
 
 heroku:
 	heroku container:login
@@ -35,10 +29,11 @@ heroku:
 	docker tag $(IMG) registry.heroku.com/$(CONTAINER)/worker
 	docker push registry.heroku.com/$(CONTAINER)/worker
 
-
-docker:
-	make build
-	make push
+dockerkill:
+	docker system prune -f
+	docker image prune -a
+	docker stop $(docker ps -a -q)
+	docker rm $(docker ps -a -q)
 
 
 	
