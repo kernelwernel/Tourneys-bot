@@ -1,3 +1,4 @@
+import { MessageEmbed } from "discord.js";
 import { text } from "stream/consumers";
 import { ICommand } from "wokcommands";
 import * as config from "../../config.json"
@@ -17,15 +18,20 @@ export default {
     ownerOnly: true,
     testOnly: true,
 
-    callback: ({ client, text }) => {
-        client.user?.setPresence({
-            status: "dnd",
-            activities: [
-                {
-                    name: text
-                }
-            ]
+    callback: ({ client, message, text }) => {
+        const embed = new MessageEmbed()
+            .setDescription(`Status has been updated to ${text}`)
+            .setColor(`#${config.color}`)
+            client.user?.setPresence({
+                status: "dnd",
+                activities: [
+                    {
+                        name: text
+                    }
+                ]
+            })
+        message.channel.send({
+            embeds: [embed]
         })
-        return "Status updated"
     }
 } as ICommand
