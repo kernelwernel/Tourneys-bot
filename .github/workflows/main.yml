@@ -63,6 +63,7 @@ jobs:
 
     - name: Set secret credentials
       run: |
+        docker swarm init
         printf ${{ secrets.TOKEN }} | docker secret create TOKEN -
         printf ${{ secrets.MONGO_URI }} | docker secret create MONGO_URI -
 
