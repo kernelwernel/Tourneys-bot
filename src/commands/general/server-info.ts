@@ -19,7 +19,7 @@ export default {
         const guild = client.guilds.cache.get(config.tourneys_id);
         var memberCount = guild?.memberCount;
         const embed = new MessageEmbed()
-            .setColor(`#${config.color}`)
+            .setColor(`#${config["color"].default}`)
             .addFields(
                 { name: `__**Members**__`, value: `> - **${memberCount}**`, inline: false },
                 //{ name: `__**Creation date**__`, value: `> - `, inline: false },

@@ -2,6 +2,8 @@ import { ICommand } from "wokcommands";
 import { Interaction, MessageEmbed } from "discord.js";
 import * as config from "../../config.json"
 import LOG_TAGS from "../../headers/logs"
+import Heroku from 'heroku-client'
+const heroku = new Heroku({ token: process.env.HEROKU_API_TOKEN })
 const LOG = new LOG_TAGS()
 
 export default {
@@ -12,7 +14,7 @@ export default {
     slash: false,
 
     minArgs: 1,
-    expectedArgs: "<location>",
+    expectedArgs: "<type>",
     
     permissions: ["ADMINISTRATOR"],
     ownerOnly: true,
@@ -20,10 +22,28 @@ export default {
 
     callback: async ({ message, client, text }) => {
 
+        let shutdown: string = ""
+        let local: boolean = false
+        let server: boolean = false
+
+        if (text == "local") {
+            shutdown = "\`\`\`> Shutting down the locally hosted bot...\`\`\`"
+            local = true
+        } else if (text == "server") {
+            shutdown = "\`\`\`> Shutting down the serverside hosted bot...\`\`\`"
+            server = true
+        } else {
+            const embed = new MessageEmbed()
+            .setTitle(config.admin_title)
+            .setDescription("\`\`\`> Invalid argument! Please try again\`\`\`")
+            .setColor(`#${config["color"].error}`)
+            return message.channel.send("Invalid argument! Please try again")
+        }
+
         const embed = new MessageEmbed()
             .setTitle(config.admin_title)
             .setDescription("\`\`\`> Shutting down the bot...\`\`\`")
-            .setColor(`#${config.admin_color}`)
+            .setColor(`#${config['color'].admin}`)
 
         const newMessage = await message.reply({
             embeds: [embed]
@@ -39,8 +59,8 @@ export default {
 
             if (text == "local") {
                 process.exit(1)
-            } else if (text == "heroku") {
-                console.log("heroku run heroku ps:scale worker=0")
+            } else if (text == "server") {
+
             } else {
                 message.channel.send("Invalid argument! Please try again")
             }

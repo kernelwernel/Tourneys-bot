@@ -29,7 +29,7 @@ export default {
         const embed = new MessageEmbed()
             .setTitle(`🛠 Admin panel 🛠`)
             .setDescription(`\`\`\`> Commands have been reloaded\`\`\``)
-            .setColor(`#${config.admin_color}`)
+            .setColor(`#${config["color"].admin}`)
         message.channel.send({
             embeds: [embed]
         }).catch((error) => {

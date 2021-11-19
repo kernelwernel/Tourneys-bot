@@ -20,8 +20,8 @@ export default {
 
     callback: ({ client, message, text }) => {
         const embed = new MessageEmbed()
-            .setDescription(`Status has been updated to ${text}`)
-            .setColor(`#${config.color}`)
+            .setDescription(`Status has been updated to **${text}**`)
+            .setColor(`#${config["color"].default}`)
             client.user?.setPresence({
                 status: "dnd",
                 activities: [

@@ -17,7 +17,7 @@ export default {
 
     callback: async ({ client, message }) => {
         const embed = new MessageEmbed()
-            .setColor(`#${config.admin_color}`)
+            .setColor(`#${config["color"].admin}`)
             .setTitle(config.admin_title)
             .setDescription(`\`\`\`> Clearing console...\`\`\``)
             console.clear()

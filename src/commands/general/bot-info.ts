@@ -24,7 +24,7 @@ export default {
         let minutes = Math.floor(totalSeconds / 60);
 
         const embed = new MessageEmbed()
-            .setColor(`#${config.color}`)
+            .setColor(`#${config["color"].default}`)
             .addFields(
                 { name: `__**Bot version**__`, value: `> 🏷 - 1.0`, inline: false },
                 { name: `__**Bot uptime**__`, value: `> ⏲ - ${days} days, ${hours} hours, ${minutes} minutes`},

@@ -3,8 +3,10 @@ name: Backend deployment
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  pull_request_review:
+    types: [submitted]
+    branches: ['master']
+    paths: [' **path/**']
 
   workflow_dispatch:
 
@@ -14,22 +16,26 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: docker login
-        env:
-          DOCKER_USER: ${{ secrets.DOCKER_USER }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        if: github.event.review.state == 'approved'
         run: |
           docker logout
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: docker build
+        if: github.event.review.state == 'approved'
         run: |
           docker build --tag tourneys_img .
 
       - name: docker tag
+        if: github.event.review.state == 'approved'
         run: |
           docker image tag tourneys_img nonce1/tourneys-bot
 
       - name: docker push
+        if: github.event.review.state == 'approved'
         run: |
           docker push nonce1/tourneys-bot
 
@@ -40,6 +46,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build, Push and Release a Docker container to Heroku.
+        if: github.event.review.state == 'approved'
         uses: gonuit/heroku-docker-deploy@v1.3.3
         with:
           email: ${{ secrets.HEROKU_EMAIL }}
@@ -56,12 +63,14 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Docker login
+      if: github.event.review.state == 'approved'
       run: |
         echo $PAT | docker login ghcr.io -u Existential-nonce --password-stdin
       env:
         PAT: ${{ secrets.PAT }}
 
     - name : Build and push to github container registry
+      if: github.event.review.state == 'approved'
       run: |
         docker build . --tag ghcr.io/existential-nonce/tourneys-bot:latest
         docker push ghcr.io/existential-nonce/tourneys-bot:latest

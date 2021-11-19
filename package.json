@@ -4,6 +4,7 @@
     "child_process": "^1.0.2",
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
+    "heroku-client": "^3.1.0",
     "mongoose": "^6.0.13",
     "nodemon": "^2.0.15",
     "ts-node": "^10.4.0",
@@ -32,6 +33,7 @@
   "homepage": "https://github.com/Existential-nonce/Tourneys-bot#readme",
   "devDependencies": {
     "@types/edit-json-file": "^1.6.1",
+    "@types/heroku-client": "^3.1.0",
     "eslint": "^8.2.0"
   }
 }

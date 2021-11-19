@@ -15,6 +15,6 @@ export default {
     testOnly: false,
 
     callback: ({ message, client, interaction, text }) => {
-        // TODO: add the snipe command functionality ffs
+        // TODO: add the snipe command functionality
     }
 } as ICommand

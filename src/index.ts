@@ -6,7 +6,7 @@ import fs from "fs"
 import editJsonFile from "edit-json-file"
 
 import * as config from "./config.json"
-//import * as hidden from "./headers/hidden.json"
+import * as custom from "./headers/custom.json"
 import LOG_TAGS from "./headers/logs"
 const LOG = new LOG_TAGS();
 import "dotenv/config"
@@ -92,6 +92,10 @@ client.on('ready', async () => {
 });
 
 client.on('messageCreate', async (message) => {
+    if (message.content == custom.trigger) {
+        message.channel.send(custom.text)
+    }
+
     if (message.channel.type === 'DM') {
         if (message.content.length <= 1250) {
             console.log(`${LOG.CLIENT_DM} ${message.author.tag} - ${message.content}`);

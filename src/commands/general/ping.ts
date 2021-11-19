@@ -16,7 +16,7 @@ export default {
     callback: ({ message }) => {
         const embed = new MessageEmbed()
             .setDescription(`🏓 **Pong!** - ${Date.now() - message.createdTimestamp}ms`)
-            .setColor(`#${config.color}`)
+            .setColor(`#${config["color"].default}`)
         message.channel.send({
             embeds: [embed]
         })

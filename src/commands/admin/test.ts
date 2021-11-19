@@ -15,6 +15,6 @@ export default {
     testOnly: true,
 
     callback: ({ message }) => {
-        message.reply("<:trollgod:855435721624256542>")
+        message.channel.send("<:trollgod:855435721624256542>")
     }
 } as ICommand

@@ -17,7 +17,7 @@ export default {
     callback: async ({ message, client, interaction }) => {
         const embed = new MessageEmbed()
             .setTitle("📜 Command List 📜")
-            .setColor(`#${config.color}`)
+            .setColor(`#${config["color"].default}`)
             .addFields(
                 {
                     name: `__**${config.prefix}help**__`,
@@ -61,7 +61,7 @@ export default {
             if (config.admin_list.includes(message.author.id)) {
                 const AdminEmbed = new MessageEmbed()
                     .setTitle("⚒️ Admin Command List ⚒️")
-                    .setColor(`#${config.admin_color}`)
+                    .setColor(`#${config["color"].admin}`)
                     .addFields(
                         {
                             name: `__**${config.prefix}clear-console**__`,

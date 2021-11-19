@@ -16,14 +16,14 @@ export default {
 
     callback: ({ message }) => {
         const embed = new MessageEmbed()
+            .setColor(`#${config["color"].default}`)
             .addFields(
                 {name: "__**Vanity URL:**__", value: "\`\`\` discord.gg/tourneys \`\`\`"},
                 {name: "__**Discord URL:**__", value: "> https://discord.gg/tourneys"},
                 {name: "__**Official Roblox Group:**__", value: "> https://www.roblox.com/groups/6295427"},
                 {name: "__**Tourneys ban appeal:**__", value: "> https://bit.ly/TourneysBanAppeal"},
-                {name: "__**Tourneys Bot source code:**__", value: "> https://github.com/Existential-nonce/Tourneys-bot"}
+                {name: "__**Tourneys bot source code:**__", value: "> https://github.com/Existential-nonce/Tourneys-bot"}
             )
-            .setColor(`#${config.color}`)
         message.channel.send({
             embeds: [embed]
         })

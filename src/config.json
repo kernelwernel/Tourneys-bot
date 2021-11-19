@@ -7,8 +7,12 @@
     "prefix": ";",
     "version": "1.0",
 
-    "color": "27E462",
-    "admin_color": "757575",
+    "color": {
+        "default": "27e462",
+        "error": "ff584d",
+        "admin": "757575"
+    },
+
     "admin_title": "🛠 Admin panel 🛠",
 
     "author": "nonce#7570",

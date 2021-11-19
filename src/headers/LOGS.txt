@@ -1,0 +1,10 @@
+{
+    "SYSTEM": {
+        "SUCCESS": "[\x1B[48;2;0;0;0mSYSTEM\x1B[0m]::[\x1B[38;2;0;255;0m\x1B[48;2;0;0;0mSUCCESS\x1B[0m]",
+        "RELOADED": "[\x1B[48;2;0;0;0mSYSTEM\x1B[0m]::[\x1B[38;2;0;255;0m\x1B[48;2;0;0;0mRELOADED\x1B[0m]",
+        "RELOADING": "[\x1B[48;2;0;0;0mSYSTEM\x1B[0m]::[\x1B[38;2;255;158;3m\x1B[48;2;0;0;0mRELOADING...\x1B[0m]",
+        "ERROR": "[\x1B[48;2;0;0;0mSYSTEM\x1B[0m]::[\x1B[38;2;255;0;0m\x1B[48;2;0;0;0mERROR\x1B[0m]",
+        "SHUTDOWN": "[\x1B[48;2;0;0;0mSYSTEM\x1B[0m]::[\x1B[38;2;255;0;0m\x1B[48;2;0;0;0mSHUTDOWN\x1B[0m]"
+    }
+
+}

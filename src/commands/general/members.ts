@@ -19,7 +19,7 @@ export default {
         var memberCount = guild?.memberCount;
         const embed = new MessageEmbed()
             .setDescription(`Tourneys has **${memberCount}** members`)
-            .setColor(`#${config.color}`)
+            .setColor(`#${config["color"].default}`)
         message.channel.send({
             embeds: [embed]
         })
