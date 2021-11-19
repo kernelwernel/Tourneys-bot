@@ -76,5 +76,5 @@ jobs:
 
     - name : Push gh container
       if: github.event.review.state == 'approved'
-        run: |
-          docker push ghcr.io/existential-nonce/tourneys-bot:latest
+      run: |
+        docker push ghcr.io/existential-nonce/tourneys-bot:latest
