@@ -75,5 +75,6 @@ jobs:
         docker build . --tag ghcr.io/existential-nonce/tourneys-bot:latest
 
     - name : Push gh container
-       run: |
-         docker push ghcr.io/existential-nonce/tourneys-bot:latest
+      if: github.event.review.state == 'approved'
+        run: |
+          docker push ghcr.io/existential-nonce/tourneys-bot:latest
