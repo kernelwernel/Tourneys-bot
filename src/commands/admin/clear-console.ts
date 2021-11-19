@@ -10,6 +10,7 @@ export default {
     aliases: ["console-clear"],
 
     slash: false,
+    cooldown: '30m',
 
     permissions: ["MANAGE_GUILD"],
     ownerOnly: true,

@@ -5,8 +5,7 @@
     <img alt="GitHub code size in bytes" align="center" src="https://img.shields.io/github/languages/code-size/existential-nonce/tourneys-bot">
     <a href="https://www.codefactor.io/repository/github/existential-nonce/tourneys-bot"><img alt="codefactor" align="center" src="https://www.codefactor.io/repository/github/existential-nonce/tourneys-bot/badge?s=21c9d17dad3405b1a8947910ddd6fe5a3dfab838"></a>
     <a href="https://actions-badge.atrox.dev/atrox/sync-dotenv/goto"><img alt="github actions" align="center" src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fatrox%2Fsync-dotenv%2Fbadge"></a>
-    <a href="https://discord.gg/gv6hpsAghJ">
-    <img alt="discord" align="center" src="https://img.shields.io/discord/591914197219016707.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2"></a>
+    <img src="https://discordapp.com/api/guilds/688510763387715649/widget.png?style=shield" align="center" alt="Discord Shield"/>
     <a href="https://GitHub.com/Existential-nonce/Tourneys-bot/graphs/commit-activity">
     <img alt="maintainance" align="center" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg"></a>
     <a href="https://GitHub.com/Existential-nonce/Tourneys-bot">
@@ -40,3 +39,7 @@
 | **!reload** | This will refresh all the `.ts` files in the src directory and reconfigure's the bot to default settings. |---|
 | **!status <status>** | This will set the bot's activity status to the arguement that's given |---|
 | **!test** | :trollgod: |---|
+
+
+# Discord server
+<img src="https://discordapp.com/api/guilds/688510763387715649/widget.png?style=banner2" alt="Discord Banner 2"/>

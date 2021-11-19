@@ -1,4 +1,4 @@
-import DiscordJS, { Client, Collection, Intents, Message, MessageEmbed } from "discord.js"
+import DiscordJS, { Client, Collection, Guild, GuildManager, Channel, Intents, Message, MessageEmbed, TextChannel } from "discord.js"
 import WOKCommands from "wokcommands"
 import path from "path"
 import testSchema from "./test-schema"
@@ -23,14 +23,22 @@ const client = new DiscordJS.Client({
         Intents.FLAGS.DIRECT_MESSAGES,
     ],
     partials: [
-        "CHANNEL",
+        "USER", "CHANNEL", "GUILD_MEMBER", "MESSAGE"
     ]
 });
 
-client.on('ready', async () => {
+client.on('ready', async (client) => {
     
     client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
     console.log(`${LOG.CLIENT_INFO} - Bot preconfigurations have been set`);
+
+    const embed = new MessageEmbed()
+    .setDescription(`Tourneys bot is now online :white_check_mark:`)
+    .setColor(`#${config["color"].default}`)
+
+    const channel: TextChannel = client.channels.cache.get(config.startchannel) as TextChannel;
+    await channel.send({ embeds: [embed] });
+
 
     function ThroughDirectory(directory: string) {
         fs.readdirSync(directory).forEach(file => {

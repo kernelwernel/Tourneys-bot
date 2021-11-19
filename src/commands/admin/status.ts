@@ -10,9 +10,10 @@ export default {
     description: "Sets the bots status",
 
     slash: false,
+    cooldown: '10m',
 
     minArgs: 1,
-    expectedArgs: "<status>",
+    expectedArgs: "<status> <type>",
 
     permissions: ["MANAGE_GUILD"],
     ownerOnly: true,

@@ -26,23 +26,30 @@ export default {
         let local: boolean = false
         let server: boolean = false
 
-        if (text == "local") {
-            shutdown = "\`\`\`> Shutting down the locally hosted bot...\`\`\`"
+        if (!text) {
+            const embed = new MessageEmbed()
+            .setTitle(config.admin_title)
+            .setDescription(`\`\`\`> Please enter a valid argument. Usage:\n ;kill <local | server>\`\`\``)
+            .setColor(`#${config["color"].error}`)
+            message.channel.send({ embeds: [embed] })
+        } if (text == "local") {
+            shutdown = "Shutting down the locally hosted bot..."
             local = true
-        } else if (text == "server") {
-            shutdown = "\`\`\`> Shutting down the serverside hosted bot...\`\`\`"
+        } else if (text == ("server" || "serverside")) {
+            shutdown = "Shutting down the serverside hosted bot..."
             server = true
         } else {
             const embed = new MessageEmbed()
             .setTitle(config.admin_title)
             .setDescription("\`\`\`> Invalid argument! Please try again\`\`\`")
             .setColor(`#${config["color"].error}`)
-            return message.channel.send("Invalid argument! Please try again")
+            message.channel.send({ embeds: [embed] })
+            return
         }
 
         const embed = new MessageEmbed()
             .setTitle(config.admin_title)
-            .setDescription("\`\`\`> Shutting down the bot...\`\`\`")
+            .setDescription(`\`\`\`${shutdown}\`\`\``)
             .setColor(`#${config['color'].admin}`)
 
         const newMessage = await message.reply({
@@ -50,20 +57,12 @@ export default {
         })
 
         const newEmbed = newMessage.embeds[0]
-        newEmbed.setDescription("\`\`\`> Shutting down the bot...\n> Bot has been shut down\`\`\`")
+        newEmbed.setDescription(`\`\`\`> ${shutdown}\n> Bot has been shut down\`\`\``)
         newMessage.edit({
             embeds: [newEmbed]
         }).then(async () => {
             console.log(`${LOG.SYSTEM_SHUTDOWN} by ${message.author.tag}`)
             client.user?.setStatus('invisible')
-
-            if (text == "local") {
-                process.exit(1)
-            } else if (text == "server") {
-
-            } else {
-                message.channel.send("Invalid argument! Please try again")
-            }
         })
     }
 } as ICommand

@@ -8,30 +8,36 @@ const LOG = new LOG_TAGS()
 export default {
     category: "Admin",
     description: "Reload all the commands and .ts files of the bot",
-    
+    aliases: ["refresh", "reboot"],
+
     slash: false,
     
     permissions: ["MANAGE_GUILD"],
     ownerOnly: true,
     testOnly: true,
 
-    callback: ({ message, client }) => {
+    callback: async ({ message, client }) => {
         console.log(`${LOG.SYSTEM_RELOADING}`)
 
         client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
-
-        for (const path in require.cache) {
-            if (path.endsWith('.ts')) {
-                delete require.cache[path]
-            }
-        }
         
         const embed = new MessageEmbed()
             .setTitle(`🛠 Admin panel 🛠`)
             .setDescription(`\`\`\`> Commands have been reloaded\`\`\``)
             .setColor(`#${config["color"].admin}`)
-        message.channel.send({
+            for (const path in require.cache) {
+                if (path.endsWith('.ts')) {
+                    delete require.cache[path]
+                }
+            }
+        const newMessage = await message.reply({
             embeds: [embed]
+        })
+
+        const newEmbed = newMessage.embeds[0]
+        newEmbed.setDescription("\`\`\`> Commands have been reloaded\n> Bot configurations have been reloaded\`\`\`")
+        newMessage.edit({
+            embeds: [newEmbed]
         }).catch((error) => {
             console.log(`${LOG.SYSTEM_ERROR} - ${error}`)
             process.exit(1)
