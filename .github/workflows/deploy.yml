@@ -45,7 +45,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Build, Push and Release a Docker container to Heroku.
+      - name: Build, push and release the docker container to heroku
         if: github.event.review.state == 'approved'
         uses: gonuit/heroku-docker-deploy@v1.3.3
         with:
@@ -62,15 +62,18 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Docker login
+    - name: Docker gh container login
       if: github.event.review.state == 'approved'
       run: |
         echo $PAT | docker login ghcr.io -u Existential-nonce --password-stdin
       env:
         PAT: ${{ secrets.PAT }}
 
-    - name : Build and push to github container registry
+    - name : Build gh container
       if: github.event.review.state == 'approved'
       run: |
         docker build . --tag ghcr.io/existential-nonce/tourneys-bot:latest
-        docker push ghcr.io/existential-nonce/tourneys-bot:latest
+
+    - name : Push gh container
+       run: |
+         docker push ghcr.io/existential-nonce/tourneys-bot:latest
