@@ -35,6 +35,11 @@ export default {
                     inline: false
                 },
                 {
+                    name: `__**${config.prefix}send <id> <message>**__`,
+                    value: "> - Sends a DM with any message to any user in the server",
+                    inline: false
+                },
+                {
                     name: `__**${config.prefix}snipe**__`,
                     value: "> - Snipe the most recently deleted message (work in progress)",
                     inline: false
