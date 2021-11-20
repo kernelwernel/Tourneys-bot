@@ -4,6 +4,7 @@
     "child_process": "^1.0.2",
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
+    "google-formify": "^1.0.2",
     "heroku-client": "^3.1.0",
     "moment": "^2.29.1",
     "mongoose": "^6.0.13",

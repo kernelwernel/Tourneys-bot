@@ -33,8 +33,8 @@ client.on('ready', async (client) => {
     console.log(`${LOG.CLIENT_INFO} - Bot preconfigurations have been set`);
 
     const embed = new MessageEmbed()
-    .setDescription(`Tourneys bot is now online :white_check_mark:`)
-    .setColor(`#${config["color"].default}`)
+    .setDescription(`**Tourneys bot is now online :white_check_mark:**`)
+    .setColor(`#${config["color"].success}`)
 
     const channel: TextChannel = client.channels.cache.get(config.startchannel) as TextChannel;
     await channel.send({ embeds: [embed] });
@@ -49,7 +49,7 @@ client.on('ready', async (client) => {
                 Absolute = Absolute.replace(".ts", "");
                 Absolute = Absolute.replace("src/commands/admin/", "");
                 Absolute = Absolute.replace("src/commands/general/", "");
-                Absolute = Absolute.replace("src/commands/music/", "");
+                Absolute = Absolute.replace("src/commands/assassin/", "");
                 return commands.push(Absolute);
             }
         });
