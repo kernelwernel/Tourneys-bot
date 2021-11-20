@@ -34,15 +34,20 @@ export default {
             embeds: [embed]
         })
 
-        const newEmbed = newMessage.embeds[0]
-        newEmbed.setDescription("\`\`\`> Commands have been reloaded\n> Bot configurations have been reloaded\`\`\`")
+        const newEmbed = newMessage.embeds[0];
+        newEmbed.setDescription("\`\`\`> Commands have been reloaded\n> Bot configurations have been reloaded\`\`\`");
         newMessage.edit({
             embeds: [newEmbed]
-        }).catch((error) => {
-            console.log(`${LOG.SYSTEM_ERROR} - ${error}`)
-            process.exit(1)
-        })
+        }).catch((error) =>{
+            const ErrorEmbed = new MessageEmbed()
+                .setTitle(config["title"].error)
+                .setDescription(`\`\`\`${error}\`\`\``)
+                .setColor(`#${config["color"].error}`)
+            message.channel.send({ embeds: [ErrorEmbed] });
+            console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+            return;
+        });
 
-        console.log(`${LOG.SYSTEM_RELOADED}`)
+        console.log(`${LOG.SYSTEM_RELOADED}`);
     }
 } as ICommand

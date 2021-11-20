@@ -19,7 +19,7 @@ export default {
     callback: async ({ client, message }) => {
         const embed = new MessageEmbed()
             .setColor(`#${config["color"].admin}`)
-            .setTitle(config.admin_title)
+            .setTitle(config["title"].admin)
             .setDescription(`\`\`\`> Clearing console...\`\`\``)
             console.clear()
         
@@ -31,6 +31,13 @@ export default {
         newEmbed.setDescription("\`\`\`> Clearing console...\n> Console has been cleared\`\`\`")
         newMessage.edit({
             embeds: [newEmbed]
-        })
+        }).catch((error) =>{
+            const ErrorEmbed = new MessageEmbed()
+                .setTitle(config["title"].error)
+                .setDescription(`\`\`\`${error}\`\`\``)
+                .setColor(`#${config["color"].error}`)
+            message.channel.send({ embeds: [ErrorEmbed] })
+            console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+        });
     }
 } as ICommand

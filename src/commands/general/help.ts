@@ -91,7 +91,15 @@ export default {
                     )
                 message.channel.send({
                     embeds: [AdminEmbed]
-                })
+                }).catch((error) =>{
+                    const ErrorEmbed = new MessageEmbed()
+                        .setTitle(config["title"].error)
+                        .setDescription(`\`\`\`${error}\`\`\``)
+                        .setColor(`#${config["color"].error}`)
+                    message.channel.send({ embeds: [ErrorEmbed] });
+                    console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+                    return;
+                });
             }
         })
     }

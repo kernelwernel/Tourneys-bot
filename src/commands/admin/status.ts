@@ -10,7 +10,7 @@ export default {
     description: "Sets the bots status",
 
     slash: false,
-    cooldown: '10m',
+    cooldown: '2m',
 
     minArgs: 1,
     expectedArgs: "<status> <type>",
@@ -33,6 +33,14 @@ export default {
             })
         message.channel.send({
             embeds: [embed]
-        })
+        }).catch((error) =>{
+            const ErrorEmbed = new MessageEmbed()
+                .setTitle(config["title"].error)
+                .setDescription(`\`\`\`${error}\`\`\``)
+                .setColor(`#${config["color"].error}`)
+            message.channel.send({ embeds: [ErrorEmbed] });
+            console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+            return;
+        });
     }
 } as ICommand

@@ -28,7 +28,7 @@ export default {
 
         if (!text) {
             const embed = new MessageEmbed()
-            .setTitle(config.admin_title)
+            .setTitle(config["title"].admin)
             .setDescription(`\`\`\`> Please enter a valid argument. Usage:\n ;kill <local | server>\`\`\``)
             .setColor(`#${config["color"].error}`)
             message.channel.send({ embeds: [embed] })
@@ -40,7 +40,7 @@ export default {
             server = true
         } else {
             const embed = new MessageEmbed()
-            .setTitle(config.admin_title)
+            .setTitle(config["title"].admin)
             .setDescription("\`\`\`> Invalid argument! Please try again\`\`\`")
             .setColor(`#${config["color"].error}`)
             message.channel.send({ embeds: [embed] })
@@ -48,7 +48,7 @@ export default {
         }
 
         const embed = new MessageEmbed()
-            .setTitle(config.admin_title)
+            .setTitle(config["title"].admin)
             .setDescription(`\`\`\`${shutdown}\`\`\``)
             .setColor(`#${config['color'].admin}`)
 
@@ -63,6 +63,13 @@ export default {
         }).then(async () => {
             console.log(`${LOG.SYSTEM_SHUTDOWN} by ${message.author.tag}`)
             client.user?.setStatus('invisible')
-        })
+        }).catch((error) =>{
+            const ErrorEmbed = new MessageEmbed()
+                .setTitle(config["title"].error)
+                .setDescription(`\`\`\`${error}\`\`\``)
+                .setColor(`#${config["color"].error}`)
+            message.channel.send({ embeds: [ErrorEmbed] })
+            console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+        });
     }
 } as ICommand

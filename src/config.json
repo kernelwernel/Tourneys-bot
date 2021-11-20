@@ -1,21 +1,30 @@
 {
-    "avatar": "./assets/logo.png",
+    "version": "1.0",
     "status": "online",
     "type": "WATCHING",
+
     "prefix": ";",
-    "version": "1.0",
+
     "color": {
         "default": "27e462",
         "error": "ff584d",
         "admin": "757575",
         "success": "6eb35b"
     },
+
     "startchannel": "909224884939419708",
-    "admin_title": "🛠 Admin panel 🛠",
+
+    "title": {
+        "admin": "🛠 Admin panel 🛠",
+        "error": "🚫 Error 🚫"
+    },
+
     "author": "nonce#7570",
     "license": "MIT",
     "repo_link": "https://github.com/Existential-nonce/Tourneys-bot",
+
     "tourneys_id": "688510763387715649",
+
     "admin_list": [
         "699310549573435423",
         "768666879308202006",

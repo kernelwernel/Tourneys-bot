@@ -15,6 +15,14 @@ export default {
     testOnly: true,
 
     callback: ({ message }) => {
-        message.channel.send("<:trollgod:855435721624256542>")
+        message.channel.send("<:trollgod:855435721624256542>").catch((error) =>{
+            const ErrorEmbed = new MessageEmbed()
+                .setTitle(config["title"].error)
+                .setDescription(`\`\`\`${error}\`\`\``)
+                .setColor(`#${config["color"].error}`)
+            message.channel.send({ embeds: [ErrorEmbed] });
+            console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+            return;
+        });
     }
 } as ICommand

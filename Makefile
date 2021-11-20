@@ -22,13 +22,13 @@ docker:
 docrun:
 	docker run -it $(CONTAINER)
 
-herokustart:
+heroku:
 	heroku ps:scale worker=1
 
 herokurestart:
 	heroku restart
 
-heroku:
+herokupush:
 	heroku container:login
 	heroku container:push worker
 	heroku container:release worker

@@ -41,5 +41,9 @@
 | **!test** | :trollgod: ||
 
 
+## To do list
+- [ ] Add a powershell script as a makefile
+- [ ] Add feature to send images or files with the `send` command
+
 ## Discord server
 <img src="https://discordapp.com/api/guilds/688510763387715649/widget.png?style=banner2" alt="Discord Banner 2"/>

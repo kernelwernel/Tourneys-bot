@@ -69,6 +69,14 @@ export default {
             .setFooter("More features will be added in the future, this is temporary lol")
         message.channel.send({
             embeds: [embed]
-        })
+        }).catch((error) =>{
+            const ErrorEmbed = new MessageEmbed()
+                .setTitle(config["title"].error)
+                .setDescription(`\`\`\`${error}\`\`\``)
+                .setColor(`#${config["color"].error}`)
+            message.channel.send({ embeds: [ErrorEmbed] });
+            console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+            return;
+        });
     }
 } as ICommand

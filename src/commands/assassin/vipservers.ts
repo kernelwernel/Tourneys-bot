@@ -22,7 +22,7 @@ export default {
             .addFields(
                 {
                     name: `__**Chicken**__`,
-                    value: "> https://www.roblox.com/games/379614936?privateServerLinkCode=33448635869382036008322697977192\n> Funded by <@736809140898496543>",
+                    value: "> https://www.roblox.com/games/379614936?privateServerLinkCode=18166094017767430485970987609076\n> Funded by <@736809140898496543>",
                     inline: false,
                 },
                 {
@@ -41,7 +41,6 @@ export default {
                     inline: false,
                 },
                 /*
-                 NOTE; make the fields inline = true if there's a pair number of fields
                 {
                     name: `__**Peppa**__`,
                     value: "> - [Link](https://www.roblox.com/games/379614936/NEW-Assassin?privateServerLinkCode=11409783693522092316446620484402)",
@@ -56,6 +55,14 @@ export default {
             )
         message.channel.send({
             embeds: [embed]
-        })
+        }).catch((error) =>{
+            const ErrorEmbed = new MessageEmbed()
+                .setTitle(config["title"].error)
+                .setDescription(`\`\`\`${error}\`\`\``)
+                .setColor(`#${config["color"].error}`)
+            message.channel.send({ embeds: [ErrorEmbed] });
+            console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+            return;
+        });
     }
 } as ICommand

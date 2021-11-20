@@ -39,7 +39,6 @@ client.on('ready', async (client) => {
     const channel: TextChannel = client.channels.cache.get(config.startchannel) as TextChannel;
     await channel.send({ embeds: [embed] });
 
-
     function ThroughDirectory(directory: string) {
         fs.readdirSync(directory).forEach(file => {
             let Absolute = path.join(directory, file);
@@ -104,7 +103,7 @@ client.on('messageCreate', async (message) => {
         message.channel.send(custom.text)
     }
 
-    if (message.channel.type === 'DM') {
+    if (message.channel.type === 'DM' && !message.author.bot) {
         if (message.content.length <= 1250) {
             console.log(`${LOG.CLIENT_DM} ${message.author.tag} - ${message.content}`);
         }
