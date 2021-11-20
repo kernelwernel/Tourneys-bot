@@ -40,7 +40,7 @@ export default {
                     value: "> https://www.roblox.com/games/379614936?privateServerLinkCode=18062227398402765602561296518186\n> Funded by <@477950742229942302>",
                     inline: false,
                 },
-                /*
+                
                  NOTE; make the fields inline = true if there's a pair number of fields
                 {
                     name: `__**Peppa**__`,
@@ -52,7 +52,7 @@ export default {
                     value: "> - [Link](https://www.roblox.com/games/379614936?privateServerLinkCode=37938804575985906324380910122518)",
                     inline: true,
                 },
-                */
+                
             )
         message.channel.send({
             embeds: [embed]
