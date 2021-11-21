@@ -17,14 +17,14 @@
 </p>
 <p align="center"> A TypeScript bot for the Tourneys server </p>
 
-
 - - -
 
 ## Commands
 | Command | Description | Alias(es) | Work in progress? |
 |---|---|---|---|
-| `;ping` | Just a simple ping command | | | 
+| `;ping` | Just a simple ping command ||| 
 | `;links` | This will send all the relevant links of the server, such as invite links, ban appeal links and so on. | link ||
+| `;send <id> <message>` | Sends a DM message to the user id | say ||
 | `;snipe` | This will snipe the most recently deleted message in chat || ✅ |
 | `;members` | This will display the member count of the server | membercount, member ||
 | `;bot-info` | This will display the bot's information, such as the version, language, bot admins, etc... | botinfo, bot ||
@@ -42,7 +42,7 @@
 
 - - -
 
-## To do list
+## To do list / Ideas
 - [ ] Add a powershell script as a makefile
 - [ ] Add feature to send images or files with the `send` command
 - [ ] Add a snipe command
@@ -50,6 +50,7 @@
 - [ ] Finish the server info command
 - [ ] Maybe add music features idk
 - [ ] Figure out a way to SSH into heroku's dyno terminal
+- [ ] Leaderboard of tourneys points
 
 - - -
 

@@ -7,6 +7,7 @@ const LOG = new LOG_TAGS()
 export default {
     category: "General",
     description: "Sends a DM message to somebody in the server",
+    aliases: ["say"],
     
     slash: false,
     cooldown: "5s",

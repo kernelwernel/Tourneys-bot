@@ -1,16 +1,14 @@
 {
   "dependencies": {
-    "@trevthedev/shell-harness": "^1.0.16",
-    "child_process": "^1.0.2",
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
     "google-formify": "^1.0.2",
     "heroku-client": "^3.1.0",
     "moment": "^2.29.1",
     "mongoose": "^6.0.13",
+    "noblox": "^4.8.5",
     "nodemon": "^2.0.15",
     "ts-node": "^10.4.0",
-    "ts-node-dev": "^1.1.8",
     "typescript": "^4.4.4",
     "wokcommands": "^1.5.3"
   },

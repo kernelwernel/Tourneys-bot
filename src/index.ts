@@ -32,11 +32,10 @@ client.on('ready', async (client) => {
     console.log(`${LOG.CLIENT_INFO} - Bot preconfigurations have been set`);
 
     const channel: TextChannel = client.channels.cache.get(config["channel"].start) as TextChannel;
-    const embed = new MessageEmbed()
-    .setDescription(`**Tourneys bot is now online :white_check_mark:**`)
-    .setColor(`#${config["color"].success}`)
-
-    await channel.send({ embeds: [embed] });
+    const ReadyEmbed = new MessageEmbed()
+        .setDescription(`**Tourneys bot is now online :white_check_mark:**`)
+        .setColor(`#${config["color"].success}`)
+    await channel.send({ embeds: [ReadyEmbed] });
 
     function ThroughDirectory(directory: string) {
         fs.readdirSync(directory).forEach(file => {
@@ -115,10 +114,14 @@ client.on('messageCreate', async (message) => {
     }
 
     if (config["list"].blacklisted.includes(message.author.id)) {
-        const embed = new MessageEmbed()
+        const BlacklistEmbed = new MessageEmbed()
             .setColor(`#${config["color"].blacklisted}`)
             .setDescription(`**Lol ${String.fromCharCode(110, 105, 103, 103, 97)} ur blacklisted**`);
-        message.channel.send({ embeds: [embed]});
+        message.channel.send({ embeds: [BlacklistEmbed]});
+        const BlacklistLogEmbed = new MessageEmbed()
+            .setColor(`#${config["color"].blacklisted}`)
+            .setDescription(`**Blocked ${message.author.tag} from using the ${message.content} command lol**`);
+        logchannel.send({ embeds: [BlacklistLogEmbed]});
         return;
     }
 
