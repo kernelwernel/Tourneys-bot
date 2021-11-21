@@ -1,4 +1,3 @@
-import { text } from "stream/consumers";
 import { ICommand } from "wokcommands";
 import * as config from "../../config.json"
 import LOG_TAGS from "../../headers/logs"
@@ -30,4 +29,4 @@ export default {
         });
 */
     }
-} as ICommand
+} as ICommand;

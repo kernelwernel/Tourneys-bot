@@ -1,5 +1,5 @@
-import { Interaction, MessageEmbed } from "discord.js";
-import { ICommand } from "wokcommands";
+import { MessageEmbed } from "discord.js"
+import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
 import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
@@ -9,12 +9,12 @@ export default {
     description: "Replies with the command list",
     aliases: ["commands"],
 
-    slash: "both",
+    slash: false,
 
     ownerOnly: false,
     testOnly: false,
 
-    callback: async ({ message, client, interaction }) => {
+    callback: async ({ message }) => {
         const embed = new MessageEmbed()
             .setTitle("📜 Command List 📜")
             .setColor(`#${config["color"].default}`)
@@ -31,7 +31,7 @@ export default {
                 },
                 {
                     name: `__**${config.prefix}links**__`,
-                    value: "> - Returns with relevant links",
+                    value: "> - Returns with relevant links of the server",
                     inline: false
                 },
                 {
@@ -96,11 +96,11 @@ export default {
                     )
                 message.channel.send({
                     embeds: [AdminEmbed]
-                }).catch((error) =>{
+                }).catch((error) => {
                     const ErrorEmbed = new MessageEmbed()
                         .setTitle(config["title"].error)
                         .setDescription(`\`\`\`${error}\`\`\``)
-                        .setColor(`#${config["color"].error}`)
+                        .setColor(`#${config["color"].error}`);
                     message.channel.send({ embeds: [ErrorEmbed] });
                     console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
                     return;
@@ -108,4 +108,4 @@ export default {
             }
         })
     }
-} as ICommand
+} as ICommand;

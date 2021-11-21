@@ -11,16 +11,16 @@ export default {
     description: "Displays the server information",
     aliases: ["server"],
 
-    slash: "both",
+    slash: false,
 
     ownerOnly: false,
     testOnly: false,
 
-    callback: ({ message, client, interaction, text }) => {
+    callback: ({ message, client }) => {
 
         function moment(createdTimestamp: number) {
             throw new Error("Function not implemented.");
-        }
+        };
 
         const verificationLevels = {
             NONE: 'None',
@@ -66,17 +66,17 @@ export default {
                 //{ name: `__****__`, value: `>  - `, inline: false },
                 
             )
-            .setFooter("More features will be added in the future, this is temporary lol")
+            .setFooter("More features will be added in the future, this is temporary lol");
         message.channel.send({
             embeds: [embed]
         }).catch((error) =>{
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)
-                .setColor(`#${config["color"].error}`)
+                .setColor(`#${config["color"].error}`);
             message.channel.send({ embeds: [ErrorEmbed] });
             console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
             return;
         });
     }
-} as ICommand
+} as ICommand;

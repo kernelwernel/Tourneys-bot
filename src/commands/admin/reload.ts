@@ -1,13 +1,12 @@
-import { Interaction, MessageEmbed } from "discord.js";
-import { ICommand } from "wokcommands";
+import { MessageEmbed } from "discord.js"
+import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
 import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
 
-
 export default {
     category: "Admin",
-    description: "Reload all the commands and .ts files of the bot",
+    description: "Reloads all the commands and .ts files of the bot",
     aliases: ["refresh", "reboot"],
 
     slash: false,
@@ -17,17 +16,17 @@ export default {
     testOnly: true,
 
     callback: async ({ message, client }) => {
-        console.log(`${LOG.SYSTEM_RELOADING}`)
+        console.log(`${LOG.SYSTEM_RELOADING}`);
 
         client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
         
         const embed = new MessageEmbed()
             .setTitle(`🛠 Admin panel 🛠`)
             .setDescription(`\`\`\`> Commands have been reloaded\`\`\``)
-            .setColor(`#${config["color"].admin}`)
+            .setColor(`#${config["color"].admin}`);
             for (const path in require.cache) {
                 if (path.endsWith('.ts')) {
-                    delete require.cache[path]
+                    delete require.cache[path];
                 }
             }
         const newMessage = await message.reply({
@@ -42,7 +41,7 @@ export default {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)
-                .setColor(`#${config["color"].error}`)
+                .setColor(`#${config["color"].error}`);
             message.channel.send({ embeds: [ErrorEmbed] });
             console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
             return;
@@ -50,4 +49,4 @@ export default {
 
         console.log(`${LOG.SYSTEM_RELOADED}`);
     }
-} as ICommand
+} as ICommand;

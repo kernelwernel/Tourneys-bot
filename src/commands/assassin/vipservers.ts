@@ -1,15 +1,15 @@
-import { Interaction, MessageEmbed } from "discord.js";
-import { ICommand } from "wokcommands";
+import { MessageEmbed } from "discord.js"
+import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
 import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
 
 export default {
-    category: "General",
-    description: "Replies with pong",
+    category: "Assassin",
+    description: "Displays all the available VIP servers",
     aliases: ["VIP", "server", "VIP-servers", "VIP-server", "VIPserver"],
     
-    slash: "both",
+    slash: false,
     
     ownerOnly: false,
     testOnly: false,
@@ -59,10 +59,10 @@ export default {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)
-                .setColor(`#${config["color"].error}`)
+                .setColor(`#${config["color"].error}`);
             message.channel.send({ embeds: [ErrorEmbed] });
             console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
             return;
         });
     }
-} as ICommand
+} as ICommand;
