@@ -9,6 +9,7 @@ export default {
     description: "Replies with pong",
     
     slash: false,
+    cooldown: "5s",
     
     ownerOnly: false,
     testOnly: false,
@@ -19,7 +20,7 @@ export default {
             .setColor(`#${config["color"].default}`);
         message.channel.send({
             embeds: [embed]
-        }).catch((error) =>{
+        }).catch((error) => {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)

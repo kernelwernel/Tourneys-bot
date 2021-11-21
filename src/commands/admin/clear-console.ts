@@ -16,7 +16,7 @@ export default {
     ownerOnly: true,
     testOnly: true,
 
-    callback: async ({ client, message }) => {
+    callback: async ({ message }) => {
         const embed = new MessageEmbed()
             .setColor(`#${config["color"].admin}`)
             .setTitle(config["title"].admin)

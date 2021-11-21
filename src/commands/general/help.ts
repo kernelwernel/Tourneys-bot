@@ -63,7 +63,7 @@ export default {
         message.channel.send({
             embeds: [embed]
         }).then(() => {
-            if (config.admin_list.includes(message.author.id)) {
+            if (config["list"].admin.includes(message.author.id)) {
                 const AdminEmbed = new MessageEmbed()
                     .setTitle("⚒️ Admin Command List ⚒️")
                     .setColor(`#${config["color"].admin}`)

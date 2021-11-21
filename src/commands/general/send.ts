@@ -39,7 +39,7 @@ export default {
                     .setColor(`#${config["color"].default}`);
                 message.channel.send({ embeds: [SentEmbed] });
             }).catch((error) => {
-                if (config.admin_list.includes(message.author.id)) {
+                if (config["list"].admin.includes(message.author.id)) {
                     const AdminErrorEmbed = new MessageEmbed()
                         .setTitle(config["title"].error)
                         .setDescription(`\`\`\`${error}\`\`\``)

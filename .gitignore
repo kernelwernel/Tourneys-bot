@@ -110,3 +110,4 @@ inspirations
 build/
 archive/
 deploy.yml
+src/archive/**

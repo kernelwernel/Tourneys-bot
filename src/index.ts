@@ -28,7 +28,6 @@ const client = new DiscordJS.Client({
 });
 
 client.on('ready', async (client) => {
-    
     client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
     console.log(`${LOG.CLIENT_INFO} - Bot preconfigurations have been set`);
 
@@ -73,7 +72,7 @@ client.on('ready', async (client) => {
             "768666879308202006", // spirals#1375
             "683467496845606980", // domm#0007
             "593985080284676156", // Huzaifa#0001
-            "351023689581461519", // TheRealMMR#0001 <= cringe as fuck
+          //"351023689581461519", // TheRealMMR#0001 <= cringe as fuck
             "270325321419587604", // reknT#6594
         ],
         mongoUri: process.env.MONGO_URI,
@@ -89,7 +88,7 @@ client.on('ready', async (client) => {
         debug: true
     })
     .setDefaultPrefix(config.prefix)
-    .setColor(config.color);
+    .setColor(config["color"].default);
 
     setTimeout(async () => {
         await new testSchema({
@@ -107,6 +106,14 @@ client.on('messageCreate', async (message) => {
         if (message.content.length <= 1250) {
             console.log(`${LOG.CLIENT_DM} ${message.author.tag} - ${message.content}`);
         }
+    }
+
+    if (config["list"].blacklisted.includes(message.author.id)) {
+        const embed = new MessageEmbed()
+            .setColor(`#${config["color"].blacklisted}`)
+            .setDescription(`**Lol ${String.fromCharCode(110, 105, 103, 103, 97)} ur blacklisted**`);
+        message.channel.send({ embeds: [embed]});
+        return;
     }
 
     if (!message.content.startsWith(config.prefix) || message.author.bot) {

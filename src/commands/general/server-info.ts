@@ -64,12 +64,11 @@ export default {
                 { name: `__**Boosts**__`, value: `>  - **${message.guild?.premiumSubscriptionCount || '0'}**`, inline: false },
                 //{ name: `__**Verification level**__`, value: `>  - ${verificationLevels[message.guild?.verificationLevel]}`, inline: false },
                 //{ name: `__****__`, value: `>  - `, inline: false },
-                
             )
             .setFooter("More features will be added in the future, this is temporary lol");
         message.channel.send({
             embeds: [embed]
-        }).catch((error) =>{
+        }).catch((error) => {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)

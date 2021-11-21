@@ -32,7 +32,7 @@ export default {
             })
         message.channel.send({
             embeds: [embed]
-        }).catch((error) =>{
+        }).catch((error) => {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)
