@@ -11,7 +11,7 @@ export default {
     slash: false,
 
     ownerOnly: false,
-    testOnly: false,
+    testOnly: true,
 
     callback: ({ message, client, interaction, text }) => {
         // TODO: add the snipe command functionality

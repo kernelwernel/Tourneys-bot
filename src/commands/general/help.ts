@@ -12,7 +12,7 @@ export default {
     slash: false,
 
     ownerOnly: false,
-    testOnly: false,
+    testOnly: true,
 
     callback: async ({ message }) => {
         const embed = new MessageEmbed()

@@ -14,7 +14,7 @@ export default {
     slash: false,
 
     ownerOnly: false,
-    testOnly: false,
+    testOnly: true,
 
     callback: ({ message, client }) => {
 

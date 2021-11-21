@@ -12,7 +12,7 @@ export default {
     slash: false,
     
     ownerOnly: false,
-    testOnly: false,
+    testOnly: true,
 
     callback: ({ message, client }) => {
         const guild = client.guilds.cache.get(config.tourneys_id);

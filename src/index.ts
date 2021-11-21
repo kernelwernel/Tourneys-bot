@@ -25,7 +25,7 @@ const client = new DiscordJS.Client({
     ]
 });
 
-let commands: Array<string> = [];
+const commands: Array<string> = [];
 
 client.on('ready', async (client) => {
     client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
@@ -97,7 +97,7 @@ client.on('ready', async (client) => {
 });
 
 client.on('messageCreate', async (message) => {
-    const logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
+    let logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
     if (message.content == custom.trigger) {
         message.channel.send(custom.text)
     }
@@ -113,7 +113,7 @@ client.on('messageCreate', async (message) => {
         }
     }
 
-    if (config["list"].blacklisted.includes(message.author.id)) {
+    if (config["list"].blacklisted.includes(message.author.id) && commands.includes(message.content.slice(1, message.content.length))) {
         const BlacklistEmbed = new MessageEmbed()
             .setColor(`#${config["color"].blacklisted}`)
             .setDescription(`**Lol ${String.fromCharCode(110, 105, 103, 103, 97)} ur blacklisted**`);
@@ -163,7 +163,6 @@ client.on("warn", (info) => {
     console.log(info)
 })
 
-process.on('unhandledRejection', (reason, promise) => {
+process.on('unhandledRejection', (reason) => {
     console.log(LOG.SYSTEM_ERROR + " - " + reason);
-    process.exit(1);
 });

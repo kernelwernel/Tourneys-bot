@@ -13,7 +13,7 @@ export default {
     cooldown: "5s",
     
     ownerOnly: false,
-    testOnly: false,
+    testOnly: true,
 
     callback: ({ message, client }) => {
         const args = message.content.slice(config.prefix.length).trim().split(/ +/);
@@ -51,7 +51,7 @@ export default {
                 } else {
                     const RegularErrorEmbed = new MessageEmbed()
                         .setTitle(config["title"].error)
-                        .setDescription(`\`\`\`Either the id you've provided is incorrect or there has been an error in Discord's servers\`\`\``)
+                        .setDescription(`\`\`\`Either the id you've provided is incorrect, or the user does not have dms open, or there has been an error in Discord\`\`\``)
                         .setColor(`#${config["color"].error}`);
                     message.channel.send({ embeds: [RegularErrorEmbed] });
                     console.log(`${LOG.SYSTEM_ERROR} - ${error}`);

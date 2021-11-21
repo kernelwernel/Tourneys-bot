@@ -29,7 +29,7 @@ export default {
                     delete require.cache[path];
                 }
             }
-        const newMessage = await message.reply({
+        const newMessage = await message.channel.send({
             embeds: [embed]
         })
 

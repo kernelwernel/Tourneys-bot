@@ -12,7 +12,7 @@ export default {
     cooldown: "5s",
     
     ownerOnly: false,
-    testOnly: false,
+    testOnly: true,
 
     callback: ({ message }) => {
         const embed = new MessageEmbed()

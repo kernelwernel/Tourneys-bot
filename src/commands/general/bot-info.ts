@@ -13,7 +13,7 @@ export default {
     slash: false,
 
     ownerOnly: false,
-    testOnly: false,
+    testOnly: true,
 
     callback: ({ client, message }) => {
         let totalSeconds = (client.uptime! / 1000);
