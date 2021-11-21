@@ -10,10 +10,15 @@
         "error": "ff584d",
         "admin": "757575",
         "success": "6eb35b",
-        "blacklisted": "010101"
+        "blacklisted": "010101",
+        "discord": "7289da",
+        "dm": "adbbff"
     },
 
-    "startchannel": "909224884939419708",
+    "channel": {
+        "start": "912004266347081768",
+        "log": "912004266347081768"
+    },
 
     "title": {
         "admin": "🛠 Admin panel 🛠",

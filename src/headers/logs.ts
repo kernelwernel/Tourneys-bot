@@ -1,3 +1,5 @@
+import { TextChannel } from "discord.js"
+
 const BLK_BG: string = "\x1B[48;2;0;0;0m"
 const CLT_FG: string = "\x1B[38;2;114;137;218m"
 const CMD_FG: string = "\x1B[38;2;120;120;120m"

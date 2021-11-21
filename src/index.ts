@@ -11,8 +11,6 @@ import LOG_TAGS from "./headers/logs"
 const LOG = new LOG_TAGS();
 import "dotenv/config"
 
-let commands: Array<string> = [];
-
 const client = new DiscordJS.Client({
     intents: [
         Intents.FLAGS.GUILDS,
@@ -27,15 +25,17 @@ const client = new DiscordJS.Client({
     ]
 });
 
+let commands: Array<string> = [];
+
 client.on('ready', async (client) => {
     client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
     console.log(`${LOG.CLIENT_INFO} - Bot preconfigurations have been set`);
 
+    const channel: TextChannel = client.channels.cache.get(config["channel"].start) as TextChannel;
     const embed = new MessageEmbed()
     .setDescription(`**Tourneys bot is now online :white_check_mark:**`)
     .setColor(`#${config["color"].success}`)
 
-    const channel: TextChannel = client.channels.cache.get(config.startchannel) as TextChannel;
     await channel.send({ embeds: [embed] });
 
     function ThroughDirectory(directory: string) {
@@ -98,13 +98,19 @@ client.on('ready', async (client) => {
 });
 
 client.on('messageCreate', async (message) => {
+    const logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
     if (message.content == custom.trigger) {
         message.channel.send(custom.text)
     }
 
     if (message.channel.type === 'DM' && !message.author.bot) {
-        if (message.content.length <= 1250) {
+        if (message.content.length < 2000) {
             console.log(`${LOG.CLIENT_DM} ${message.author.tag} - ${message.content}`);
+            const DMembed = new MessageEmbed()
+                .setColor(`#${config["color"].dm}`)
+                .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
+                .setDescription(`**Received DM:**\`\`\`${message.content}\`\`\``);
+            await logchannel.send({ embeds: [DMembed] });
         }
     }
 
@@ -122,6 +128,11 @@ client.on('messageCreate', async (message) => {
 
     if (commands.includes(message.content.slice(1, message.content.length))) {
         console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`);
+        const CommandEmbed = new MessageEmbed()
+            .setColor(`#${config["color"].discord}`)
+            .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
+            .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``);
+        await logchannel.send({ embeds: [CommandEmbed] });
     }
 });
 
