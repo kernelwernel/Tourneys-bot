@@ -22,23 +22,23 @@
 ## Commands
 | Command | Description | Alias(es) | Work in progress? |
 |---|---|---|---|
-| `;ping` | Just a simple ping command ||| 
+| `;ping` | Just imple ping command ||| 
 | `;links` | This will send all the relevant links of the server, such as invite links, ban appeal links and so on. | link ||
 | `;send <id> <message>` | Sends a DM message to the user id | say ||
-| `;snipe` | This will snipe the most recently deleted message in chat || ✅ |
+| `;snipe` | This will snipe the most recently deleted message in chat || Yes |
 | `;members` | This will display the member count of the server | membercount, member ||
 | `;bot-info` | This will display the bot's information, such as the version, language, bot admins, etc... | botinfo, bot ||
-| `;server-info` | This will display the server's information, such as the creation date, channel count, etc... | serverinfo, server | ✅ |
+| `;server-info` | This will display the server's information, such as the creation date, channel count, etc... | serverinfo, server | Yes |
 
 - - -
 
 ## Administrator commands
 | Command | Description | Alias(es) | Work in progress? | 
 |---|---|---|---|
-| `;clear-console` | This will clear the bot's console. Used if there are too many messages and want to clear the terminal | console-clear ||
-| `;kill` | This will terminate the bot process. **ONLY** used for emergency cases or for certain circumstances | terminate, abort, terminate, shutdown ||
-| `;reload` | This will refresh all the `.ts` files in the src directory and reconfigure's the bot to default settings. | refresh, reboot | ✅ |
-| `;status <status>` | This will set the bot's activity status to the arguement that's given || ✅ |
+| `;clear-console` | This will clear the bot's console. Used if there are too many log messages and I need to clear the terminal | console-clear ||
+| `;kill` | This will terminate the bot process. **ONLY** used for emergency cases or for certain circumstances | terminate, abort, shutdown ||
+| `;reload` | This will refresh all the `.ts` files in the src directory and reconfigure the bot to default presence settings. | refresh, reboot | Yes |
+| `;status <status>` | This will set the bot's activity status to the argument that's given || Yes |
 
 - - -
 
