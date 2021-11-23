@@ -164,5 +164,11 @@ client.on("warn", (info) => {
 })
 
 process.on('unhandledRejection', (reason) => {
+    let logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
     console.log(LOG.SYSTEM_ERROR + " - " + reason);
+    const UnhandledRejection = new MessageEmbed()
+        .setTitle(`${config["title"].error}`)
+        .setColor(`#${config["color"].error}`)
+        .setDescription(`\`\`\`${reason}\`\`\``)
+    logchannel.send({ embeds: [UnhandledRejection] })
 });

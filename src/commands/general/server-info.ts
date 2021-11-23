@@ -1,8 +1,6 @@
 import { Interaction, MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 import * as config from "../../config.json"
-import * as data from "../../../package.json"
-import moment from "moment"
 import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
 
@@ -26,24 +24,8 @@ export default {
             NONE: 'None',
             LOW: 'Low',
             MEDIUM: 'Medium',
-            HIGH: '(╯°□°）╯︵ ┻━┻',
-            VERY_HIGH: '┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻'
-        };
-
-        const regions = {
-            brazil: 'Brazil',
-            europe: 'Europe',
-            hongkong: 'Hong Kong',
-            india: 'India',
-            japan: 'Japan',
-            russia: 'Russia',
-            singapore: 'Singapore',
-            southafrica: 'South Africa',
-            sydeny: 'Sydeny',
-            'us-central': 'US Central',
-            'us-east': 'US East',
-            'us-west': 'US West',
-            'us-south': 'US South'
+            HIGH: 'High (╯°□°）╯︵ ┻━┻',
+            VERY_HIGH: 'Very high ┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻'
         };
 
         const roles = message.guild?.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
@@ -52,20 +34,26 @@ export default {
         const emojis = message.guild?.emojis.cache;
 
         var memberCount = guild?.memberCount;
+
+        let boostlevel:any;
+        let boostcount = message.guild?.premiumSubscriptionCount || "0"
+        if (boostcount < 7) { boostlevel = 1}
+        else if (boostcount >= 7 && boostcount < 14) { boostlevel = 2 }
+        else if (boostcount >= 14) { boostlevel = 3 }
+        else { boostlevel = "error"}
+
         const embed = new MessageEmbed()
             .setColor(`#${config["color"].default}`)
-            //.setThumbnail(message.guild.iconURL({ dynamic: true }))
+            .setThumbnail(`${message.guild?.iconURL({ dynamic: true })}`)
             .addFields(
-                { name: `__**Server name**__`, value: `>  - **${message.guild?.name}**`, inline: false },
-                { name: `__**Members**__`, value: `> - **${memberCount}**`, inline: false },
-                { name: `__**Emojis**__`, value: `>  - **${emojis?.size}**`, inline: false },
-                //{ name: `__**Creation date**__`, value: `> - **${moment(message.guild?.createdTimestamp).format('LT')} ${moment(message.guild?.createdTimestamp).format('LL')} [${moment(message.guild?.createdTimestamp).fromNow()}**`, inline: false },
-                //{ name: `__**Region**__`, value: `>  - ${regions[message.guild?.region], inline: false },
-                { name: `__**Boosts**__`, value: `>  - **${message.guild?.premiumSubscriptionCount || '0'}**`, inline: false },
-                //{ name: `__**Verification level**__`, value: `>  - ${verificationLevels[message.guild?.verificationLevel]}`, inline: false },
-                //{ name: `__****__`, value: `>  - `, inline: false },
+                { name: `__**Server name**__`, value: `> <:TourneysLogo:905736079519416331> - **${message.guild?.name}**`, inline: false },
+                { name: `__**Members**__`, value: `> 👥 - **${memberCount}**`, inline: false },
+                { name: `__**Emojis**__`, value: `> <:whenhe:755793144708202638> - **${emojis?.size}**`, inline: false },
+                { name: `__**Creation date**__`, value: `> 🗓️ - **${message.guild?.createdAt.toDateString()}**`, inline: false },
+                { name: `__**Boosts**__`, value: `> <a:nitro:912309250104102922> - **${boostcount}**`, inline: false },
+                { name: `__**Boost level**__`, value: `> <:1151nitro:912448526414409739> - **Level ${boostlevel}**`, inline: false },
+                { name: `__**Verification level**__`, value: `> <:7649modshield:912450558395306044> - **High**`}
             )
-            .setFooter("More features will be added in the future, this is temporary lol");
         message.channel.send({
             embeds: [embed]
         }).catch((error) => {
