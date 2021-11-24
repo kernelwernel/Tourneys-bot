@@ -37,14 +37,14 @@ export default {
         const embed = new MessageEmbed() 
             .setColor(`#${config["color"].default}`)
             .addFields(
-                { name: `__**Bot version**__`, value: `> 🏷 - **1.0**`, inline: false },
+                { name: `__**Bot version**__`, value: `> 🏷 - **${config.release}**`, inline: false },
                 { name: `__**Bot uptime**__`, value: `> ⏲ - **${days} days, ${hours} hours, ${minutes} minutes**`},
                 { name: `__**Discord.js version**__`, value: `> <:djs:909502528490725446> - **${npm.dependencies["discord.js"].substring(1)}**`, inline: false },
                 { name: `__**Discord.js API latency**__`, value: `> 📡 - **${Math.round(client.ws.ping)}ms**`, inline: false },
                 { name: `__**Languages used**__`, value:`>>> <:Typescript:909503375433928764> - **TypeScript**  \`${langs.ts}%\`
-                <:bash:912487277446455307> - **Shell**  \`${langs.shell}%\`
-                <:makefile:912488405106049075> - **Makefile**  \`${langs.make}%\`
-                <:docker:910267595045883914> - **Dockerfile**  \`${langs.docker}%\``, inline: false },
+<:bash:912487277446455307> - **Shell**  \`${langs.shell}%\`
+<:makefile:912488405106049075> - **Makefile**  \`${langs.make}%\`
+<:docker:910267595045883914> - **Dockerfile**  \`${langs.docker}%\``, inline: false },
                 { name: "__**Tourneys bot source code:**__", value: `> <:github:798841111338680330> - **${config.repo_link}**`, inline: false },
                 { name: "__**Docker container:**__", value: "> <:docker:910267595045883914> - **https://hub.docker.com/r/nonce1/tourneys-bot**", inline: false },
                 { name: `__**Credits**__`, value: `> <:777964368717414410:798168215020109895> - **${config.author}**`, inline: false },

@@ -16,10 +16,6 @@ export default {
 
     callback: ({ message, client }) => {
 
-        function moment(createdTimestamp: number) {
-            throw new Error("Function not implemented.");
-        };
-
         const verificationLevels = {
             NONE: 'None',
             LOW: 'Low',
