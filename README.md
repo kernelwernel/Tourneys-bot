@@ -42,6 +42,28 @@
 
 - - -
 
+## Update log
+### `v1.0`
+    - Added core functionality
+    - Added basic general and admin commands
+
+### `v2.0`
+    - Added deployment workflows
+    - Added github container registry to the bot repository
+    - Added Dockerfile for heroku to host
+    - Added catch net for each command if error occurs
+    - Added/Updated the following commands:
+        - `bot-info`
+        - `help`
+        - `send`
+        - `server-info`
+    - Added new command categoty section called "assassin"
+    - Udated and improved admin-only commands
+    - Updated `README.md` for better documentation
+    - Added useful development environment stuff such as makefiles
+    - Added a few other stuff for better collaboration
+
+
 ## To do list / Ideas
 - [ ] Add a powershell script as a makefile
 - [ ] Add feature to send images or files with the `send` command
