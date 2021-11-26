@@ -159,7 +159,7 @@ client.on("guildMemberAdd", (member) => {
     });
 });
 
-c.on("altAction", async (member: { user: { displayAvatarURL: (arg0: { dynamic: boolean }) => 
+c.on("altAction", async (member: { user: { displayAvatarURL: (arg0: { dynamic: boolean }) =>
 any; username: any; id: any }; guild: { memberCount: any } }, date: { createdAt: any; createdAtDate: any; joinAt: any }, action: any) => {
     let modchannel: TextChannel = client.channels.cache.get(config["channel"].mod) as TextChannel;
     const AltAlertEmbed = new MessageEmbed()
@@ -186,15 +186,15 @@ client.on("guildMembersChunk", async (members, guild) => {
         .setColor(`#${config["color"].alert}`)
         .setDescription(`\`\`\`A raid is potentially happening, this alert was triggered due to many members in the same mutual server joining at the same time. The mutual server the raid is suspected to be its main base of operation is called ${guild}. If this was a false alarm, ignore this alert.\`\`\``)
     await modchannel.send({ embeds: [RaidAlertEmbed] }).then(() => {
-        modchannel.send(`^^^^ <@${config["list"].admin[0]}> 
-<@${config["list"].admin[0]}> 
-<@${config["list"].admin[1]}> 
-<@${config["list"].admin[2]}> 
-<@${config["list"].admin[3]}> 
-<@${config["list"].admin[4]}> 
-<@${config["list"].admin[5]}> 
-<@${config["list"].admin[6]}> 
-<@${config["list"].admin[7]}> 
+        modchannel.send(`^^^^ <@${config["list"].admin[0]}>
+<@${config["list"].admin[0]}>
+<@${config["list"].admin[1]}>
+<@${config["list"].admin[2]}>
+<@${config["list"].admin[3]}>
+<@${config["list"].admin[4]}>
+<@${config["list"].admin[5]}>
+<@${config["list"].admin[6]}>
+<@${config["list"].admin[7]}>
 <@351023689581461519> ^^^^`)
     })
 });
