@@ -59,6 +59,10 @@ export default {
                     value: "> - Displays the server's relevant links (work in progress)",
                     inline: false
                 },
+                {
+                    name: `__**${config.prefix}update**__`,
+                    value: "> - Displays the latest update release of the bot"
+                }
             )
         message.channel.send({
             embeds: [embed]

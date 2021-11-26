@@ -1,8 +1,10 @@
 {
   "dependencies": {
     "axios": "^0.24.0",
+    "discord-antialts": "^1.1.0",
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
+    "glob": "^7.2.0",
     "google-formify": "^1.0.2",
     "heroku-client": "^3.1.0",
     "mongoose": "^6.0.13",
@@ -32,6 +34,7 @@
   "homepage": "https://github.com/Existential-nonce/Tourneys-bot#readme",
   "devDependencies": {
     "@types/edit-json-file": "^1.6.1",
+    "@types/glob": "^7.2.0",
     "@types/heroku-client": "^3.1.0",
     "eslint": "^8.3.0"
   }

@@ -29,6 +29,7 @@
 | `;members` | This will display the member count of the server | membercount, member ||
 | `;bot-info` | This will display the bot's information, such as the version, language, bot admins, etc... | botinfo, bot ||
 | `;server-info` | This will display the server's information, such as the creation date, channel count, etc... | serverinfo, server | Yes |
+| `;update` | This will display the bot's latest release and show what has been updated | releases ||
 
 - - -
 
@@ -73,6 +74,7 @@
 - [ ] Maybe add music features idk
 - [ ] Figure out a way to SSH into heroku's dyno terminal
 - [ ] Leaderboard of tourneys points
+- [ ] Auto alt account detector
 
 - - -
 

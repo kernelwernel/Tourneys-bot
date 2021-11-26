@@ -14,17 +14,24 @@
         "success": "6eb35b",
         "blacklisted": "010101",
         "discord": "7289da",
-        "dm": "adbbff"
+        "dm": "adbbff",
+        "warn": "ffb405",
+        "serverwarn": "ffb405",
+        "alert": "ff0000"
     },
 
     "channel": {
-        "start": "912004266347081768",
-        "log": "912004266347081768"
+        "log": "912004266347081768",
+        "mod": "688520264807350275"
     },
 
     "title": {
         "admin": "🛠 Admin panel 🛠",
-        "error": "🚫 Error 🚫"
+        "warn": "⚠️ Bot warning ⚠️",
+        "serverwarn": "⚠️ Server warning ⚠️",
+        "error": "🚫 Error 🚫",
+        "alert": "🛃 Potential alt account detected 🛃",
+        "raid_alert": "🚨 POTENTIAL RAID ALERT 🚨"
     },
 
     "author": "nonce#7570",

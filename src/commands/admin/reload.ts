@@ -1,6 +1,7 @@
 import { MessageEmbed } from "discord.js"
 import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
+import glob from "glob"
 import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
 
@@ -24,11 +25,11 @@ export default {
             .setTitle(`🛠 Admin panel 🛠`)
             .setDescription(`\`\`\`> Commands have been reloaded\`\`\``)
             .setColor(`#${config["color"].admin}`);
-            for (const path in require.cache) {
-                if (path.endsWith('.ts')) {
-                    delete require.cache[path];
-                }
-            }
+            glob(`${__dirname}/../**/*.ts`, async (err, filePaths) => {
+                filePaths.forEach((file) => {
+                    delete require.cache[require.resolve(file)];
+                })
+            })
         const newMessage = await message.channel.send({
             embeds: [embed]
         })

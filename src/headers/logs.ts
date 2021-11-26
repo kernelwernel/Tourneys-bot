@@ -15,6 +15,7 @@ export default class LOG_TAGS {
     SYSTEM_RELOADING: string  = `[${BLK_BG}SYSTEM${ANS_TM}]::[${REL_FG}${BLK_BG}RELOADING...${ANS_TM}]`
     SYSTEM_ERROR: string  = `[${BLK_BG}SYSTEM${ANS_TM}]::[${ERR_FG}${BLK_BG}ERROR${ANS_TM}]`
     SYSTEM_SHUTDOWN: string  = `[${BLK_BG}SYSTEM${ANS_TM}]::[${ERR_FG}${BLK_BG}SHUTDOWN${ANS_TM}]`
+    SYSTEM_WARNING: string = `[${BLK_BG}SYSTEM${ANS_TM}]::[${REL_FG}${BLK_BG}WARNING${ANS_TM}]`
 
     // ==== CLIENT ====
     CLIENT_DM: string  = `[${CLT_FG}${BLK_BG}CLIENT${ANS_TM}]::[${CLT_FG}DM${ANS_TM}]`

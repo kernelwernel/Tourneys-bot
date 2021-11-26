@@ -7,7 +7,7 @@ const LOG = new LOG_TAGS()
 export default {
     category: "Assassin",
     description: "Displays all the available VIP servers",
-    aliases: ["VIP", "server", "VIP-servers", "VIP-server", "VIPserver"],
+    aliases: ["VIP", "server", "VIP-servers", "VIP-server", "VIPserver", "servers", "jxemo", "chicken", "cobra", "dillon"],
     
     slash: false,
     
