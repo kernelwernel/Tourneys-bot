@@ -34,7 +34,7 @@ export default {
             docker: (Math.round((data.Dockerfile / total) * 100 * 10) / 10)
         }
 
-        const embed = new MessageEmbed() 
+        const embed = new MessageEmbed()
             .setColor(`#${config["color"].default}`)
             .addFields(
                 { name: `__**Bot version**__`, value: `> 🏷 - **${config.release}**`, inline: false },
