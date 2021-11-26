@@ -23,10 +23,10 @@ export default {
 - Added Dockerfile for heroku to host
 - Added catch net for each command if error occurs
 - Added/Updated the following commands:
-    - \`bot-info\`
-    - \`help\`
-    - \`send\`
-    - \`server-info\`
+     \`bot-info\`
+     \`help\`
+     \`send\`
+     \`server-info\`
 - Added new command category section called "assassin"
 - Udated and improved admin-only commands
 - Updated \`README.md\` for better documentation
