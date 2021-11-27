@@ -93,6 +93,10 @@ export default {
                             inline: false,
                         },
                         {
+                            name: `__**${config.prefix}announce <general | secret-general> <message>**__`,
+                            value: "> - Announces/Sends a message to the selected channel"
+                        },
+                        {
                             name: `__**${config.prefix}test**__`,
                             value: "> <:trollgod:855435721624256542>",
                             inline: false,

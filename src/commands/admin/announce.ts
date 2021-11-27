@@ -43,7 +43,7 @@ export default {
                     case ("general"):
                         await generalchannel.send(announce_message);
                         break;
-                    case ("secret" || "secret-general"):
+                    case ("secret"):
                         await secretchannel.send(announce_message);
                         break;
                     default:

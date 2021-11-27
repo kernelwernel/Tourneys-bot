@@ -98,7 +98,6 @@ client.on('ready', async (client) => {
 });
 
 client.on('messageCreate', async (message) => {
-    let logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
     let dmchannel: TextChannel = client.channels.cache.get(config["channel"].dm) as TextChannel;
     let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
 
@@ -172,10 +171,10 @@ any; username: any; id: any }; guild: { memberCount: any } }, date: { createdAt:
         .addFields(
             { name: "**__Alt Name__**", value: ` - ${member.user} (${member.user.username})`, inline: true },
             { name: "**__ID__**", value: ` - ${member.user.id}`, inline: true },
-            { name: "**__Account Created__**", value: ` - ${date.createdAt} days ago`, inline: true},
-            { name: "**__Account Creation Date__**", value: ` - ${date.createdAtDate}`, inline: true},
-            { name: "**__Join Position__**", value: ` - ${member.guild.memberCount}`, inline: true},
-            { name: "**__Join Date__**", value: ` - ${date.joinAt}`, inline: true}
+            { name: "**__Account Created__**", value: ` - ${date.createdAt} days ago`, inline: true },
+            { name: "**__Account Creation Date__**", value: ` - ${date.createdAtDate}`, inline: true },
+            { name: "**__Join Position__**", value: ` - ${member.guild.memberCount}`, inline: true },
+            { name: "**__Join Date__**", value: ` - ${date.joinAt}`, inline: true }
         )
     await modchannel.send({ embeds: [AltAlertEmbed] })
 });

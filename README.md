@@ -40,6 +40,7 @@
 | `;kill` | This will terminate the bot process. **ONLY** used for emergency cases or for certain circumstances | terminate, abort, shutdown ||
 | `;reload` | This will refresh all the `.ts` files in the src directory and reconfigure the bot to default presence settings. | refresh, reboot | Yes |
 | `;status <status>` | This will set the bot's activity status to the argument that's given || Yes |
+| `;announce <general | secret> <message>` | This will Announce/send a message to the selected channel |||
 
 - - -
 
