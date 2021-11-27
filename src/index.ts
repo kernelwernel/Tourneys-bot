@@ -99,6 +99,9 @@ client.on('ready', async (client) => {
 
 client.on('messageCreate', async (message) => {
     let logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
+    let dmchannel: TextChannel = client.channels.cache.get(config["channel"].dm) as TextChannel;
+    let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
+
     if (message.content == custom.trigger) {
         message.channel.send(custom.text)
     }
@@ -110,7 +113,7 @@ client.on('messageCreate', async (message) => {
                 .setColor(`#${config["color"].dm}`)
                 .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
                 .setDescription(`**Received DM:**\`\`\`${message.content}\`\`\``);
-            await logchannel.send({ embeds: [DMembed] });
+            await dmchannel.send({ embeds: [DMembed] });
         }
     }
 
@@ -122,7 +125,7 @@ client.on('messageCreate', async (message) => {
         const BlacklistLogEmbed = new MessageEmbed()
             .setColor(`#${config["color"].blacklisted}`)
             .setDescription(`**Blocked ${message.author.tag} from using the ${message.content} command lol**`);
-        await logchannel.send({ embeds: [BlacklistLogEmbed]});
+        await cmdchannel.send({ embeds: [BlacklistLogEmbed]});
         return;
     }
 
@@ -136,7 +139,7 @@ client.on('messageCreate', async (message) => {
             .setColor(`#${config["color"].discord}`)
             .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
             .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``);
-        await logchannel.send({ embeds: [CommandEmbed] });
+        await cmdchannel.send({ embeds: [CommandEmbed] });
     }
 });
 
