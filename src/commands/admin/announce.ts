@@ -1,7 +1,6 @@
 import { Interaction, Message, MessageEmbed, TextChannel } from "discord.js";
 import { ICommand } from "wokcommands";
-import LOG_TAGS from "../../headers/logs"
-const LOG = new LOG_TAGS()
+import LOG from "../../headers/logs.json"
 import * as config from "../../config.json"
 
 export default {
@@ -30,7 +29,7 @@ export default {
             message.channel.send({ embeds: [IncorrectEmbed] });
             return;
         }
-    
+
         if (!args.length || args.length == 1) {
             ErrorEmbed()
         } else {

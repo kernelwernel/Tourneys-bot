@@ -6,19 +6,27 @@ import fs from "fs"
 import moment from "moment"
 import * as config from "./config.json"
 import * as custom from "./headers/custom.json"
-import LOG_TAGS from "./headers/logs"
-const LOG = new LOG_TAGS();
+import * as LOG from "./headers/logs.json"
 import "dotenv/config"
 const { AntiAltClient } = require("discord-antialts") // importing won't work on this package for some reason
 
 const client = new DiscordJS.Client({
     intents: [
         Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_MEMBERS,
         Intents.FLAGS.GUILD_MESSAGES,
         Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+        Intents.FLAGS.GUILD_MESSAGE_TYPING,
         Intents.FLAGS.GUILD_VOICE_STATES,
         Intents.FLAGS.GUILD_PRESENCES,
+        Intents.FLAGS.GUILD_INTEGRATIONS,
+        Intents.FLAGS.GUILD_WEBHOOKS,
+        Intents.FLAGS.GUILD_BANS,
+        Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
+        Intents.FLAGS.GUILD_INVITES,
         Intents.FLAGS.DIRECT_MESSAGES,
+        Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
+        Intents.FLAGS.DIRECT_MESSAGE_TYPING
     ],
     partials: [
         "USER", "CHANNEL", "GUILD_MEMBER", "MESSAGE", "REACTION"
@@ -29,7 +37,7 @@ const commands: Array<string> = [];
 
 client.on('ready', async (client) => {
     client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
-    console.log(`${LOG.CLIENT_INFO} - Bot preconfigurations have been set`);
+    console.log(`${LOG["CLIENT"].INFO} - Bot preconfigurations have been set`);
 
     const logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
     const ReadyEmbed = new MessageEmbed()
@@ -107,7 +115,7 @@ client.on('messageCreate', async (message) => {
 
     if (message.channel.type === 'DM' && !message.author.bot) {
         if (message.content.length < 2000) {
-            console.log(`${LOG.CLIENT_DM} ${message.author.tag} - ${message.content}`);
+            console.log(`${LOG["CLIENT"].DM} ${message.author.tag} - ${message.content}`);
             const DMembed = new MessageEmbed()
                 .setColor(`#${config["color"].dm}`)
                 .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
@@ -133,7 +141,7 @@ client.on('messageCreate', async (message) => {
     }
 
     if (commands.includes(message.content.slice(1, message.content.length))) {
-        console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`);
+        console.log(`${LOG["CLIENT"].COMMAND} ${message.author.tag} - ${message.content}`);
         const CommandEmbed = new MessageEmbed()
             .setColor(`#${config["color"].discord}`)
             .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
@@ -148,6 +156,7 @@ client.on('messageDelete', async (message) => {
         type: 'MESSAGE_DELETE'
     }).catch(console.error);
     // https://stackoverflow.com/questions/53328061/finding-who-deleted-the-message
+
 });
 
 const c = new AntiAltClient({
@@ -211,7 +220,7 @@ client.on("guildUnavailable", async (guild) => {
 });
 
 client.on("warn", async (warning) => {
-    console.log(`${LOG.SYSTEM_WARNING} - ${warning}`);
+    console.log(`${LOG["SYSTEM"].WARNING} - ${warning}`);
     let logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
     const BotWarnEmbed = new MessageEmbed()
         .setTitle(`${config["title"].warn}`)
@@ -242,15 +251,15 @@ client.on("debug", async (debug) => {
 */
 
 client.once('reconnecting', () => {
-    console.log(`${LOG.CLIENT_INFO} - Client is reconnecting...`);
+    console.log(`${LOG["CLIENT"].INFO} - Client is reconnecting...`);
 });
 
 client.once('disconnect', () => {
-    console.log(`${LOG.CLIENT_INFO} - Client has disconnected`);
+    console.log(`${LOG["CLIENT"].INFO} - Client has disconnected`);
 });
 
 client.login(process.env.TOKEN).then(() => {
-    console.log(`\n${LOG.SYSTEM_SUCCESS} - Logged into ${client.user?.tag}\n`);
+    console.log(`\n${LOG["SYSTEM"].SUCCESS} - Logged into ${client.user?.tag}\n`);
 });
 
 /*

@@ -2,8 +2,7 @@ import { MessageEmbed } from "discord.js"
 import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
 import glob from "glob"
-import LOG_TAGS from "../../headers/logs"
-const LOG = new LOG_TAGS()
+import LOG from "../../headers/logs.json"
 
 export default {
     category: "Admin",
@@ -17,7 +16,7 @@ export default {
     testOnly: true,
 
     callback: async ({ message, client }) => {
-        console.log(`${LOG.SYSTEM_RELOADING}`);
+        console.log(`${LOG["SYSTEM"].RELOADING}`);
 
         client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
         
@@ -44,10 +43,10 @@ export default {
                 .setDescription(`\`\`\`${error}\`\`\``)
                 .setColor(`#${config["color"].error}`);
             message.channel.send({ embeds: [ErrorEmbed] });
-            console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+            console.log(`${LOG["SYSTEM"].ERROR} - ${error}`);
             return;
         });
 
-        console.log(`${LOG.SYSTEM_RELOADED}`);
+        console.log(`${LOG["SYSTEM"].RELOADED}`);
     }
 } as ICommand;

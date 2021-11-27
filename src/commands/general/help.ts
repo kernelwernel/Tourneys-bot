@@ -1,8 +1,7 @@
 import { MessageEmbed } from "discord.js"
 import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
-import LOG_TAGS from "../../headers/logs"
-const LOG = new LOG_TAGS()
+import LOG from "../../headers/logs.json"
 
 export default {
     category: "General",
@@ -39,11 +38,13 @@ export default {
                     value: "> - Sends a DM with any message to any user in the server",
                     inline: false
                 },
+                /*
                 {
                     name: `__**${config.prefix}snipe**__`,
                     value: "> - Snipe the most recently deleted message (work in progress)",
                     inline: false
                 },
+                */
                 {
                     name: `__**${config.prefix}members**__`,
                     value: "> - Displays the member count of the server",
@@ -89,12 +90,12 @@ export default {
                         },
                         {
                             name: `__**${config.prefix}reload**__`,
-                            value: "> - Refreshes all the source files, basically a reload",
+                            value: "> - Refreshes all the source files, basically a reboot",
                             inline: false,
                         },
                         {
                             name: `__**${config.prefix}announce <general | secret-general> <message>**__`,
-                            value: "> - Announces/Sends a message to the selected channel"
+                            value: "> - Announces/sends a message to the selected channel"
                         },
                         {
                             name: `__**${config.prefix}test**__`,
@@ -110,7 +111,7 @@ export default {
                         .setDescription(`\`\`\`${error}\`\`\``)
                         .setColor(`#${config["color"].error}`);
                     message.channel.send({ embeds: [ErrorEmbed] });
-                    console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+                    console.log(`${LOG["SYSTEM"].ERROR} - ${error}`);
                     return;
                 });
             }

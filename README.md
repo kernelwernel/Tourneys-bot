@@ -66,6 +66,14 @@
 - Added useful development environment stuff such as makefiles
 - Added a few other stuff for better collaboration
 
+    ##### `v2.1`
+    - Added anti-raid feature
+    - Added anti-alt feature
+    - Added the `;announce` and `;update` commands
+    - Added the `Utility` section of commands
+    - Added new client events in `index.ts`
+    - Finished the `;server-info` command
+
 
 ## To do list / Ideas
 - [ ] Add a powershell script as a makefile
@@ -76,7 +84,7 @@
 - [ ] Maybe add music features idk
 - [ ] Figure out a way to SSH into heroku's dyno terminal
 - [ ] Leaderboard of tourneys points
-- [ ] Auto alt account detector
+- [x] Auto alt account detector
 
 - - -
 

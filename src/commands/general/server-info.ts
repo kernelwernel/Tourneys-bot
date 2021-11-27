@@ -1,13 +1,12 @@
 import { Interaction, MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 import * as config from "../../config.json"
-import LOG_TAGS from "../../headers/logs"
-const LOG = new LOG_TAGS()
+import LOG from "../../headers/logs.json"
 
 export default {
     category: "General",
     description: "Displays the server information",
-    aliases: ["server"],
+    aliases: ["server", "serverinfo"],
 
     slash: false,
 
@@ -44,7 +43,7 @@ export default {
             .addFields(
                 { name: `__**Server name**__`, value: `> <:TourneysLogo:905736079519416331> - **${message.guild?.name}**`, inline: false },
                 { name: `__**Members**__`, value: `> 👥 - **${memberCount}**`, inline: false },
-                { name: `__**Emojis**__`, value: `> <:whenhe:755793144708202638> - **${emojis?.size}**`, inline: false },
+                { name: `__**Emojis**__`, value: `> <:dudewhat:752186068832354314> - **${emojis?.size}**`, inline: false },
                 { name: `__**Creation date**__`, value: `> 🗓️ - **${message.guild?.createdAt.toDateString()}**`, inline: false },
                 { name: `__**Boosts**__`, value: `> <a:nitro:912309250104102922> - **${boostcount}**`, inline: false },
                 { name: `__**Boost level**__`, value: `> <:1151nitro:912448526414409739> - **Level ${boostlevel}**`, inline: false },
@@ -58,7 +57,7 @@ export default {
                 .setDescription(`\`\`\`${error}\`\`\``)
                 .setColor(`#${config["color"].error}`);
             message.channel.send({ embeds: [ErrorEmbed] });
-            console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+            console.log(`${LOG["SYSTEM"].ERROR} - ${error}`);
             return;
         });
     }

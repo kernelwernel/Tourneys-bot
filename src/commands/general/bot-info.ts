@@ -3,8 +3,7 @@ import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
 import * as npm from "../../../package.json"
 import axios from "axios"
-import LOG_TAGS from "../../headers/logs"
-const LOG = new LOG_TAGS()
+import LOG from "../../headers/logs.json"
 
 export default {
     category: "General",
@@ -57,7 +56,7 @@ export default {
                 .setDescription(`\`\`\`${error}\`\`\``)
                 .setColor(`#${config["color"].error}`);
             message.channel.send({ embeds: [ErrorEmbed] });
-            console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+            console.log(`${LOG["SYSTEM"].ERROR} - ${error}`);
             return;
         });
     }

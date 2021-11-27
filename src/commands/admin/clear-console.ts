@@ -1,8 +1,7 @@
 import { MessageEmbed } from "discord.js"
 import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
-import LOG_TAGS from "../../headers/logs"
-const LOG = new LOG_TAGS()
+import LOG from "../../headers/logs.json"
 
 export default {
     category: "Admin",
@@ -37,7 +36,7 @@ export default {
                 .setDescription(`\`\`\`${error}\`\`\``)
                 .setColor(`#${config["color"].error}`);
             message.channel.send({ embeds: [ErrorEmbed] });
-            console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+            console.log(`${LOG["SYSTEM"].ERROR} - ${error}`);
         });
     }
 } as ICommand;
