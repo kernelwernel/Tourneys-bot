@@ -22,7 +22,9 @@
 
     "channel": {
         "log": "912004266347081768",
-        "mod": "688520264807350275"
+        "mod": "688520264807350275",
+        "general": "906386495441612800",
+        "secret": "911060120400695316"
     },
 
     "title": {
@@ -32,6 +34,11 @@
         "error": "🚫 Error 🚫",
         "alert": "🛃 Potential alt account detected 🛃",
         "raid_alert": "🚨 POTENTIAL RAID ALERT 🚨"
+    },
+
+    "webhooks": {
+        "general": "https://discord.com/api/webhooks/913913920450863125/h6tsXEKhebz0oBy73noorGDOtdN4Gww6VF2x-6A9mEoUovFfTFJ83NKbp6ucr24Qd5Wk",
+        "secret_general": "https://discord.com/api/webhooks/913914453832114246/KcAFTwv4ryKV1WfqDzu2S6wxO0iGf0FlAGkp-gSVXdb1zLZ8A4Z6X96fpXzvOoEL0a_V"
     },
 
     "author": "nonce#7570",

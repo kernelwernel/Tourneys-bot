@@ -13,7 +13,7 @@ export default {
     ownerOnly: true,
     testOnly: true,
 
-    callback: ({ message }) => {
+    callback: ({ message, client }) => {
         message.channel.send("<:trollgod:855435721624256542>").catch((error) => {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)

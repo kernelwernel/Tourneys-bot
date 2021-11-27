@@ -9,7 +9,7 @@ import * as custom from "./headers/custom.json"
 import LOG_TAGS from "./headers/logs"
 const LOG = new LOG_TAGS();
 import "dotenv/config"
-const { AntiAltClient } = require("discord-antialts")
+const { AntiAltClient } = require("discord-antialts") // importing won't work on this package for some reason
 
 const client = new DiscordJS.Client({
     intents: [
@@ -21,7 +21,7 @@ const client = new DiscordJS.Client({
         Intents.FLAGS.DIRECT_MESSAGES,
     ],
     partials: [
-        "USER", "CHANNEL", "GUILD_MEMBER", "MESSAGE"
+        "USER", "CHANNEL", "GUILD_MEMBER", "MESSAGE", "REACTION"
     ]
 });
 

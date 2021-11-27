@@ -1,3 +1,4 @@
+import { MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 import * as config from "../../config.json"
 import LOG_TAGS from "../../headers/logs"
@@ -13,9 +14,8 @@ export default {
     ownerOnly: false,
     testOnly: true,
 
-    callback: ({ message, client, interaction, text }) => {
-        // TODO: add the snipe command functionality
-
+    callback: ({ message, client }) => {
+    // TODO: add the  snipe command functionality
 
 /*
         .catch((error) =>{

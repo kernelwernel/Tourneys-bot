@@ -10,12 +10,16 @@ export default {
     aliases: ["say"],
     
     slash: false,
-    cooldown: "5s",
+    cooldown: "3s",
     
     ownerOnly: false,
     testOnly: true,
 
     callback: ({ message, client }) => {
+        if (!(message.channel.id = "909224884939419708")) {
+            message.delete();
+        }
+
         const args = message.content.slice(config.prefix.length).trim().split(/ +/);
         const command = args.shift()?.toLowerCase();
 
@@ -38,8 +42,8 @@ export default {
                 const SentEmbed = new MessageEmbed()
                     .setDescription(`**Message to <@${SendID}> sent!**`)
                     .setColor(`#${config["color"].default}`);
-                message.channel.send({ embeds: [SentEmbed] });
-            }).catch((error) => {
+                message.channel.send({ embeds: [SentEmbed] })
+            }).catch(async (error) => {
                 if (config["list"].admin.includes(message.author.id)) {
                     const AdminErrorEmbed = new MessageEmbed()
                         .setTitle(config["title"].error)

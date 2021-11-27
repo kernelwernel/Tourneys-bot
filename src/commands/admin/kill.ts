@@ -28,38 +28,42 @@ export default {
         let local: boolean = false;
         let server: boolean = false;
 
-        if (!text) {
-            const embed = new MessageEmbed()
-            .setTitle(config["title"].admin)
-            .setDescription(`\`\`\`> Please enter a valid argument. Usage:\n ;kill <local | server>\`\`\``)
-            .setColor(`#${config["color"].error}`);
-            message.channel.send({ embeds: [embed] });
-        } if (text == "local") {
-            shutdown = "Shutting down the locally hosted bot...";
-            local = true;
-        } else if (text == ("server" || "serverside")) {
-            shutdown = "Shutting down the serverside hosted bot...";
-            server = true;
-        } else {
-            const embed = new MessageEmbed()
-            .setTitle(config["title"].admin)
-            .setDescription("\`\`\`> Invalid argument! Please try again\`\`\`")
-            .setColor(`#${config["color"].error}`);
-            message.channel.send({ embeds: [embed] });
+        const args = message.content.slice(config.prefix.length).trim().split(/ +/);
+        function InvalidEmbed(err_msg) {
+            const InvalidEmbed = new MessageEmbed()
+                .setTitle(config["title"].admin)
+                .setDescription(`\`\`\`> ${err_msg}\`\`\``)
+                .setColor(`#${config["color"].error}`);
+            message.channel.send({ embeds: [InvalidEmbed] });
             return;
+        }
+
+        if (!args) {
+            InvalidEmbed("Please enter a valid argument. Usage:\n ;kill <local | server>")
+        }
+        
+        switch (args[1]) {
+            case ("local"):
+                shutdown = "locally"
+                local = true;
+                break;
+            case ("server"):
+                shutdown = "serverside"
+                server = true;
+            default:
+                return InvalidEmbed("Invalid argument! Please try again");
         }
 
         const embed = new MessageEmbed()
             .setTitle(config["title"].admin)
-            .setDescription(`\`\`\`${shutdown}\`\`\``)
+            .setDescription(`\`\`\`"Shutting down the ${shutdown} hosted bot..."\`\`\``)
             .setColor(`#${config['color'].admin}`);
-
         const newMessage = await message.reply({
             embeds: [embed]
         })
 
         const newEmbed = newMessage.embeds[0];
-        newEmbed.setDescription(`\`\`\`> ${shutdown}\n> Bot has been shut down\`\`\``);
+        newEmbed.setDescription(`\`\`\`> Shutting down the ${shutdown} hosted bot...\n> Bot has been shut down\`\`\``);
         newMessage.edit({
             embeds: [newEmbed]
         }).then(async () => {
