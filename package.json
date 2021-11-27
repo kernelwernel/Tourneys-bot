@@ -33,9 +33,9 @@
   },
   "homepage": "https://github.com/Existential-nonce/Tourneys-bot#readme",
   "devDependencies": {
-    "@types/edit-json-file": "^1.6.1",
-    "@types/glob": "^7.2.0",
-    "@types/heroku-client": "^3.1.0",
-    "eslint": "^8.3.0"
+    "@types/edit-json-file": "1.6.1",
+    "@types/glob": "7.2.0",
+    "@types/heroku-client": "3.1.0",
+    "eslint": "8.3.0"
   }
 }
