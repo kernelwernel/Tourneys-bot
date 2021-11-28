@@ -9,7 +9,7 @@ export default {
     aliases: ["say"],
     
     slash: false,
-    COOLDOWN: "3s",
+    cooldown: "4s",
     
     ownerOnly: false,
     testOnly: true,
@@ -34,7 +34,7 @@ export default {
         const args = message.content.slice(config.prefix.length).trim().split(/ +/);
         const command = args.shift()?.toLowerCase();
 
-        let SendID:string = ""
+        let SendID: string = ""
         let SnowflakeIsValid: boolean = false
 
         if (!args.length || args.length == 1) {
@@ -52,7 +52,11 @@ export default {
         if (!(SnowflakeIsValid)) {
             return ErrorEmbed()
         } else {
-            message.delete()
+            const adminchannels = new Array("913948455766990888", "913948495537377330", "909224884939419708");
+            if (!adminchannels.includes(message.channel.id)) {
+                message.delete()
+            }
+
             console.log(`${LOG["CLIENT"].COMMAND} ${message.author.tag} - ${message.content}`);
 
             client.users.fetch(`${SendID}`).then((user) => {

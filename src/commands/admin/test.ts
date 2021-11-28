@@ -9,7 +9,7 @@ export default {
     
     slash: false,
     
-    ownerOnly: true,
+    ownerOnly: false,
     testOnly: true,
 
     callback: ({ message, client }) => {

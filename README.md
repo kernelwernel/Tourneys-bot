@@ -74,6 +74,7 @@
     - Added new client events in `index.ts`
     - Finished the `;server-info` command
 
+- - -
 
 ## To do list / Ideas
 - [ ] Add a powershell script as a makefile
