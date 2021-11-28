@@ -9,6 +9,7 @@ export default {
     aliases: ["server", "serverinfo"],
 
     slash: false,
+    cooldown: "5s",
 
     ownerOnly: false,
     testOnly: true,

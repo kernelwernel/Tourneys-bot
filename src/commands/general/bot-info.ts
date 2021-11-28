@@ -11,6 +11,7 @@ export default {
     aliases: ["botinfo", "bot"],
     
     slash: false,
+    cooldown: "5s",
 
     ownerOnly: false,
     testOnly: true,

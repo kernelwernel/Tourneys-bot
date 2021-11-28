@@ -9,30 +9,23 @@ export default {
     aliases: ["releases"],
 
     slash: false,
+    cooldown: "5s",
 
     ownerOnly: false,
     testOnly: true,
 
     callback: ({ message, client, interaction, text }) => {
         const embed = new MessageEmbed()
-            .setTitle(`🏷️ Tourneys bot v2.0 updates 🏷️`)
+            .setTitle(`🏷️ Tourneys bot v2.1 updates 🏷️`)
             .setDescription(`
-- Added deployment workflows
-- Added github container registry to the bot repository
-- Added Dockerfile for heroku to host
-- Added catch net for each command if error occurs
-- Added/Updated the following commands:
-     \`bot-info\`
-     \`help\`
-     \`send\`
-     \`server-info\`
-- Added new command category section called "assassin"
-- Udated and improved admin-only commands
-- Updated \`README.md\` for better documentation
-- Added useful development environment stuff such as makefiles
-- Added a few other stuff for better collaboration
-            
-**[Full Changelog](https://github.com/Existential-nonce/Tourneys-bot/compare/v1.0...v2.0)**
+- Added anti-raid feature
+- Added anti-alt feature
+- Added the ;announce and ;update commands
+- Added the Utility section of commands
+- Finished the ;server-info command
+- Updated the ;send command where it'll automatically delete your message so you don't need to manually delete it yourself to hide it 
+
+**[Full Changelog](https://github.com/Existential-nonce/Tourneys-bot/compare/v2.0...v2.1)**
 `)
             .setColor(`#${config["color"].default}`);
         message.channel.send({ embeds: [embed]}).catch((error) => {

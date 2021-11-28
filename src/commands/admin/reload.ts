@@ -10,6 +10,7 @@ export default {
     aliases: ["refresh", "reboot"],
 
     slash: false,
+    cooldown: "5s",
     
     permissions: ["MANAGE_GUILD"],
     ownerOnly: true,

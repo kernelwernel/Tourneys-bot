@@ -9,6 +9,7 @@ export default {
     aliases: ["membercount", "member"],
     
     slash: false,
+    cooldown: "5s",
     
     ownerOnly: false,
     testOnly: true,

@@ -9,6 +9,7 @@ export default {
     aliases: ["commands"],
 
     slash: false,
+    cooldown: "5s",
 
     ownerOnly: false,
     testOnly: true,
@@ -63,6 +64,10 @@ export default {
                 {
                     name: `__**${config.prefix}update**__`,
                     value: "> - Displays the latest update release of the bot"
+                },
+                {
+                    name: `__**${config.prefix}announce <general | secret> <message>**__`,
+                    value: "> - Announces/sends a message to the selected channel"
                 }
             )
         message.channel.send({
@@ -92,10 +97,6 @@ export default {
                             name: `__**${config.prefix}reload**__`,
                             value: "> - Refreshes all the source files, basically a reboot",
                             inline: false,
-                        },
-                        {
-                            name: `__**${config.prefix}announce <general | secret-general> <message>**__`,
-                            value: "> - Announces/sends a message to the selected channel"
                         },
                         {
                             name: `__**${config.prefix}test**__`,

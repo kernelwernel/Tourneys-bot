@@ -9,6 +9,7 @@ export default {
     aliases: ["link"],
 
     slash: false,
+    cooldown: "5s",
     
     ownerOnly: false,
     testOnly: true,

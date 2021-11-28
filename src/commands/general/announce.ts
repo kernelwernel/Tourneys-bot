@@ -8,13 +8,17 @@ export default {
     description: "Send a message to a specific channel",
 
     slash: false,
+    cooldown: "5s",
 
-    permissions: ["MANAGE_GUILD"],
-    ownerOnly: true,
+    ownerOnly: false,
     testOnly: false,
 
     callback: async ({ message, client }) => {
-        message.delete();
+        const adminchannels = new Array("913948455766990888", "913948495537377330", "909224884939419708");
+        if (!adminchannels.includes(message.channel.id)) {
+            message.delete()
+        }
+
         const args = message.content.slice(config.prefix.length).trim().split(/ +/);
         const command = args.shift()?.toLowerCase();
 
@@ -37,18 +41,29 @@ export default {
             let SendID = args.shift()?.toLowerCase();
             announce_message.toString();
 
+            let result = announce_message.replace(/@everyone/i, "(@)everyone");
+            let ChannelID: string = ""
+
             if (message.content.length < 2000) {
                 switch (SendID) {
-                    case ("general"):
-                        await generalchannel.send(announce_message);
+                    case "general":
+                        ChannelID = "906386495441612800"
+                        await generalchannel.send(result);
                         break;
-                    case ("secret"):
-                        await secretchannel.send(announce_message);
+                    case "secret-general":
+                    case "secret":
+                        ChannelID = "911060120400695316"
+                        await secretchannel.send(result);
                         break;
                     default:
                         ErrorEmbed()
                         break;
                 }
+
+                const SentEmbed = new MessageEmbed()
+                    .setDescription(`**Message sent in <#${ChannelID}>!**`)
+                    .setColor(`#${config["color"].default}`);
+                message.channel.send({ embeds: [SentEmbed] })
             }
         }
     }

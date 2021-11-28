@@ -13,6 +13,7 @@ export default {
     aliases: ["exit", "abort", "terminate", "shutdown"],
 
     slash: false,
+    cooldown: "5s",
 
     minArgs: 1,
     expectedArgs: "<type>",

@@ -9,6 +9,7 @@ export default {
     description: "snipe command",
 
     slash: false,
+    cooldown: "5s",
 
     ownerOnly: false,
     testOnly: true,

@@ -8,6 +8,7 @@ export default {
     description: "Just a simple test command to see if the bot works",
     
     slash: false,
+    cooldown: "5s",
     
     ownerOnly: false,
     testOnly: true,

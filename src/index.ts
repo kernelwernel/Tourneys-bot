@@ -109,11 +109,14 @@ client.on('messageCreate', async (message) => {
     let dmchannel: TextChannel = client.channels.cache.get(config["channel"].dm) as TextChannel;
     let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
 
-    if (message.content == custom.trigger) {
+    const regex = /(n|N)(a|A)(z|Z)(i|I)/
+    if (regex.test(message.content)) {
         message.channel.send(custom.text)
     }
 
     if (message.channel.type === 'DM' && !message.author.bot) {
+
+        if (message.attachments.size > 0) { return; }
         if (message.content.length < 2000) {
             console.log(`${LOG["CLIENT"].DM} ${message.author.tag} - ${message.content}`);
             const DMembed = new MessageEmbed()
@@ -165,9 +168,7 @@ const c = new AntiAltClient({
 });
 
 client.on("guildMemberAdd", (member) => {
-    c.init(member, {
-        action: "kick",
-    });
+    //c.init(member, { });
 });
 
 c.on("altAction", async (member: { user: { displayAvatarURL: (arg0: { dynamic: boolean }) =>
@@ -178,16 +179,15 @@ any; username: any; id: any }; guild: { memberCount: any } }, date: { createdAt:
         .setColor(`#${config["color"].alert}`)
         .setThumbnail(`${member.user.displayAvatarURL({dynamic: true})}`)
         .addFields(
-            { name: "**__Alt Name__**", value: ` - ${member.user} (${member.user.username})`, inline: true },
-            { name: "**__ID__**", value: ` - ${member.user.id}`, inline: true },
-            { name: "**__Account Created__**", value: ` - ${date.createdAt} days ago`, inline: true },
-            { name: "**__Account Creation Date__**", value: ` - ${date.createdAtDate}`, inline: true },
-            { name: "**__Join Position__**", value: ` - ${member.guild.memberCount}`, inline: true },
-            { name: "**__Join Date__**", value: ` - ${date.joinAt}`, inline: true }
+            { name: "**__Alt Name__**", value: ` - ${member.user} (${member.user.username})`, inline: false },
+            { name: "**__ID__**", value: ` - ${member.user.id}`, inline: false },
+            { name: "**__Account Created__**", value: ` - ${date.createdAt} days ago`, inline: false },
+            { name: "**__Account Creation Date__**", value: ` - ${date.createdAtDate}`, inline: false },
+            { name: "**__Join Position__**", value: ` - ${member.guild.memberCount}`, inline: false },
+            { name: "**__Join Date__**", value: ` - ${date.joinAt}`, inline: false }
         )
     await modchannel.send({ embeds: [AltAlertEmbed] })
 });
-
 
 client.on("guildMembersChunk", async (members, guild) => {
     console.error(`a chunk of guild members is received`);

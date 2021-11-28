@@ -9,19 +9,12 @@ export default {
     aliases: ["say"],
     
     slash: false,
-    cooldown: "4s",
+    cooldown: "5s",
     
     ownerOnly: false,
     testOnly: true,
 
     callback: ({ message, client }) => {
-
-        /*
-        if (!(message.channel.id = "909224884939419708")) {
-            message.delete();
-        }
-        */
-
         function ErrorEmbed() {
             message.delete()
             const IncorrectEmbed = new MessageEmbed()
@@ -34,8 +27,8 @@ export default {
         const args = message.content.slice(config.prefix.length).trim().split(/ +/);
         const command = args.shift()?.toLowerCase();
 
-        let SendID: string = ""
-        let SnowflakeIsValid: boolean = false
+        let SendID: string
+        let SnowflakeIsValid: boolean
 
         if (!args.length || args.length == 1) {
             return ErrorEmbed()
@@ -45,11 +38,15 @@ export default {
         SendID = args.shift()!;
         DMmessage.toString();
 
-        if (SendID.length == 18) {
-            SnowflakeIsValid = true
+        switch (SendID.length) {
+            case 18:
+                SnowflakeIsValid = true
+                break;
+            default:
+                SnowflakeIsValid = false
         }
 
-        if (!(SnowflakeIsValid)) {
+        if (!SnowflakeIsValid) {
             return ErrorEmbed()
         } else {
             const adminchannels = new Array("913948455766990888", "913948495537377330", "909224884939419708");
