@@ -46,7 +46,7 @@ export default {
             let SendID = args.shift()?.toLowerCase();
             announce_message.toString();
 
-            let result = announce_message.replace(/@everyone/i, "(@)everyone");
+            let result = announce_message.replace(/@/i, "(@)");
             let channelID: string | undefined;
             let validChannel: boolean | undefined;
 

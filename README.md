@@ -78,7 +78,7 @@
 
 ## To do list / Ideas
 - [ ] Add a powershell script as a makefile
-- [ ] Add feature to send images or files with the `send` command
+- [ ] Add feature to send images or files with the `;send` command
 - [ ] Add a snipe command
 - [ ] Figure out a way to make Diff files and add one to the repository
 - [x] Finish the server info command
@@ -86,6 +86,7 @@
 - [ ] Figure out a way to SSH into heroku's dyno terminal
 - [ ] Leaderboard of tourneys points
 - [x] Auto alt account detector
+- [ ] Create help menu for the `;help` command
 
 - - -
 

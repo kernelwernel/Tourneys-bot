@@ -3,7 +3,7 @@ import WOKCommands from "wokcommands"
 import path from "path"
 import testSchema from "./test-schema"
 import fs from "fs"
-import moment from "moment"
+import glob from "glob"
 import * as config from "./config.json"
 import * as custom from "./headers/custom.json"
 import LOG_TAGS from "./headers/logs"
@@ -48,7 +48,7 @@ client.on('ready', async (client) => {
         .setColor(`#${config["color"].success}`)
     await logchannel.send({ embeds: [ReadyEmbed] });
 
-    function ThroughDirectory(directory: string) {
+    function ThroughDirectory(directory) {
         fs.readdirSync(directory).forEach(file => {
             let Absolute = path.join(directory, file);
             if (fs.statSync(Absolute).isDirectory()) {
@@ -59,6 +59,7 @@ client.on('ready', async (client) => {
                 Absolute = Absolute.replace("src/commands/general/", "");
                 Absolute = Absolute.replace("src/commands/assassin/", "");
                 Absolute = Absolute.replace("src/commands/utility/", "");
+                Absolute = Absolute.replace("src/commands/music/", "");
                 return commands.push(Absolute);
             }
         });
