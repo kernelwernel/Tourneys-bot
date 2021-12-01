@@ -13,7 +13,7 @@ run:
 nodemon:
 	@nodemon $(SRC)
 
-reconfig:
+tsconfig:
 	@rm -rf tsconfig.json && tsc -init
 
 docker:
@@ -21,7 +21,7 @@ docker:
 	@docker image tag $(IMG) $(USR)/$(CONTAINER)
 	@docker push $(USR)/$(CONTAINER)
 
-docrun:
+dockerrun:
 	@docker run -it $(CONTAINER)
 
 heroku:

@@ -2,6 +2,7 @@
   "dependencies": {
     "axios": "^0.24.0",
     "discord-antialts": "^1.1.0",
+    "discord-chatbot": "^2.0.2",
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
     "glob": "^7.2.0",
@@ -9,6 +10,7 @@
     "heroku-client": "^3.1.0",
     "mongoose": "^6.0.13",
     "nodemon": "^2.0.15",
+    "smart-botto": "^1.1.1",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.2",
     "wokcommands": "^1.5.3"

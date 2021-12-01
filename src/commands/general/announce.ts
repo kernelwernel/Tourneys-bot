@@ -71,10 +71,16 @@ export default {
                 }
 
                 if (validChannel == true) {
+                    let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
                     const SentEmbed = new MessageEmbed()
                         .setDescription(`**Message sent in <#${channelID}>!**`)
                         .setColor(`#${config["color"].default}`);
                     message.channel.send({ embeds: [SentEmbed] })
+                    const CommandEmbed = new MessageEmbed()
+                        .setColor(`#${config["color"].discord}`)
+                        .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
+                        .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``);
+                    cmdchannel.send({ embeds: [CommandEmbed] });
                 } else {
                     ErrorEmbed(error2)
                 }

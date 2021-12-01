@@ -1,4 +1,4 @@
-import { MessageEmbed, GuildManager } from "discord.js"
+import { MessageEmbed, GuildManager, TextChannel } from "discord.js"
 import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
 import LOG_TAGS from "../../headers/logs"
@@ -31,6 +31,7 @@ export default {
 
         let SendID: string
         let SnowflakeIsValid: boolean
+        let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
 
         if (!args.length || args.length == 1) {
             return ErrorEmbed()
@@ -51,38 +52,47 @@ export default {
         if (!SnowflakeIsValid) {
             return ErrorEmbed()
         } else {
-            const adminchannels = new Array("913948455766990888", "913948495537377330", "909224884939419708");
-            if (!adminchannels.includes(message.channel.id)) {
-                message.delete()
+            if (SendID == "906274074966253578") {
+                message.channel.send("<:smh:859528238077706240>")
+            } else {
+                const adminchannels = new Array("913948455766990888", "913948495537377330", "909224884939419708");
+                if (!adminchannels.includes(message.channel.id)) {
+                    message.delete()
+                }
+
+                console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`);
+
+                client.users.fetch(`${SendID}`).then((user) => {
+                    user.send(`${DMmessage}`);
+                    const SentEmbed = new MessageEmbed()
+                        .setDescription(`**Message to <@${SendID}> sent!**`)
+                        .setColor(`#${config["color"].default}`);
+                    message.channel.send({ embeds: [SentEmbed] })
+                    const CommandEmbed = new MessageEmbed()
+                        .setColor(`#${config["color"].discord}`)
+                        .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
+                        .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``);
+                    cmdchannel.send({ embeds: [CommandEmbed] });
+                }).catch(async (error) => {
+                    if (config["list"].admin.includes(message.author.id)) {
+                        const AdminErrorEmbed = new MessageEmbed()
+                            .setTitle(config["title"].error)
+                            .setDescription(`\`\`\`${error}\`\`\``)
+                            .setColor(`#${config["color"].error}`);
+                        message.channel.send({ embeds: [AdminErrorEmbed] });
+                        console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+                        return;
+                    } else {
+                        const RegularErrorEmbed = new MessageEmbed()
+                            .setTitle(config["title"].error)
+                            .setDescription(`\`\`\`Either the id you've provided is incorrect, or the user does not have dms open, or there has been an error in the Discord API\`\`\``)
+                            .setColor(`#${config["color"].error}`);
+                        message.channel.send({ embeds: [RegularErrorEmbed] });
+                        console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+                        return;
+                    };
+                });
             }
-
-            console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`);
-
-            client.users.fetch(`${SendID}`).then((user) => {
-                user.send(`${DMmessage}`);
-                const SentEmbed = new MessageEmbed()
-                    .setDescription(`**Message to <@${SendID}> sent!**`)
-                    .setColor(`#${config["color"].default}`);
-                message.channel.send({ embeds: [SentEmbed] })
-            }).catch(async (error) => {
-                if (config["list"].admin.includes(message.author.id)) {
-                    const AdminErrorEmbed = new MessageEmbed()
-                        .setTitle(config["title"].error)
-                        .setDescription(`\`\`\`${error}\`\`\``)
-                        .setColor(`#${config["color"].error}`);
-                    message.channel.send({ embeds: [AdminErrorEmbed] });
-                    console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
-                    return;
-                } else {
-                    const RegularErrorEmbed = new MessageEmbed()
-                        .setTitle(config["title"].error)
-                        .setDescription(`\`\`\`Either the id you've provided is incorrect, or the user does not have dms open, or there has been an error in the Discord API\`\`\``)
-                        .setColor(`#${config["color"].error}`);
-                    message.channel.send({ embeds: [RegularErrorEmbed] });
-                    console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
-                    return;
-                };
-            });
         };
     }
 } as ICommand;

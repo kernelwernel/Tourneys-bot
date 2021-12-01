@@ -1,6 +1,6 @@
 {
-    "version": "2.0",
-    "release": "v2.0",
+    "version": "2.1",
+    "release": "v2.1",
 
     "status": "online",
     "type": "WATCHING",
@@ -17,7 +17,7 @@
         "dm": "adbbff",
         "warn": "ffb405",
         "serverwarn": "ffb405",
-        "alert": "ff0000"
+        "alert": "ff584d"
     },
 
     "channel": {

@@ -4,9 +4,6 @@ import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
 import * as config from "../../config.json"
 
-
-
-
 export default {
     category: "Utility",
     description: "Displays the most recent update of the bot",

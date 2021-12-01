@@ -252,5 +252,5 @@ client.once('disconnect', () => {
 });
 
 client.login(process.env.TOKEN).then(() => {
-    console.log(`\n${LOG.SYSTEM_SUCCESS} - Logged into ${client.user?.tag}\n`);
+    console.log(`\n${LOG.SYSTEM_SUCCESS} - Logged into ${client.user?.tag}`);
 });
