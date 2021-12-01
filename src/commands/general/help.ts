@@ -1,7 +1,8 @@
 import { MessageEmbed } from "discord.js"
 import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
-import LOG from "../../headers/logs.json"
+import LOG_TAGS from "../../headers/logs"
+const LOG = new LOG_TAGS()
 
 export default {
     category: "General",
@@ -15,13 +16,14 @@ export default {
     testOnly: true,
 
     callback: async ({ message }) => {
+        if (config["list"].blacklisted.includes(message.author.id)) { return; }
         const embed = new MessageEmbed()
             .setTitle("📜 Command List 📜")
             .setColor(`#${config["color"].default}`)
             .addFields(
                 {
                     name: `__**${config.prefix}help**__`,
-                    value: "> - Displays all the bot's commands",
+                    value: "> - Displays all the commands",
                     inline: false,
                 },
                 {
@@ -31,7 +33,7 @@ export default {
                 },
                 {
                     name: `__**${config.prefix}links**__`,
-                    value: "> - Returns with relevant links of the server",
+                    value: "> - Displays the relevant links of the server",
                     inline: false
                 },
                 {
@@ -58,7 +60,7 @@ export default {
                 },
                 {
                     name: `__**${config.prefix}server-info**__`,
-                    value: "> - Displays the server's relevant links (work in progress)",
+                    value: "> - Displays the server's relevant links",
                     inline: false
                 },
                 {
@@ -112,7 +114,7 @@ export default {
                         .setDescription(`\`\`\`${error}\`\`\``)
                         .setColor(`#${config["color"].error}`);
                     message.channel.send({ embeds: [ErrorEmbed] });
-                    console.log(`${LOG["SYSTEM"].ERROR} - ${error}`);
+                    console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
                     return;
                 });
             }

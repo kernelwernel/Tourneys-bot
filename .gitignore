@@ -111,3 +111,4 @@ build/
 archive/
 deploy.yml
 src/archive/**
+.vscode

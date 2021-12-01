@@ -2,7 +2,8 @@ import { MessageEmbed } from "discord.js"
 import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
 import glob from "glob"
-import LOG from "../../headers/logs.json"
+import LOG_TAGS from "../../headers/logs"
+const LOG = new LOG_TAGS()
 
 export default {
     category: "Admin",
@@ -17,7 +18,8 @@ export default {
     testOnly: true,
 
     callback: async ({ message, client }) => {
-        console.log(`${LOG["SYSTEM"].RELOADING}`);
+        if (config["list"].blacklisted.includes(message.author.id)) { return; }
+        console.log(`${LOG.SYSTEM_RELOADING}`);
 
         client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
         
@@ -38,16 +40,18 @@ export default {
         newEmbed.setDescription("\`\`\`> Commands have been reloaded\n> Bot configurations have been reloaded\`\`\`");
         newMessage.edit({
             embeds: [newEmbed]
-        }).catch((error) =>{
+        })
+
+        try { } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)
                 .setColor(`#${config["color"].error}`);
             message.channel.send({ embeds: [ErrorEmbed] });
-            console.log(`${LOG["SYSTEM"].ERROR} - ${error}`);
+            console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
             return;
-        });
+        };
 
-        console.log(`${LOG["SYSTEM"].RELOADED}`);
+        console.log(`${LOG.SYSTEM_RELOADED}`);
     }
 } as ICommand;

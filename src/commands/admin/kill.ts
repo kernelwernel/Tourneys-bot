@@ -1,7 +1,8 @@
 import { ICommand } from "wokcommands"
 import { MessageEmbed } from "discord.js"
 import * as config from "../../config.json"
-import LOG from "../../headers/logs.json"
+import LOG_TAGS from "../../headers/logs"
+const LOG = new LOG_TAGS()
 /*
 import Heroku from 'heroku-client'
 const heroku = new Heroku({ token: process.env.HEROKU_API_TOKEN })
@@ -23,7 +24,7 @@ export default {
     testOnly: true,
 
     callback: async ({ message, client, text }) => {
-
+        if (config["list"].blacklisted.includes(message.author.id)) { return; }
         let shutdown: string = "";
         let local: boolean = false;
         let server: boolean = false;
@@ -70,13 +71,15 @@ export default {
             console.log(`${LOG["SYSTEM"].SHUTDOWN} by ${message.author.tag}`);
             client.user?.setStatus('invisible');
             server ? process.kill(process.pid, 'SIGTERM') : process.exit(1)
-        }).catch((error) => {
+        })
+        
+        try { } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)
                 .setColor(`#${config["color"].error}`);
             message.channel.send({ embeds: [ErrorEmbed] });
-            console.log(`${LOG["SYSTEM"].ERROR} - ${error}`);
-        });
+            console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+        };
     }
 } as ICommand;

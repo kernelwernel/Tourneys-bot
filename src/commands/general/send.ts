@@ -1,7 +1,8 @@
 import { MessageEmbed, GuildManager } from "discord.js"
 import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
-import LOG from "../../headers/logs.json"
+import LOG_TAGS from "../../headers/logs"
+const LOG = new LOG_TAGS()
 
 export default {
     category: "General",
@@ -15,6 +16,7 @@ export default {
     testOnly: true,
 
     callback: ({ message, client }) => {
+        if (config["list"].blacklisted.includes(message.author.id)) { return; }
         function ErrorEmbed() {
             message.delete()
             const IncorrectEmbed = new MessageEmbed()
@@ -54,7 +56,7 @@ export default {
                 message.delete()
             }
 
-            console.log(`${LOG["CLIENT"].COMMAND} ${message.author.tag} - ${message.content}`);
+            console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`);
 
             client.users.fetch(`${SendID}`).then((user) => {
                 user.send(`${DMmessage}`);
@@ -69,7 +71,7 @@ export default {
                         .setDescription(`\`\`\`${error}\`\`\``)
                         .setColor(`#${config["color"].error}`);
                     message.channel.send({ embeds: [AdminErrorEmbed] });
-                    console.log(`${LOG["SYSTEM"].ERROR} - ${error}`);
+                    console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
                     return;
                 } else {
                     const RegularErrorEmbed = new MessageEmbed()
@@ -77,7 +79,7 @@ export default {
                         .setDescription(`\`\`\`Either the id you've provided is incorrect, or the user does not have dms open, or there has been an error in the Discord API\`\`\``)
                         .setColor(`#${config["color"].error}`);
                     message.channel.send({ embeds: [RegularErrorEmbed] });
-                    console.log(`${LOG["SYSTEM"].ERROR} - ${error}`);
+                    console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
                     return;
                 };
             });

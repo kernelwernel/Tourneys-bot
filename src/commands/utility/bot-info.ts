@@ -3,7 +3,8 @@ import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
 import * as npm from "../../../package.json"
 import axios from "axios"
-import LOG from "../../headers/logs.json"
+import LOG_TAGS from "../../headers/logs"
+const LOG = new LOG_TAGS()
 
 export default {
     category: "General",
@@ -17,6 +18,7 @@ export default {
     testOnly: true,
 
     callback: async ({ client, message }) => {
+        if (config["list"].blacklisted.includes(message.author.id)) { return; }
         let totalSeconds = (client.uptime! / 1000);
         let days = Math.floor(totalSeconds / 86400);
         totalSeconds %= 86400;
@@ -57,7 +59,7 @@ export default {
                 .setDescription(`\`\`\`${error}\`\`\``)
                 .setColor(`#${config["color"].error}`);
             message.channel.send({ embeds: [ErrorEmbed] });
-            console.log(`${LOG["SYSTEM"].ERROR} - ${error}`);
+            console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
             return;
         });
     }

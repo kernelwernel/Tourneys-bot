@@ -6,9 +6,12 @@ import fs from "fs"
 import moment from "moment"
 import * as config from "./config.json"
 import * as custom from "./headers/custom.json"
-import * as LOG from "./headers/logs.json"
+import LOG_TAGS from "./headers/logs"
+const LOG = new LOG_TAGS()
 import "dotenv/config"
-const { AntiAltClient } = require("discord-antialts") // importing won't work on this package for some reason
+
+// importing won't work on this package for some reason
+const { AntiAltClient } = require("discord-antialts")
 
 const client = new DiscordJS.Client({
     intents: [
@@ -37,7 +40,7 @@ const commands: Array<string> = [];
 
 client.on('ready', async (client) => {
     client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
-    console.log(`${LOG["CLIENT"].INFO} - Bot preconfigurations have been set`);
+    console.log(`${LOG.CLIENT_INFO} - Bot preconfigurations have been set`);
 
     const logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
     const ReadyEmbed = new MessageEmbed()
@@ -74,9 +77,9 @@ client.on('ready', async (client) => {
         botOwners: [
             // ===== BOT DEVS =====
             "699310549573435423", // nonce#7570
-            "299876224233373698", // dylаn#1111
 
             // ===== BOT ADMINS =====
+            "299876224233373698", // dylаn#1111
             "768666879308202006", // spirals#1375
             "683467496845606980", // domm#0007
             "593985080284676156", // Huzaifa#0001
@@ -105,25 +108,23 @@ client.on('ready', async (client) => {
     }, 1000);
 });
 
-client.on('messageCreate', async (message) => {
+client.on('messageCreate', (message) => {
     let dmchannel: TextChannel = client.channels.cache.get(config["channel"].dm) as TextChannel;
     let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
 
-    const regex = /(n|N)(a|A)(z|Z)(i|I)/
-    if (regex.test(message.content)) {
+    if (/(n|N)(a|A)(z|Z)(i|I)/.test(message.content)) {
         message.channel.send(custom.text)
     }
 
     if (message.channel.type === 'DM' && !message.author.bot) {
-
         if (message.attachments.size > 0) { return; }
         if (message.content.length < 2000) {
-            console.log(`${LOG["CLIENT"].DM} ${message.author.tag} - ${message.content}`);
+            console.log(`${LOG.CLIENT_DM} ${message.author.tag} - ${message.content}`);
             const DMembed = new MessageEmbed()
                 .setColor(`#${config["color"].dm}`)
                 .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
                 .setDescription(`**Received DM:**\`\`\`${message.content}\`\`\``);
-            await dmchannel.send({ embeds: [DMembed] });
+             dmchannel.send({ embeds: [DMembed] });
         }
     }
 
@@ -135,7 +136,7 @@ client.on('messageCreate', async (message) => {
         const BlacklistLogEmbed = new MessageEmbed()
             .setColor(`#${config["color"].blacklisted}`)
             .setDescription(`**Blocked ${message.author.tag} from using the ${message.content} command lol**`);
-        await cmdchannel.send({ embeds: [BlacklistLogEmbed]});
+        cmdchannel.send({ embeds: [BlacklistLogEmbed]});
         return;
     }
 
@@ -144,12 +145,12 @@ client.on('messageCreate', async (message) => {
     }
 
     if (commands.includes(message.content.slice(1, message.content.length))) {
-        console.log(`${LOG["CLIENT"].COMMAND} ${message.author.tag} - ${message.content}`);
+        console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`);
         const CommandEmbed = new MessageEmbed()
             .setColor(`#${config["color"].discord}`)
             .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
             .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``);
-        await cmdchannel.send({ embeds: [CommandEmbed] });
+         cmdchannel.send({ embeds: [CommandEmbed] });
     }
 });
 
@@ -179,12 +180,12 @@ any; username: any; id: any }; guild: { memberCount: any } }, date: { createdAt:
         .setColor(`#${config["color"].alert}`)
         .setThumbnail(`${member.user.displayAvatarURL({dynamic: true})}`)
         .addFields(
-            { name: "**__Alt Name__**", value: ` - ${member.user} (${member.user.username})`, inline: false },
-            { name: "**__ID__**", value: ` - ${member.user.id}`, inline: false },
-            { name: "**__Account Created__**", value: ` - ${date.createdAt} days ago`, inline: false },
-            { name: "**__Account Creation Date__**", value: ` - ${date.createdAtDate}`, inline: false },
-            { name: "**__Join Position__**", value: ` - ${member.guild.memberCount}`, inline: false },
-            { name: "**__Join Date__**", value: ` - ${date.joinAt}`, inline: false }
+            { name: "**__Alt Name__**", value: ` - **${member.user} (${member.user.username})**`, inline: false },
+            { name: "**__ID__**", value: ` - **${member.user.id}**`, inline: false },
+            { name: "**__Account Created__**", value: ` - **${date.createdAt} days ago**`, inline: false },
+            { name: "**__Account Creation Date__**", value: ` - **${date.createdAtDate}**`, inline: false },
+            { name: "**__Join Position__**", value: ` - **${member.guild.memberCount}**`, inline: false },
+            { name: "**__Join Date__**", value: ` - **${date.joinAt}**`, inline: false }
         )
     await modchannel.send({ embeds: [AltAlertEmbed] })
 });
@@ -195,18 +196,21 @@ client.on("guildMembersChunk", async (members, guild) => {
     const RaidAlertEmbed = new MessageEmbed()
         .setTitle(`${config["title"].raid_alert}`)
         .setColor(`#${config["color"].alert}`)
-        .setDescription(`\`\`\`A raid is potentially happening, this alert was triggered due to many members in the same mutual server joining at the same time. The mutual server the raid is suspected to be its main base of operation is called ${guild}. If this was a false alarm, ignore this alert.\`\`\``)
+        .setDescription(`\`\`\`A raid is potentially happening, this alert was triggered due to many members in the same mutual server joining at the same time. The mutual server where the raid is suspected to be its main base of operation is called ${guild}. If this was a false alarm, ignore this alert.\`\`\``)
     await modchannel.send({ embeds: [RaidAlertEmbed] }).then(() => {
-        modchannel.send(`^^^^ <@${config["list"].admin[0]}>
-<@${config["list"].admin[0]}>
-<@${config["list"].admin[1]}>
-<@${config["list"].admin[2]}>
-<@${config["list"].admin[3]}>
-<@${config["list"].admin[4]}>
-<@${config["list"].admin[5]}>
-<@${config["list"].admin[6]}>
-<@${config["list"].admin[7]}>
-<@351023689581461519> ^^^^`)
+        let admins: any
+        admins.concat(
+            `<@${config["list"].admin[0]}> `,
+            `<@${config["list"].admin[1]}> `,
+            `<@${config["list"].admin[2]}> `,
+            `<@${config["list"].admin[3]}> `,
+            `<@${config["list"].admin[4]}> `,
+            `<@${config["list"].admin[5]}> `,
+            `<@${config["list"].admin[6]}> `,
+            `<@${config["list"].admin[7]}> `,
+            `<@351023689581461519>`
+        );
+        modchannel.send(`^^^^ ${admins} ^^^^`)
     })
 });
 
@@ -239,37 +243,14 @@ client.on("error", async (error) => {
     await logchannel.send({ embeds: [BotErrorEmbed] })
 });
 
-/*
-client.on("debug", async (debug) => {
-    let logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
-    const DebugEmbed = new MessageEmbed()
-        .setTitle(`${config["title"].warn}`)
-        .setColor(`#${config["color"].warn}`)
-        .setDescription(`\`\`\`${debug}\`\`\``)
-    await logchannel.send({ embeds: [DebugEmbed] })
-});
-*/
-
 client.once('reconnecting', () => {
-    console.log(`${LOG["CLIENT"].INFO} - Client is reconnecting...`);
+    console.log(`${LOG.CLIENT_INFO} - Client is reconnecting...`);
 });
 
 client.once('disconnect', () => {
-    console.log(`${LOG["CLIENT"].INFO} - Client has disconnected`);
+    console.log(`${LOG.CLIENT_INFO} - Client has disconnected`);
 });
 
 client.login(process.env.TOKEN).then(() => {
-    console.log(`\n${LOG["SYSTEM"].SUCCESS} - Logged into ${client.user?.tag}\n`);
+    console.log(`\n${LOG.SYSTEM_SUCCESS} - Logged into ${client.user?.tag}\n`);
 });
-
-/*
-process.on('unhandledRejection', (reason) => {
-    let logstuff: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
-    console.log(LOG.SYSTEM_ERROR + " - " + reason);
-    const UnhandledRejection = new MessageEmbed()
-        .setTitle(`${config["title"].error}`)
-        .setColor(`#${config["color"].error}`)
-        .setDescription(`\`\`\`${reason}\`\`\``)
-    logstuff.send({ embeds: [UnhandledRejection] })
-});
-*/

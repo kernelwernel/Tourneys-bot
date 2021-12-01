@@ -1,0 +1,45 @@
+
+import { Interaction, Message, MessageEmbed } from "discord.js";
+import { ICommand } from "wokcommands";
+import music from '@koenie06/discord.js-music';
+import LOG_TAGS from "../../headers/logs"
+const LOG = new LOG_TAGS()
+import * as config from "../../config.json"
+
+export default {
+    category: "Music",
+    description: "plays a song",
+
+    slash: "both",
+    cooldown: "5s",
+
+    ownerOnly: false,
+    testOnly: true,
+
+    callback: ({ message, client, interaction, text }) => {
+        if (config["list"].blacklisted.includes(message.author.id)) { return; }
+        const { options, member, guild, channel } = interaction
+        if (message.member?.voice.channel == null) {
+            const NotInVoiceEmbed = new MessageEmbed()
+                .setTitle(config["title"].error)
+                .setDescription("\`\`\`> You're not in a voice channel! Please execute this command again when you're in a voice channel.\`\`\`")
+                .setColor(`#${config["color"].error}`);
+            message.channel.send({ embeds: [NotInVoiceEmbed] })
+        }
+
+        let a = member.voice.channel
+
+        const song = interaction.options.getString('song');
+
+        //Gets the voice channel where the member is in. If the member isn't in any, return.
+        const voiceChannel = interaction.member.voice.channel;
+        if(!voiceChannel) return interaction.reply({ content: 'You need to be in a voice channel!', ephemeral: true });
+
+        //Get more info about how the play command works at https://npmjs.com/package/@koenie06/discord.js-music#play
+        music.play({
+            interaction: interaction,
+            channel: voiceChannel,
+            song: song
+        });
+    }
+} as ICommand

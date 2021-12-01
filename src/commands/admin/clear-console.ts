@@ -1,7 +1,8 @@
 import { MessageEmbed } from "discord.js"
 import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
-import LOG from "../../headers/logs.json"
+import LOG_TAGS from "../../headers/logs"
+const LOG = new LOG_TAGS()
 
 export default {
     category: "Admin",
@@ -16,6 +17,7 @@ export default {
     testOnly: true,
 
     callback: async ({ message }) => {
+        if (config["list"].blacklisted.includes(message.author.id)) { return; }
         const embed = new MessageEmbed()
             .setColor(`#${config["color"].admin}`)
             .setTitle(config["title"].admin)
@@ -30,13 +32,15 @@ export default {
         newEmbed.setDescription("\`\`\`> Clearing console...\n> Console has been cleared\`\`\`");
         newMessage.edit({
             embeds: [newEmbed]
-        }).catch((error) =>{
+        })
+        
+        try { } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)
                 .setColor(`#${config["color"].error}`);
             message.channel.send({ embeds: [ErrorEmbed] });
-            console.log(`${LOG["SYSTEM"].ERROR} - ${error}`);
-        });
+            console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+        };
     }
 } as ICommand;
