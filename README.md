@@ -22,25 +22,25 @@
 ## Commands
 | Command | Description | Alias(es) | Work in progress? |
 |---|---|---|---|
-| `;ping` | Just imple ping command ||| 
-| `;links` | This will send all the relevant links of the server, such as invite links, ban appeal links and so on. | link ||
-| `;send <id> <message>` | Sends a DM message to the user id | say ||
+| `;ping` | Just a simple ping command ||| 
+| `;links` | This will send all the relevant links of the server | link ||
+| `;send <id> <message>` | This will send a DM message to the inputted user id | say ||
 | `;snipe` | This will snipe the most recently deleted message in chat || Yes |
 | `;members` | This will display the member count of the server | membercount, member ||
-| `;bot-info` | This will display the bot's information, such as the version, language, bot admins, etc... | botinfo, bot ||
+| `;bot-info` | This will display the bot's information | botinfo, bot ||
 | `;server-info` | This will display the server's information, such as the creation date, channel count, etc... | serverinfo, server | Yes |
 | `;update` | This will display the bot's latest release and show what has been updated | releases ||
+| `;announce <general/secret> <message>` | This will announce/send a message to the selected channel |||
 
 - - -
 
 ## Administrator commands
 | Command | Description | Alias(es) | Work in progress? | 
 |---|---|---|---|
-| `;clear-console` | This will clear the bot's console. Used if there are too many log messages and I need to clear the terminal | console-clear ||
-| `;kill` | This will terminate the bot process. **ONLY** used for emergency cases or for certain circumstances | terminate, abort, shutdown ||
+| `;clear-console` | This will clear the bot's console. Used if there are too many log messages | console-clear ||
+| `;kill <local/serverside>` | This will terminate the bot process | terminate, abort, shutdown ||
 | `;reload` | This will refresh all the `.ts` files in the src directory and reconfigure the bot to default presence settings. | refresh, reboot | Yes |
 | `;status <status>` | This will set the bot's activity status to the argument that's given || Yes |
-| `;announce <general | secret> <message>` | This will Announce/send a message to the selected channel |||
 
 - - -
 

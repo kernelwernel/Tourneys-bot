@@ -25,7 +25,7 @@ export default {
 
     callback: async ({ message, client, text }) => {
         if (config["list"].blacklisted.includes(message.author.id)) { return; }
-        let shutdown: string = "";
+        let shutdown: string;
         let local: boolean = false;
         let server: boolean = false;
 

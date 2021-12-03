@@ -18,12 +18,13 @@ export default {
     callback: ({ message, client }) => {
         if (config["list"].blacklisted.includes(message.author.id)) { return; }
         function ErrorEmbed() {
-            message.delete()
             const IncorrectEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription("\`\`\`> Invalid argument! Please try again.\nCorrect usage:\n ;send <id> <message>\`\`\`")
                 .setColor(`#${config["color"].error}`);
-            message.channel.send({ embeds: [IncorrectEmbed] })
+            message.channel.send({ embeds: [IncorrectEmbed] }).then(() => {
+                message.delete()
+            })
         }
 
         const args = message.content.slice(config.prefix.length).trim().split(/ +/);
@@ -55,11 +56,8 @@ export default {
             if (SendID == "906274074966253578") {
                 message.channel.send("<:smh:859528238077706240>")
             } else {
-                const adminchannels = new Array("913948455766990888", "913948495537377330", "909224884939419708");
-                if (!adminchannels.includes(message.channel.id)) {
-                    message.delete()
-                }
-
+                const adminchannels = new Array("913948455766990888", "913948495537377330", "909224884939419708", "912004266347081768");
+                                                                                        
                 console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`);
 
                 client.users.fetch(`${SendID}`).then((user) => {
@@ -67,7 +65,11 @@ export default {
                     const SentEmbed = new MessageEmbed()
                         .setDescription(`**Message to <@${SendID}> sent!**`)
                         .setColor(`#${config["color"].default}`);
-                    message.channel.send({ embeds: [SentEmbed] })
+                    message.channel.send({ embeds: [SentEmbed] }).then(() => {
+                        if (!adminchannels.includes(message.channel.id)) {
+                            message.delete()
+                        }
+                    })
                     const CommandEmbed = new MessageEmbed()
                         .setColor(`#${config["color"].discord}`)
                         .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)

@@ -9,6 +9,7 @@ import * as custom from "./headers/custom.json"
 import LOG_TAGS from "./headers/logs"
 const LOG = new LOG_TAGS()
 import "dotenv/config"
+import mongoose from "mongoose"
 
 // importing won't work on this package for some reason
 const { AntiAltClient } = require("discord-antialts")
@@ -64,6 +65,13 @@ client.on('ready', async (client) => {
             }
         });
     }
+
+    /*
+    mongoose.connect(process.env.MONGO_URI) {
+        useNewUrlParser: true
+        useUni
+    }
+    */
     
     ThroughDirectory("./src/commands/");
 
@@ -87,10 +95,12 @@ client.on('ready', async (client) => {
           //"351023689581461519", // TheRealMMR#0001 <= cringe as fuck
             "270325321419587604", // reknT#6594
         ],
+        /*
         mongoUri: process.env.MONGO_URI,
         dbOptions: {
             keepAlive: true
         },
+        */
         defaultLanguage: 'english',
         ignoreBots: false,
         ephemeral: true,
@@ -125,7 +135,7 @@ client.on('messageCreate', (message) => {
                 .setColor(`#${config["color"].dm}`)
                 .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
                 .setDescription(`**Received DM:**\`\`\`${message.content}\`\`\``);
-             dmchannel.send({ embeds: [DMembed] });
+            dmchannel.send({ embeds: [DMembed] });
         }
     }
 
@@ -151,7 +161,7 @@ client.on('messageCreate', (message) => {
             .setColor(`#${config["color"].discord}`)
             .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
             .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``);
-         cmdchannel.send({ embeds: [CommandEmbed] });
+        cmdchannel.send({ embeds: [CommandEmbed] });
     }
 });
 
