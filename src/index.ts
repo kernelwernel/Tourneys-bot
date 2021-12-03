@@ -65,13 +65,6 @@ client.on('ready', async (client) => {
             }
         });
     }
-
-    /*
-    mongoose.connect(process.env.MONGO_URI) {
-        useNewUrlParser: true
-        useUni
-    }
-    */
     
     ThroughDirectory("./src/commands/");
 
@@ -95,12 +88,10 @@ client.on('ready', async (client) => {
           //"351023689581461519", // TheRealMMR#0001 <= cringe as fuck
             "270325321419587604", // reknT#6594
         ],
-        /*
         mongoUri: process.env.MONGO_URI,
         dbOptions: {
             keepAlive: true
         },
-        */
         defaultLanguage: 'english',
         ignoreBots: false,
         ephemeral: true,
