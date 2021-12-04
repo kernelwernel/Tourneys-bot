@@ -1,4 +1,4 @@
-import { MessageEmbed, GuildManager, TextChannel } from "discord.js"
+import { MessageEmbed, GuildManager, TextChannel, Message } from "discord.js"
 import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
 import LOG_TAGS from "../../headers/logs"
@@ -42,6 +42,13 @@ export default {
         SendID = args.shift()!;
         DMmessage.toString();
 
+        /*
+        const server = client.guilds.cache.get(config.tourneys_id)
+        if (server?.members.cache.find(args.shift())) {
+            message.channel.send("HELLO")
+        }
+        */
+
         switch (SendID.length) {
             case 18:
                 SnowflakeIsValid = true
@@ -61,7 +68,7 @@ export default {
                 console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`);
 
                 client.users.fetch(`${SendID}`).then((user) => {
-                    user.send(`${DMmessage}`);
+                    try { user.send(`${DMmessage}`) } catch { return ErrorEmbed() }
                     const SentEmbed = new MessageEmbed()
                         .setDescription(`**Message to <@${SendID}> sent!**`)
                         .setColor(`#${config["color"].default}`);

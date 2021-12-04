@@ -10,6 +10,7 @@ import LOG_TAGS from "./headers/logs"
 const LOG = new LOG_TAGS()
 import "dotenv/config"
 import mongoose from "mongoose"
+import db from "quick.db"
 
 // importing won't work on this package for some reason
 const { AntiAltClient } = require("discord-antialts")
@@ -65,7 +66,7 @@ client.on('ready', async (client) => {
             }
         });
     }
-    
+
     ThroughDirectory("./src/commands/");
 
     new WOKCommands(client, {
@@ -77,12 +78,12 @@ client.on('ready', async (client) => {
             "688510763387715649", // Tourneys
         ],
         botOwners: [
-            // ===== BOT DEVS =====
+            // ===== BOT OWNERS =====
             "699310549573435423", // nonce#7570
+            "768666879308202006", // spirals#1375
 
             // ===== BOT ADMINS =====
             "299876224233373698", // dylаn#1111
-            "768666879308202006", // spirals#1375
             "683467496845606980", // domm#0007
             "593985080284676156", // Huzaifa#0001
           //"351023689581461519", // TheRealMMR#0001 <= cringe as fuck
@@ -114,7 +115,7 @@ client.on('messageCreate', (message) => {
     let dmchannel: TextChannel = client.channels.cache.get(config["channel"].dm) as TextChannel;
     let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
 
-    if (/(n|N)(a|A)(z|Z)(i|I)/.test(message.content)) {
+    if (/nazi/.test(message.content.toLowerCase())) {
         message.channel.send(custom.text)
     }
 
@@ -137,7 +138,9 @@ client.on('messageCreate', (message) => {
         message.channel.send({ embeds: [BlacklistEmbed]});
         const BlacklistLogEmbed = new MessageEmbed()
             .setColor(`#${config["color"].blacklisted}`)
-            .setDescription(`**Blocked ${message.author.tag} from using the ${message.content} command lol**`);
+            .setTitle(`Blacklisted user command`)
+            .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({ dynamic: true })}`)
+            .setDescription(`\`\`\`${message.content}\`\`\``);
         cmdchannel.send({ embeds: [BlacklistLogEmbed]});
         return;
     }
