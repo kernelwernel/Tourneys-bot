@@ -10,7 +10,7 @@ import LOG_TAGS from "./headers/logs"
 const LOG = new LOG_TAGS()
 import "dotenv/config"
 import mongoose from "mongoose"
-import db from "quick.db"
+//import db from "quick.db"
 
 // importing won't work on this package for some reason
 const { AntiAltClient } = require("discord-antialts")
