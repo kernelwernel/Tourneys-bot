@@ -16,26 +16,27 @@ export default {
     testOnly: true,
 
     callback: ({ message, client, interaction, text }) => {
-        if (config["list"].blacklisted.includes(message.author.id)) { return; }
+        try {
+            if (config["list"].blacklisted.includes(message.author.id)) { return; }
 
-        let result: string | undefined
+            let result: string | undefined
 
-        let coinflip = Math.floor(Math.random() * 2)
-        switch (coinflip) {
-            case 0: 
-                result = "Heads"
-                break;
-            case 1: 
-                result = "Tails"
-                break;
-        }
+            let coinflip = Math.floor(Math.random() * 2)
+            switch (coinflip) {
+                case 0: 
+                    result = "Heads"
+                    break;
+                case 1: 
+                    result = "Tails"
+                    break;
+            }
 
-        const CoinflipEmbed = new MessageEmbed()
-            .setDescription(`**${result}**`)
-            .setColor(`#${config["color"].default}`);
-        message.channel.send({ embeds: [CoinflipEmbed] });
+            const CoinflipEmbed = new MessageEmbed()
+                .setDescription(`**${result}**`)
+                .setColor(`#${config["color"].default}`);
+            message.channel.send({ embeds: [CoinflipEmbed] });
 
-        try { } catch (error) {
+        } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)

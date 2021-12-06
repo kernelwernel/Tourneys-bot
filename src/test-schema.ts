@@ -1,10 +1,8 @@
 import mongoose from 'mongoose'
 
 const schema = new mongoose.Schema({
-    message: {
-        type: String,
-        required: true
-    }
+    email: String,
+    username: String
 })
 
-export default mongoose.model("testing", schema)
+export default mongoose.model("users", schema)

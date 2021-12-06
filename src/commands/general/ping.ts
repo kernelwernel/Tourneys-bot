@@ -15,15 +15,15 @@ export default {
     testOnly: true,
 
     callback: ({ message }) => {
-        if (config["list"].blacklisted.includes(message.author.id)) { return; }
-        const embed = new MessageEmbed()
-            .setDescription(`🏓 **Pong!** - ${Date.now() - message.createdTimestamp}ms`)
-            .setColor(`#${config["color"].default}`);
-        message.channel.send({
-            embeds: [embed]
-        })
-        
-        try { } catch (error) {
+        try {
+            if (config["list"].blacklisted.includes(message.author.id)) { return; }
+            const embed = new MessageEmbed()
+                .setDescription(`🏓 **Pong!** - ${Date.now() - message.createdTimestamp}ms`)
+                .setColor(`#${config["color"].default}`);
+            message.channel.send({
+                embeds: [embed]
+            })
+        } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)

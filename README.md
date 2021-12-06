@@ -19,28 +19,42 @@
 
 - - -
 
-## Commands
-| Command | Description | Alias(es) | Work in progress? |
+## General Commands
+| Command | Description | Alias(es) |
+| `;announce <general/secret> <message>` | This will announce/send a message to the selected channel | say |
+| `;help` | This will display all the commands ||
+| `;links` | This will send all the relevant links of the server | link |
+| `;ping` | Just a simple ping command ||
+| `;send <id> <message>` | This will send a DM message to the inputted user id | say |
+| `;snipe` | This will snipe the most recently deleted message in chat ||
+
+- - -
+
+## Utility Commands
+| Command | Description | Alias(es) |
 |---|---|---|---|
-| `;ping` | Just a simple ping command ||| 
-| `;links` | This will send all the relevant links of the server | link ||
-| `;send <id> <message>` | This will send a DM message to the inputted user id | say ||
-| `;snipe` | This will snipe the most recently deleted message in chat || Yes |
-| `;members` | This will display the member count of the server | membercount, member ||
-| `;bot-info` | This will display the bot's information | botinfo, bot ||
-| `;server-info` | This will display the server's information, such as the creation date, channel count, etc... | serverinfo, server | Yes |
-| `;update` | This will display the bot's latest release and show what has been updated | releases ||
-| `;announce <general/secret> <message>` | This will announce/send a message to the selected channel |||
+| `;members` | This will display the member count of the server | membercount, member |
+| `;bot-info` | This will display the bot's information | botinfo, bot |
+| `;server-info` | This will display the server's information, such as the creation date, channel count, etc... | serverinfo, server |
+| `;update` | This will display the bot's latest release and show what has been updated | releases |
+
+- - -
+
+## Assassin Commands
+| Command | Description | Alias(es) |
+|---|---|---|---|
+| `;members` | This will do a coinflip and output either Heads or Tails | coin, flip, coin-flip, cf |
+| `;vipservers` | This will display the available vip server links | VIP, server, VIP-servers, VIP-server, VIPserver, servers, jxemo, chicken, cobra, dillon |
 
 - - -
 
 ## Administrator commands
-| Command | Description | Alias(es) | Work in progress? | 
+| Command | Description | Alias(es) |
 |---|---|---|---|
-| `;clear-console` | This will clear the bot's console. Used if there are too many log messages | console-clear ||
-| `;kill <local/serverside>` | This will terminate the bot process | terminate, abort, shutdown ||
-| `;reload` | This will refresh all the `.ts` files in the src directory and reconfigure the bot to default presence settings. | refresh, reboot | Yes |
-| `;status <status>` | This will set the bot's activity status to the argument that's given || Yes |
+| `;clear-console` | This will clear the bot's console. Used if there are too many log messages | console-clear |
+| `;kill <local/serverside>` | This will terminate the bot process | terminate, abort, shutdown |
+| `;reload` | This will refresh all the `.ts` files in the src directory and reconfigure the bot to default presence settings. | refresh, reboot |
+| `;status <status>` | This will set the bot's activity status to the argument that's given |
 
 - - -
 
@@ -69,17 +83,26 @@
     ##### `v2.1`
     - Added anti-raid feature
     - Added anti-alt feature
-    - Added the `;announce` and `;update` commands
+    - Added the `announce` and `update` commands
     - Added the `Utility` section of commands
     - Added new client events in `index.ts`
-    - Finished the `;server-info` command
+    - Finished the `server-info` command
+
+    ##### `v2.2`
+    - Added snipe command
+    - Made the announce command public
+    - Created channel shortcuts for the announce command
+    - Fixed announce command bug
+    - Patched bypassing for the announce command
+    - Corrected some typos in the documentation
+    - Added coinflip command
 
 - - -
 
 ## To do list / Ideas
 - [ ] Add a powershell script as a makefile
 - [ ] Add feature to send images or files with the `;send` command
-- [ ] Add a snipe command
+- [x] Add a snipe command
 - [ ] Figure out a way to make Diff files and add one to the repository
 - [x] Finish the server info command
 - [ ] Maybe add music features idk

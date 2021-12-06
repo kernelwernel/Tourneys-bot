@@ -3,7 +3,6 @@ import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
 import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
-import db from "quick.db"
 
 export default {
     category: "Admin",
@@ -20,10 +19,10 @@ export default {
         const args = message.content.slice(config.prefix.length).trim().split(/ +/);
         const command = args.shift()?.toLowerCase();
 
-        let SendID: string | undefined
-        let blList: string | undefined
-        let blacklistUser: string | undefined
-        let SnowflakeIsValid: boolean | undefined
+        let SendID: String
+        let blList: string
+        let blacklistUser: string
+        let SnowflakeIsValid: boolean
 
         function ErrorEmbed() {
             const IncorrectEmbed = new MessageEmbed()
@@ -49,8 +48,6 @@ export default {
         } else {
             blacklistUser = args[0]
 
-            db.push("bl.users", blacklistUser)
-            blList = db.get("bl.users")
         }
     }
 } as ICommand

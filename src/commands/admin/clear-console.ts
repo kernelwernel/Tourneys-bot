@@ -17,24 +17,24 @@ export default {
     testOnly: true,
 
     callback: async ({ message }) => {
-        if (config["list"].blacklisted.includes(message.author.id)) { return; }
-        const embed = new MessageEmbed()
-            .setColor(`#${config["color"].admin}`)
-            .setTitle(config["title"].admin)
-            .setDescription(`\`\`\`> Clearing console...\`\`\``);
-            console.clear();
-        
-        const newMessage = await message.reply({
-            embeds: [embed]
-        })
+        try { 
+            if (config["list"].blacklisted.includes(message.author.id)) { return; }
+            const embed = new MessageEmbed()
+                .setColor(`#${config["color"].admin}`)
+                .setTitle(config["title"].admin)
+                .setDescription(`\`\`\`> Clearing console...\`\`\``);
+                console.clear();
+            
+            const newMessage = await message.reply({
+                embeds: [embed]
+            })
 
-        const newEmbed = newMessage.embeds[0];
-        newEmbed.setDescription("\`\`\`> Clearing console...\n> Console has been cleared\`\`\`");
-        newMessage.edit({
-            embeds: [newEmbed]
-        })
-        
-        try { } catch (error) {
+            const newEmbed = newMessage.embeds[0];
+            newEmbed.setDescription("\`\`\`> Clearing console...\n> Console has been cleared\`\`\`");
+            newMessage.edit({
+                embeds: [newEmbed]
+            })
+        } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)

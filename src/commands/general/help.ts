@@ -16,65 +16,64 @@ export default {
     testOnly: true,
 
     callback: async ({ message }) => {
-        if (config["list"].blacklisted.includes(message.author.id)) { return; }
-        const embed = new MessageEmbed()
-            .setTitle("📜 Command List 📜")
-            .setColor(`#${config["color"].default}`)
-            .addFields(
-                {
-                    name: `__**${config.prefix}help**__`,
-                    value: "> - Displays all the commands",
-                    inline: false,
-                },
-                {
-                    name: `__**${config.prefix}ping**__`,
-                    value: "> - Pings the bot",
-                    inline: false,
-                },
-                {
-                    name: `__**${config.prefix}links**__`,
-                    value: "> - Displays the relevant links of the server",
-                    inline: false
-                },
-                {
-                    name: `__**${config.prefix}send <id> <message>**__`,
-                    value: "> - Sends a DM with any message to any user in the server",
-                    inline: false
-                },
-                /*
-                {
-                    name: `__**${config.prefix}snipe**__`,
-                    value: "> - Snipe the most recently deleted message (work in progress)",
-                    inline: false
-                },
-                */
-                {
-                    name: `__**${config.prefix}members**__`,
-                    value: "> - Displays the member count of the server",
-                    inline: false
-                },
-                {
-                    name: `__**${config.prefix}bot-info**__`,
-                    value: "> - Displays the bot's info",
-                    inline: false,
-                },
-                {
-                    name: `__**${config.prefix}server-info**__`,
-                    value: "> - Displays the server's relevant links",
-                    inline: false
-                },
-                {
-                    name: `__**${config.prefix}update**__`,
-                    value: "> - Displays the latest update release of the bot"
-                },
-                {
-                    name: `__**${config.prefix}announce <general | secret> <message>**__`,
-                    value: "> - Announces/sends a message to the selected channel"
-                }
-            )
-        message.channel.send({
-            embeds: [embed]
-        }).then(() => {
+        try {
+            if (config["list"].blacklisted.includes(message.author.id)) { return; }
+            const embed = new MessageEmbed()
+                .setTitle("📜 Command List 📜")
+                .setColor(`#${config["color"].default}`)
+                .addFields(
+                    {
+                        name: `__**${config.prefix}help**__`,
+                        value: "> - Displays all the commands",
+                        inline: false,
+                    },
+                    {
+                        name: `__**${config.prefix}ping**__`,
+                        value: "> - Pings the bot",
+                        inline: false,
+                    },
+                    {
+                        name: `__**${config.prefix}links**__`,
+                        value: "> - Displays the relevant links of the server",
+                        inline: false
+                    },
+                    {
+                        name: `__**${config.prefix}send <id> <message>**__`,
+                        value: "> - Sends a DM with any message to any user in the server",
+                        inline: false
+                    },
+                    {
+                        name: `__**${config.prefix}snipe**__`,
+                        value: "> - Snipe the most recently deleted message",
+                        inline: false
+                    },
+                    {
+                        name: `__**${config.prefix}members**__`,
+                        value: "> - Displays the member count of the server",
+                        inline: false
+                    },
+                    {
+                        name: `__**${config.prefix}bot-info**__`,
+                        value: "> - Displays the bot's info",
+                        inline: false,
+                    },
+                    {
+                        name: `__**${config.prefix}server-info**__`,
+                        value: "> - Displays the server's relevant links",
+                        inline: false
+                    },
+                    {
+                        name: `__**${config.prefix}update**__`,
+                        value: "> - Displays the latest update release of the bot"
+                    },
+                    {
+                        name: `__**${config.prefix}announce <general | secret> <message>**__`,
+                        value: "> - Announces/sends a message to the selected channel"
+                    }
+                )
+            message.channel.send({
+                embeds: [embed]
+            })
             if (config["list"].admin.includes(message.author.id)) {
                 const AdminEmbed = new MessageEmbed()
                     .setTitle("⚒️ Admin Command List ⚒️")
@@ -104,20 +103,20 @@ export default {
                             name: `__**${config.prefix}test**__`,
                             value: "> <:trollgod:855435721624256542>",
                             inline: false,
-                        },
+                        }
                     )
                 message.channel.send({
                     embeds: [AdminEmbed]
-                }).catch((error) => {
-                    const ErrorEmbed = new MessageEmbed()
-                        .setTitle(config["title"].error)
-                        .setDescription(`\`\`\`${error}\`\`\``)
-                        .setColor(`#${config["color"].error}`);
-                    message.channel.send({ embeds: [ErrorEmbed] });
-                    console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
-                    return;
-                });
+                })
             }
-        })
+        } catch (error) {
+            const ErrorEmbed = new MessageEmbed()
+                .setTitle(config["title"].error)
+                .setDescription(`\`\`\`${error}\`\`\``)
+                .setColor(`#${config["color"].error}`);
+            message.channel.send({ embeds: [ErrorEmbed] });
+            console.log(`${LOG.SYSTEM_ERROR} - ${error}`);
+            return;
+        }
     }
 } as ICommand;

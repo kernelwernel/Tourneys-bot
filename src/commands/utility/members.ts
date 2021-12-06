@@ -16,17 +16,17 @@ export default {
     testOnly: true,
 
     callback: ({ message, client }) => {
-        if (config["list"].blacklisted.includes(message.author.id)) { return; }
-        const guild = client.guilds.cache.get(config.tourneys_id);
-        var memberCount = guild?.memberCount;
-        const embed = new MessageEmbed()
-            .setDescription(`Tourneys has **${memberCount}** members`)
-            .setColor(`#${config["color"].default}`);
-        message.channel.send({
-            embeds: [embed]
-        })
-        
-        try { } catch (error) {
+        try { 
+            if (config["list"].blacklisted.includes(message.author.id)) { return; }
+            const guild = client.guilds.cache.get(config.tourneys_id);
+            var memberCount = guild?.memberCount;
+            const embed = new MessageEmbed()
+                .setDescription(`Tourneys has **${memberCount}** members`)
+                .setColor(`#${config["color"].default}`);
+            message.channel.send({
+                embeds: [embed]
+            })
+        } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)

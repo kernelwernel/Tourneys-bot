@@ -16,22 +16,23 @@ export default {
     testOnly: true,
 
     callback: ({ message, client, interaction, text }) => {
-        if (config["list"].blacklisted.includes(message.author.id)) { return; }
-        const embed = new MessageEmbed()
-            .setTitle(`🏷️ Tourneys bot v2.1 updates 🏷️`)
-            .setDescription(`
-- Added anti-raid feature
-- Added anti-alt feature
-- Added the ;announce and ;update commands
-- Added the Utility section of commands
-- Finished the ;server-info command
-- Updated the ;send command where it'll automatically delete your message so you don't need to manually delete it yourself to hide it 
+        try {   
+            if (config["list"].blacklisted.includes(message.author.id)) { return; }
+            const embed = new MessageEmbed()
+                .setTitle(`🏷️ Tourneys bot v2.1 updates 🏷️`)
+                .setDescription(`
+- Added snipe command
+- Made the announce command public
+- Created channel shortcuts for the announce command
+- Fixed announce command bug
+- Patched bypassing for the announce command
+- Corrected some typos in the documentation
+- Added coinflip command
 
-**[Full Changelog](https://github.com/Existential-nonce/Tourneys-bot/compare/v2.0...v2.1)**
-`)
-            .setColor(`#${config["color"].default}`);
-        message.channel.send({ embeds: [embed]})
-        try { } catch (error) {
+**[Full Changelog](https://github.com/Existential-nonce/Tourneys-bot/compare/v2.1...v2.2)**`)
+                .setColor(`#${config["color"].default}`);
+            message.channel.send({ embeds: [embed]})
+        } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)

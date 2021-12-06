@@ -18,31 +18,32 @@ export default {
     testOnly: true,
 
     callback: async ({ message, client }) => {
-        if (config["list"].blacklisted.includes(message.author.id)) { return; }
-        console.log(`${LOG.SYSTEM_RELOADING}`);
+        try {
+            if (config["list"].blacklisted.includes(message.author.id)) { return; }
+            console.log(`${LOG.SYSTEM_RELOADING}`);
 
-        client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
-        
-        const embed = new MessageEmbed()
-            .setTitle(`🛠 Admin panel 🛠`)
-            .setDescription(`\`\`\`> Commands have been reloaded\`\`\``)
-            .setColor(`#${config["color"].admin}`);
-            glob(`${__dirname}/../**/*.ts`, async (err, filePaths) => {
-                filePaths.forEach((file) => {
-                    delete require.cache[require.resolve(file)];
+            client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
+            
+            const embed = new MessageEmbed()
+                .setTitle(`🛠 Admin panel 🛠`)
+                .setDescription(`\`\`\`> Commands have been reloaded\`\`\``)
+                .setColor(`#${config["color"].admin}`);
+                glob(`${__dirname}/../**/*.ts`, async (err, filePaths) => {
+                    filePaths.forEach((file) => {
+                        delete require.cache[require.resolve(file)];
+                    })
                 })
+            const newMessage = await message.channel.send({
+                embeds: [embed]
             })
-        const newMessage = await message.channel.send({
-            embeds: [embed]
-        })
 
-        const newEmbed = newMessage.embeds[0];
-        newEmbed.setDescription("\`\`\`> Commands have been reloaded\n> Bot configurations have been reloaded\`\`\`");
-        newMessage.edit({
-            embeds: [newEmbed]
-        })
+            const newEmbed = newMessage.embeds[0];
+            newEmbed.setDescription("\`\`\`> Commands have been reloaded\n> Bot configurations have been reloaded\`\`\`");
+            newMessage.edit({
+                embeds: [newEmbed]
+            })
 
-        try { } catch (error) {
+        } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)

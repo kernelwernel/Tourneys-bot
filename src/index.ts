@@ -9,7 +9,7 @@ import * as custom from "./headers/custom.json"
 import LOG_TAGS from "./headers/logs"
 const LOG = new LOG_TAGS()
 import "dotenv/config"
-import mongoose from "mongoose"
+import mongoose, { mongo, Schema } from "mongoose"
 //import db from "quick.db"
 
 // importing won't work on this package for some reason
@@ -37,6 +37,8 @@ const client = new DiscordJS.Client({
         "USER", "CHANNEL", "GUILD_MEMBER", "MESSAGE", "REACTION"
     ]
 });
+
+export { client }
 
 const commands: Array<string> = [];
 
@@ -93,6 +95,7 @@ client.on('ready', async (client) => {
         dbOptions: {
             keepAlive: true
         },
+
         defaultLanguage: 'english',
         ignoreBots: false,
         ephemeral: true,
@@ -157,15 +160,6 @@ client.on('messageCreate', (message) => {
             .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``);
         cmdchannel.send({ embeds: [CommandEmbed] });
     }
-});
-
-client.on('messageDelete', async (message) => {
-    const fetchedLogs = await message.guild?.fetchAuditLogs({
-        limit: 6,
-        type: 'MESSAGE_DELETE'
-    }).catch(console.error);
-    // https://stackoverflow.com/questions/53328061/finding-who-deleted-the-message
-
 });
 
 const c = new AntiAltClient({

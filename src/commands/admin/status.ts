@@ -19,23 +19,24 @@ export default {
     testOnly: true,
 
     callback: ({ client, message, text }) => {
-        if (config["list"].blacklisted.includes(message.author.id)) { return; }
-        const embed = new MessageEmbed()
-            .setDescription(`Status has been updated to **${text}**`)
-            .setColor(`#${config["color"].default}`);
-            client.user?.setPresence({
-                status: "dnd",
-                activities: [
-                    {
-                        name: text
-                    }
-                ]
+        try {
+            if (config["list"].blacklisted.includes(message.author.id)) { return; }
+            const embed = new MessageEmbed()
+                .setDescription(`Status has been updated to **${text}**`)
+                .setColor(`#${config["color"].default}`);
+                client.user?.setPresence({
+                    status: "dnd",
+                    activities: [
+                        {
+                            name: text
+                        }
+                    ]
+                })
+            message.channel.send({
+                embeds: [embed]
             })
-        message.channel.send({
-            embeds: [embed]
-        })
-        
-        try { } catch(error) {
+            
+        } catch(error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)

@@ -16,21 +16,22 @@ export default {
     testOnly: true,
 
     callback: ({ message }) => {
-        if (config["list"].blacklisted.includes(message.author.id)) { return; }
-        const embed = new MessageEmbed()
-            .setColor(`#${config["color"].default}`)
-            .addFields(
-                {name: "__**Vanity URL:**__", value: "\`\`\` discord.gg/tourneys \`\`\`"},
-                {name: "__**Discord URL:**__", value: "> https://discord.gg/tourneys"},
-                {name: "__**Official Roblox Group:**__", value: "> https://www.roblox.com/groups/6295427"},
-                {name: "__**Tourneys ban appeal:**__", value: "> https://bit.ly/TourneysBanAppeal"},
-                {name: "__**Tourneys bot source code:**__", value: "> https://github.com/Existential-nonce/Tourneys-bot"}
-            )
-        message.channel.send({
-            embeds: [embed]
-        })
-        
-        try { } catch (error) {
+        try {
+            if (config["list"].blacklisted.includes(message.author.id)) { return; }
+            const embed = new MessageEmbed()
+                .setColor(`#${config["color"].default}`)
+                .addFields(
+                    {name: "__**Vanity URL:**__", value: "\`\`\` discord.gg/tourneys \`\`\`"},
+                    {name: "__**Discord URL:**__", value: "> https://discord.gg/tourneys"},
+                    {name: "__**Official Roblox Group:**__", value: "> https://www.roblox.com/groups/6295427"},
+                    {name: "__**Tourneys ban appeal:**__", value: "> https://bit.ly/TourneysBanAppeal"},
+                    {name: "__**Tourneys bot source code:**__", value: "> https://github.com/Existential-nonce/Tourneys-bot"}
+                )
+            message.channel.send({
+                embeds: [embed]
+            })
+            
+        } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
                 .setDescription(`\`\`\`${error}\`\`\``)
