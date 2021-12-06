@@ -21,6 +21,7 @@
 
 ## General Commands
 | Command | Description | Alias(es) |
+|---|---|---|
 | `;announce <general/secret> <message>` | This will announce/send a message to the selected channel | say |
 | `;help` | This will display all the commands ||
 | `;links` | This will send all the relevant links of the server | link |
@@ -32,7 +33,7 @@
 
 ## Utility Commands
 | Command | Description | Alias(es) |
-|---|---|---|---|
+|---|---|---|
 | `;members` | This will display the member count of the server | membercount, member |
 | `;bot-info` | This will display the bot's information | botinfo, bot |
 | `;server-info` | This will display the server's information, such as the creation date, channel count, etc... | serverinfo, server |
@@ -42,7 +43,7 @@
 
 ## Assassin Commands
 | Command | Description | Alias(es) |
-|---|---|---|---|
+|---|---|---|
 | `;members` | This will do a coinflip and output either Heads or Tails | coin, flip, coin-flip, cf |
 | `;vipservers` | This will display the available vip server links | VIP, server, VIP-servers, VIP-server, VIPserver, servers, jxemo, chicken, cobra, dillon |
 
@@ -50,7 +51,7 @@
 
 ## Administrator commands
 | Command | Description | Alias(es) |
-|---|---|---|---|
+|---|---|---|
 | `;clear-console` | This will clear the bot's console. Used if there are too many log messages | console-clear |
 | `;kill <local/serverside>` | This will terminate the bot process | terminate, abort, shutdown |
 | `;reload` | This will refresh all the `.ts` files in the src directory and reconfigure the bot to default presence settings. | refresh, reboot |
