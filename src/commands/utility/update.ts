@@ -16,7 +16,7 @@ export default {
     testOnly: true,
 
     callback: ({ message, client, interaction, text }) => {
-        try {   
+        try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
             const embed = new MessageEmbed()
                 .setTitle(`🏷️ Tourneys bot v2.2 updates 🏷️`)

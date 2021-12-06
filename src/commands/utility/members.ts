@@ -16,7 +16,7 @@ export default {
     testOnly: true,
 
     callback: ({ message, client }) => {
-        try { 
+        try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
             const guild = client.guilds.cache.get(config.tourneys_id);
             var memberCount = guild?.memberCount;

@@ -23,10 +23,10 @@ export default {
 
             let coinflip = Math.floor(Math.random() * 2)
             switch (coinflip) {
-                case 0: 
+                case 0:
                     result = "Heads"
                     break;
-                case 1: 
+                case 1:
                     result = "Tails"
                     break;
             }

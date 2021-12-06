@@ -38,7 +38,7 @@ export default {
             const args = message.content.slice(config.prefix.length).trim().split(/ +/);
             const command = args.shift()?.toLowerCase();
 
-            let bypassMessage: string 
+            let bypassMessage: string
             let generalchannel: TextChannel = client.channels.cache.get(config["channel"].general) as TextChannel;
             let secretchannel: TextChannel = client.channels.cache.get(config["channel"].secret) as TextChannel;
 
@@ -55,10 +55,10 @@ export default {
 
                 if (message.content.length < 2000) {
                     /*
-                    * for anybody looking at this, i'm only writting these 
+                    * for anybody looking at this, i'm only writting these
                     * slurs/derogative words in the context to detect
-                    * and stop people from bypassing these. 
-                    * I'm not writing these for any kind of discriminatorial 
+                    * and stop people from bypassing these.
+                    * I'm not writing these for any kind of discriminatorial
                     * reason or anything based on my racial beliefs.
                     */
                     const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag/
