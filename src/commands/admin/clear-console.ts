@@ -17,7 +17,7 @@ export default {
     testOnly: true,
 
     callback: async ({ message }) => {
-        try { 
+        try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
             const embed = new MessageEmbed()
                 .setColor(`#${config["color"].admin}`)
