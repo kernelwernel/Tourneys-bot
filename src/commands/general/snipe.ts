@@ -1,6 +1,6 @@
 /*
  * Credit for the snipe code goes to https://github.com/DankMemer/sniper.
- * If you're the owner of the above mentioned repository 
+ * If you're the owner of the above mentioned repository
  * and you want me to remove the code, please dm me on discord at nonce#7444.
 */
 
