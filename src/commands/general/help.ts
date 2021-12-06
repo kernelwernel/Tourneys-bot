@@ -101,7 +101,7 @@ export default {
                         },
                         {
                             name: `__**${config.prefix}test**__`,
-                            value: "> <:trollgod:855435721624256542>",
+                            value: "<:trolort:915170922556690442>",
                             inline: false,
                         }
                     )

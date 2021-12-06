@@ -12,8 +12,6 @@ import { client } from "../../index"
 const LOG = new LOG_TAGS()
 
 const snipes = {};
-const editSnipes = {};
-const reactionSnipes = {};
 
 client.on("messageDelete", async (message) => {
     if (message.partial || (message.embeds.length && !message.content)) { return; }
@@ -43,7 +41,7 @@ export default {
 
             if (!snipe) {
                 const NoSnipeEmbed = new MessageEmbed()
-                    .setColor(`#${config["color"].default}`)
+                    .setColor(`#${config["color"].error}`)
                     .setDescription(`**There is nothing to snipe!**`)
                 message.channel.send({ embeds: [NoSnipeEmbed]});
                 return;
@@ -51,10 +49,8 @@ export default {
 
             const SnipeEmbed = new MessageEmbed()
                 .setAuthor(`${snipe.author.tag}`, `${snipe.author.displayAvatarURL({dynamic: true})}`)
-                .setFooter(`#${channel.name}`)
                 .setColor(`#${config["color"].default}`)
-                .setTimestamp(snipe.createdAt);
-                snipe.content ? SnipeEmbed.setDescription(snipe.content) : null;
+                snipe.content ? SnipeEmbed.setDescription(`\`\`\`${snipe.content}\`\`\``) : null;
                 snipe.image ? SnipeEmbed.setImage(snipe.image) : null;
             await message.channel.send({ embeds: [SnipeEmbed] });
         } catch (error) {
