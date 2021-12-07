@@ -38,9 +38,10 @@ const client = new DiscordJS.Client({
     ]
 });
 
-export { client }
-
 const commands: Array<string> = [];
+var d = new Date();
+var time = d.toLocaleTimeString();
+export { time, client }
 
 client.on('ready', async (client) => {
     client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
@@ -190,26 +191,14 @@ any; username: any; id: any }; guild: { memberCount: any } }, date: { createdAt:
 });
 
 client.on("guildMembersChunk", async (members, guild) => {
-    console.error(`a chunk of guild members is received`);
+    console.error(`a chunk of guild members has been received`);
     let modchannel: TextChannel = client.channels.cache.get(config["channel"].mod) as TextChannel;
     const RaidAlertEmbed = new MessageEmbed()
         .setTitle(`${config["title"].raid_alert}`)
         .setColor(`#${config["color"].alert}`)
         .setDescription(`\`\`\`A raid is potentially happening, this alert was triggered due to many members in the same mutual server joining at the same time. The mutual server where the raid is suspected to be its main base of operation is called ${guild}. If this was a false alarm, ignore this alert.\`\`\``)
     await modchannel.send({ embeds: [RaidAlertEmbed] }).then(() => {
-        let admins: any
-        admins.concat(
-            `<@${config["list"].admin[0]}> `,
-            `<@${config["list"].admin[1]}> `,
-            `<@${config["list"].admin[2]}> `,
-            `<@${config["list"].admin[3]}> `,
-            `<@${config["list"].admin[4]}> `,
-            `<@${config["list"].admin[5]}> `,
-            `<@${config["list"].admin[6]}> `,
-            `<@${config["list"].admin[7]}> `,
-            `<@351023689581461519>`
-        );
-        modchannel.send(`^^^^ ${admins} ^^^^`)
+        modchannel.send(`^^^^ @everyone ^^^^`)
     })
 });
 

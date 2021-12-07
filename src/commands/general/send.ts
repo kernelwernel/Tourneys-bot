@@ -36,6 +36,8 @@ export default {
             let SendID: string
             let SnowflakeIsValid: boolean
             let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
+            const adminchannels = new Array<string>("913948455766990888", "913948495537377330", "909224884939419708", "912004266347081768");
+            let noLog: boolean | undefined;
 
             if (!args.length || args.length == 1) {
                 return ErrorEmbed()
@@ -65,26 +67,39 @@ export default {
             } else {
                 if (SendID == "906274074966253578") {
                     message.channel.send("<:smh:859528238077706240>")
+                    return;
                 } else {
-                    const adminchannels = new Array("913948455766990888", "913948495537377330", "909224884939419708", "912004266347081768");
-                                                                                            
-                    console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`);
-
                     client.users.fetch(`${SendID}`).then((user) => {
                         try { user.send(`${DMmessage}`) } catch { return ErrorEmbed() }
-                        const SentEmbed = new MessageEmbed()
-                            .setDescription(`**Message to <@${SendID}> sent!**`)
-                            .setColor(`#${config["color"].default}`);
-                        message.channel.send({ embeds: [SentEmbed] }).then(() => {
-                            if (!adminchannels.includes(message.channel.id)) {
-                                message.delete()
-                            }
-                        })
-                        const CommandEmbed = new MessageEmbed()
-                            .setColor(`#${config["color"].discord}`)
-                            .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
-                            .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``);
-                        cmdchannel.send({ embeds: [CommandEmbed] });
+
+                        if (message.channel.id != `${config["channel"].secret}`) {
+                            const SentEmbed = new MessageEmbed()
+                                .setDescription(`**Message to <@${SendID}> sent!**`)
+                                .setColor(`#${config["color"].default}`);
+                            message.channel.send({ embeds: [SentEmbed] })
+                            noLog = false
+                        } else {
+                            noLog = true
+                        }
+
+                        if (!adminchannels.includes(message.channel.id)) {
+                            message.delete()
+                        }
+    
+                        switch (noLog) {
+                            case true:
+                                break;
+                            case false:
+                                console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`);
+                                const CommandEmbed = new MessageEmbed()
+                                    .setColor(`#${config["color"].discord}`)
+                                    .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
+                                    .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``);
+                                cmdchannel.send({ embeds: [CommandEmbed] });
+                                break;
+                            default:
+                                return ErrorEmbed()
+                        }
                     })
                 }
             }

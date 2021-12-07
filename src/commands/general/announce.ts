@@ -28,8 +28,13 @@ export default {
         try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
             const adminchannels = new Array("913948455766990888", "913948495537377330", "909224884939419708");
+            let adminExecute: boolean | undefined
+
             if (!adminchannels.includes(message.channel.id)) {
                 message.delete()
+                adminExecute = true
+            } else {
+                adminExecute == false
             }
             
             const error1: string = `> Invalid argument! Please try again.\nCorrect usage:\n${config.prefix}announce <general | secret> <message>`
@@ -48,10 +53,6 @@ export default {
                 let announce_message = args.slice(1).join(" ");
                 let SendID = args.shift()?.toLowerCase();
                 announce_message.toString();
-
-                let result = announce_message.replace(/@/i, "(@)");
-                let channelID: string | undefined;
-                let validChannel: boolean | undefined;
 
                 if (message.content.length < 2000) {
                     /*
@@ -77,6 +78,11 @@ export default {
                         return;
                     }
 
+                    let result = announce_message.replace(/@/i, "(@)");
+                    let channelID: string | undefined;
+                    let validChannel: boolean | undefined;
+                    let noLog: boolean;
+
                     switch (SendID) {
                         case "g":
                         case "general":
@@ -96,18 +102,31 @@ export default {
                             break;
                     }
 
+                    message.channel.id == "911060120400695316" 
+                        ? noLog = true 
+                        : noLog = false
+
                     if (validChannel == true) {
-                        let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
-                        const SentEmbed = new MessageEmbed()
-                            .setDescription(`**Message sent in <#${channelID}>!**`)
-                            .setColor(`#${config["color"].default}`);
-                        message.channel.send({ embeds: [SentEmbed] })
-                        const CommandEmbed = new MessageEmbed()
-                            .setColor(`#${config["color"].discord}`)
-                            .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
-                            .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``);
-                        cmdchannel.send({ embeds: [CommandEmbed] });
-                        console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`)
+                        if (noLog == true) {
+                            if (adminExecute == false) {
+                                message.delete();
+                                return;
+                            }
+                        } else if (noLog == false) {
+                            let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
+                            const SentEmbed = new MessageEmbed()
+                                .setDescription(`**Message sent in <#${channelID}>!**`)
+                                .setColor(`#${config["color"].default}`);
+                            message.channel.send({ embeds: [SentEmbed] })
+                            const CommandEmbed = new MessageEmbed()
+                                .setColor(`#${config["color"].discord}`)
+                                .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
+                                .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``);
+                            cmdchannel.send({ embeds: [CommandEmbed] });
+                            console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`)
+                        } else {
+                            return ErrorEmbed(error1)
+                        }
                     } else {
                         return ErrorEmbed(error2)
                     }
