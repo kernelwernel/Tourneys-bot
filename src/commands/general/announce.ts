@@ -16,6 +16,7 @@ export default {
     testOnly: false,
 
     callback: async ({ message, client }) => {
+
         function ErrorEmbed(errorMessage: string) {
             const IncorrectEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
@@ -40,12 +41,14 @@ export default {
             const error1: string = `> Invalid argument! Please try again.\nCorrect usage:\n${config.prefix}announce <general | secret> <message>`
             const error2: string = `> Invalid channel argument! Make sure the argument is either "general" or "secret"\nExample:\n  ;announce general hello chat`
 
-            const args = message.content.slice(config.prefix.length).trim().split(/ +/);
-            const command = args.shift()?.toLowerCase();
-
             let bypassMessage: string
             let generalchannel: TextChannel = client.channels.cache.get(config["channel"].general) as TextChannel;
             let secretchannel: TextChannel = client.channels.cache.get(config["channel"].secret) as TextChannel;
+            let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
+            let auditchannel: TextChannel = client.channels.cache.get(config["channel"].audit) as TextChannel;
+
+            const args = message.content.slice(config.prefix.length).trim().split(/ +/);
+            const command = args.shift()?.toLowerCase();
 
             if (!args.length || args.length == 1) {
                 return ErrorEmbed(error1)
@@ -112,8 +115,8 @@ export default {
                                 message.delete();
                                 return;
                             }
+                            auditchannel.bulkDelete(1)
                         } else if (noLog == false) {
-                            let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
                             const SentEmbed = new MessageEmbed()
                                 .setDescription(`**Message sent in <#${channelID}>!**`)
                                 .setColor(`#${config["color"].default}`);

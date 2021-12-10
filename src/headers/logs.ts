@@ -12,14 +12,14 @@ const ANS_TM: string = "\x1B[0m"
 export default class LOG_TAGS {
     // ==== SYSTEM ====
     SYSTEM_SUCCESS: string = `[${BLK_BG}SYSTEM${ANS_TM}]::[${SUC_FG}SUCCESS${ANS_TM}]`
-    SYSTEM_RELOADED: string  = `[${time}]::[${BLK_BG}SYSTEM${ANS_TM}]::[${SUC_FG}RELOADED${ANS_TM}]`
-    SYSTEM_RELOADING: string  = `[${time}]::[${BLK_BG}SYSTEM${ANS_TM}]::[${REL_FG}RELOADING...${ANS_TM}]`
-    SYSTEM_ERROR: string  = `[${time}]::[${BLK_BG}SYSTEM${ANS_TM}]::[${ERR_FG}ERROR${ANS_TM}]`
-    SYSTEM_SHUTDOWN: string  = `[${time}]::[${BLK_BG}SYSTEM${ANS_TM}]::[${ERR_FG}SHUTDOWN${ANS_TM}]`
-    SYSTEM_WARNING: string = `[${time}]::[${BLK_BG}SYSTEM${ANS_TM}]::[${REL_FG}WARNING${ANS_TM}]`
+    SYSTEM_RELOADED: string  = `[${BLK_BG}SYSTEM${ANS_TM}]::[${SUC_FG}RELOADED${ANS_TM}]`
+    SYSTEM_RELOADING: string  = `[${BLK_BG}SYSTEM${ANS_TM}]::[${REL_FG}RELOADING...${ANS_TM}]`
+    SYSTEM_ERROR: string  = `[${BLK_BG}SYSTEM${ANS_TM}]::[${ERR_FG}ERROR${ANS_TM}]`
+    SYSTEM_SHUTDOWN: string  = `[${BLK_BG}SYSTEM${ANS_TM}]::[${ERR_FG}SHUTDOWN${ANS_TM}]`
+    SYSTEM_WARNING: string = `[${BLK_BG}SYSTEM${ANS_TM}]::[${REL_FG}WARNING${ANS_TM}]`
 
     // ==== CLIENT ====
-    CLIENT_DM: string  = `[${time}]::[${CLT_FG}${BLK_BG}CLIENT${ANS_TM}]::[${CLT_FG}DM${ANS_TM}]`
-    CLIENT_COMMAND: string  = `[${time}]::[${CLT_FG}${BLK_BG}CLIENT${ANS_TM}]::[${CMD_FG}CMD${ANS_TM}]`
+    CLIENT_DM: string  = `[${CLT_FG}${BLK_BG}CLIENT${ANS_TM}]::[${CLT_FG}DM${ANS_TM}]`
+    CLIENT_COMMAND: string  = `[${CLT_FG}${BLK_BG}CLIENT${ANS_TM}]::[${CMD_FG}CMD${ANS_TM}]`
     CLIENT_INFO: string  = `[${CLT_FG}${BLK_BG}CLIENT${ANS_TM}]::[${INF_FG}INFO${ANS_TM}]`
 }

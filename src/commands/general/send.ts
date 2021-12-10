@@ -36,6 +36,7 @@ export default {
             let SendID: string
             let SnowflakeIsValid: boolean
             let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
+            let auditchannel: TextChannel = client.channels.cache.get(config["channel"].audit) as TextChannel;
             const adminchannels = new Array<string>("913948455766990888", "913948495537377330", "909224884939419708", "912004266347081768");
             let noLog: boolean | undefined;
 
@@ -46,13 +47,6 @@ export default {
             let DMmessage = args.slice(1).join(" ");
             SendID = args.shift()!;
             DMmessage.toString();
-
-            /*
-            const server = client.guilds.cache.get(config.tourneys_id)
-            if (server?.members.cache.find(args.shift())) {
-                message.channel.send("HELLO")
-            }
-            */
 
             switch (SendID.length) {
                 case 18:
@@ -80,6 +74,7 @@ export default {
                             noLog = false
                         } else {
                             noLog = true
+                            auditchannel.bulkDelete(1)
                         }
 
                         if (!adminchannels.includes(message.channel.id)) {

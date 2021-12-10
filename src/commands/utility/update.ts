@@ -19,7 +19,7 @@ export default {
         try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
             const embed = new MessageEmbed()
-                .setTitle(`🏷️ Tourneys bot v2.2 updates 🏷️`)
+                .setTitle(`🏷️ Tourneys bot v${config.version} updates 🏷️`)
                 .setDescription(`
 - Added snipe command
 - Made the announce command public

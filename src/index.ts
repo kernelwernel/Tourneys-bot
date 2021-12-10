@@ -40,14 +40,18 @@ const client = new DiscordJS.Client({
 
 const commands: Array<string> = [];
 var d = new Date();
-var time = d.toLocaleTimeString();
+var time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
 export { time, client }
+
+let logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
+let dmchannel: TextChannel = client.channels.cache.get(config["channel"].dm) as TextChannel;
+let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
+let modchannel: TextChannel = client.channels.cache.get(config["channel"].mod) as TextChannel;
 
 client.on('ready', async (client) => {
     client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
     console.log(`${LOG.CLIENT_INFO} - Bot preconfigurations have been set`);
 
-    const logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
     const ReadyEmbed = new MessageEmbed()
         .setDescription(`**Tourneys bot is now online :white_check_mark:**`)
         .setColor(`#${config["color"].success}`)
@@ -116,9 +120,6 @@ client.on('ready', async (client) => {
 });
 
 client.on('messageCreate', (message) => {
-    let dmchannel: TextChannel = client.channels.cache.get(config["channel"].dm) as TextChannel;
-    let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
-
     if (/nazi/.test(message.content.toLowerCase())) {
         message.channel.send(custom.text)
     }
@@ -130,7 +131,8 @@ client.on('messageCreate', (message) => {
             const DMembed = new MessageEmbed()
                 .setColor(`#${config["color"].dm}`)
                 .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
-                .setDescription(`**Received DM:**\`\`\`${message.content}\`\`\``);
+                .setDescription(`**Received DM:**\`\`\`${message.content}\`\`\``)
+                .setFooter(`Author ID: ${message.author.id}`)
             dmchannel.send({ embeds: [DMembed] });
         }
     }
@@ -174,7 +176,6 @@ client.on("guildMemberAdd", (member) => {
 
 c.on("altAction", async (member: { user: { displayAvatarURL: (arg0: { dynamic: boolean }) =>
 any; username: any; id: any }; guild: { memberCount: any } }, date: { createdAt: any; createdAtDate: any; joinAt: any }, action: any) => {
-    let modchannel: TextChannel = client.channels.cache.get(config["channel"].mod) as TextChannel;
     const AltAlertEmbed = new MessageEmbed()
         .setTitle(`${config["title"].alert}`)
         .setColor(`#${config["color"].alert}`)
@@ -192,7 +193,6 @@ any; username: any; id: any }; guild: { memberCount: any } }, date: { createdAt:
 
 client.on("guildMembersChunk", async (members, guild) => {
     console.error(`a chunk of guild members has been received`);
-    let modchannel: TextChannel = client.channels.cache.get(config["channel"].mod) as TextChannel;
     const RaidAlertEmbed = new MessageEmbed()
         .setTitle(`${config["title"].raid_alert}`)
         .setColor(`#${config["color"].alert}`)
@@ -203,7 +203,6 @@ client.on("guildMembersChunk", async (members, guild) => {
 });
 
 client.on("guildUnavailable", async (guild) => {
-    let modchannel: TextChannel = client.channels.cache.get(config["channel"].mod) as TextChannel;
     const ServerWarnEmbed = new MessageEmbed()
         .setTitle(`${config["title"].serverwarn}`)
         .setColor(`#${config["color"].serverwarn}`)
@@ -212,7 +211,7 @@ client.on("guildUnavailable", async (guild) => {
 });
 
 client.on("warn", async (warning) => {
-    console.log(`${LOG["SYSTEM"].WARNING} - ${warning}`);
+    console.log(`${LOG.SYSTEM_WARNING} - ${warning}`);
     let logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
     const BotWarnEmbed = new MessageEmbed()
         .setTitle(`${config["title"].warn}`)
@@ -223,7 +222,6 @@ client.on("warn", async (warning) => {
 
 client.on("error", async (error) => {
     console.error(`client's WebSocket encountered a connection error: ${error}`);
-    let logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
     const BotErrorEmbed = new MessageEmbed()
         .setTitle(`${config["title"].error}`)
         .setColor(`#${config["color"].error}`)

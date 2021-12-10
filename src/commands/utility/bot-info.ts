@@ -40,7 +40,7 @@ export default {
             const embed = new MessageEmbed()
                 .setColor(`#${config["color"].default}`)
                 .addFields(
-                    { name: `__**Bot version**__`, value: `> 🏷 - **${config.release}**`, inline: false },
+                    { name: `__**Bot version**__`, value: `> 🏷 - **v${config.version}**`, inline: false },
                     { name: `__**Bot uptime**__`, value: `> ⏲ - **${days} days, ${hours} hours, ${minutes} minutes**`},
                     { name: `__**Discord.js version**__`, value: `> <:djs:909502528490725446> - **v${npm.dependencies["discord.js"].substring(1)}**`, inline: false },
                     { name: `__**Discord.js API latency**__`, value: `> 📡 - **${Math.round(client.ws.ping)}ms**`, inline: false },
