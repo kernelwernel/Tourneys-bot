@@ -43,12 +43,8 @@ var d = new Date();
 var time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
 export { time, client }
 
-let logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
-let dmchannel: TextChannel = client.channels.cache.get(config["channel"].dm) as TextChannel;
-let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
-let modchannel: TextChannel = client.channels.cache.get(config["channel"].mod) as TextChannel;
-
 client.on('ready', async (client) => {
+    let logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
     client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
     console.log(`${LOG.CLIENT_INFO} - Bot preconfigurations have been set`);
 
@@ -120,6 +116,8 @@ client.on('ready', async (client) => {
 });
 
 client.on('messageCreate', (message) => {
+    let dmchannel: TextChannel = client.channels.cache.get(config["channel"].dm) as TextChannel;
+    let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
     if (/nazi/.test(message.content.toLowerCase())) {
         message.channel.send(custom.text)
     }
@@ -176,6 +174,7 @@ client.on("guildMemberAdd", (member) => {
 
 c.on("altAction", async (member: { user: { displayAvatarURL: (arg0: { dynamic: boolean }) =>
 any; username: any; id: any }; guild: { memberCount: any } }, date: { createdAt: any; createdAtDate: any; joinAt: any }, action: any) => {
+    let modchannel: TextChannel = client.channels.cache.get(config["channel"].mod) as TextChannel;
     const AltAlertEmbed = new MessageEmbed()
         .setTitle(`${config["title"].alert}`)
         .setColor(`#${config["color"].alert}`)
@@ -192,6 +191,7 @@ any; username: any; id: any }; guild: { memberCount: any } }, date: { createdAt:
 });
 
 client.on("guildMembersChunk", async (members, guild) => {
+    let modchannel: TextChannel = client.channels.cache.get(config["channel"].mod) as TextChannel;
     console.error(`a chunk of guild members has been received`);
     const RaidAlertEmbed = new MessageEmbed()
         .setTitle(`${config["title"].raid_alert}`)
@@ -203,6 +203,7 @@ client.on("guildMembersChunk", async (members, guild) => {
 });
 
 client.on("guildUnavailable", async (guild) => {
+    let modchannel: TextChannel = client.channels.cache.get(config["channel"].mod) as TextChannel;
     const ServerWarnEmbed = new MessageEmbed()
         .setTitle(`${config["title"].serverwarn}`)
         .setColor(`#${config["color"].serverwarn}`)
@@ -221,6 +222,7 @@ client.on("warn", async (warning) => {
 });
 
 client.on("error", async (error) => {
+    let logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
     console.error(`client's WebSocket encountered a connection error: ${error}`);
     const BotErrorEmbed = new MessageEmbed()
         .setTitle(`${config["title"].error}`)
