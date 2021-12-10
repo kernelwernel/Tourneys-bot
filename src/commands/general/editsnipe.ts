@@ -1,6 +1,6 @@
 /*
  * Credit for the snipe code goes to https://github.com/DankMemer/sniper.
- * If you're the owner of the above mentioned repository 
+ * If you're the owner of the above mentioned repository
  * and you want me to remove the code, please dm me on discord at nonce#7444.
 */
 
@@ -14,7 +14,7 @@ const LOG = new LOG_TAGS()
 const editSnipes = {};
 
 client.on("messageUpdate", async (oldMessage, newMessage) => {
-	if (oldMessage.partial) { return; } 
+	if (oldMessage.partial) { return; }
 
 	editSnipes[oldMessage.channel.id] = {
 		author: oldMessage.author,
@@ -48,12 +48,12 @@ export default {
                             .setDescription(`Old message: \`\`\`${snipe.oldcontent}\`\`\`\nEdited message: \`\`\`${snipe.newcontent}\`\`\``)
                             .setAuthor(`${snipe.author.tag}`, `${snipe.author.displayAvatarURL({dynamic: true})}`)
                     ]
-                } : { 
+                } : {
                     embeds: [
                         new MessageEmbed()
                             .setDescription(`**There is nothing to snipe!**`)
                             .setColor(`#${config["color"].error}`)
-                    ]  
+                    ]
                 }
             );
         } catch (error) {

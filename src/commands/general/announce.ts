@@ -105,8 +105,8 @@ export default {
                             break;
                     }
 
-                    message.channel.id == "911060120400695316" 
-                        ? noLog = true 
+                    message.channel.id == "911060120400695316"
+                        ? noLog = true
                         : noLog = false
 
                     if (validChannel == true) {
