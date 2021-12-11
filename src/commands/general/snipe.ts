@@ -14,7 +14,7 @@ const LOG = new LOG_TAGS()
 const snipes = {};
 
 client.on("messageDelete", async (message) => {
-    if (message.partial || (message.embeds.length && !message.content)) { return; }
+    if (message.partial || (message.embeds.length && !message.content) || message.author.bot) { return; }
     snipes[message.channel.id] = {
         author: message.author,
         content: message.content,

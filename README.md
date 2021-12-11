@@ -111,6 +111,7 @@
 - [ ] Leaderboard of tourneys points
 - [x] Auto alt account detector
 - [ ] Create help menu for the `;help` command
+- [ ] Implement the TeamGenerator bot's functions and replace the existing bot in the server
 
 - - -
 

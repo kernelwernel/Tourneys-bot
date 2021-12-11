@@ -15,17 +15,13 @@ export default {
 
     slash: false,
     cooldown: "5s",
-
-    minArgs: 1,
-    expectedArgs: "<type>",
     
     permissions: ["ADMINISTRATOR"],
     ownerOnly: true,
     testOnly: true,
 
-    callback: async ({ message, client, text }) => {
-
-        function InvalidEmbed(err_msg) {
+    callback: async ({ message, client }) => {
+        function InvalidEmbed(err_msg: string) {
             const InvalidEmbed = new MessageEmbed()
                 .setTitle(config["title"].admin)
                 .setDescription(`\`\`\`> ${err_msg}\`\`\``)
@@ -36,45 +32,44 @@ export default {
 
         try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
-            let shutdown: string;
-            let local: boolean = false;
-            let server: boolean = false;
 
             const args = message.content.slice(config.prefix.length).trim().split(/ +/);
 
             if (!args) {
                 InvalidEmbed("Please enter a valid argument. Usage:\n ;kill <local | server>")
             }
-            
+
+            let shutdown: string;
+            let local: boolean = false;
+            let server: boolean = false;
+
             switch (args[1]) {
-                case ("local"):
+                case "locally":
+                case "local":
                     shutdown = "locally"
                     local = true;
                     break;
-                case ("server"):
+                case "serverside":
+                case "server":
                     shutdown = "serverside"
                     server = true;
+                    break;
                 default:
-                    return InvalidEmbed("Invalid argument! Please try again");
+                    return InvalidEmbed("Invalid argument! Please try again. Usage:\n;kill <local | server>");
             }
 
             const embed = new MessageEmbed()
                 .setTitle(config["title"].admin)
-                .setDescription(`\`\`\`"Shutting down the ${shutdown} hosted bot..."\`\`\``)
+                .setDescription(`\`\`\`The ${shutdown} hosted bot has successfully been shut down\`\`\``)
                 .setColor(`#${config['color'].admin}`);
-            const newMessage = await message.reply({
+            await message.channel.send({
                 embeds: [embed]
             })
 
-            const newEmbed = newMessage.embeds[0];
-            newEmbed.setDescription(`\`\`\`> Shutting down the ${shutdown} hosted bot...\n> Bot has been shut down\`\`\``);
-            newMessage.edit({
-                embeds: [newEmbed]
-            }).then(async () => {
-                console.log(`${LOG["SYSTEM"].SHUTDOWN} by ${message.author.tag}`);
-                client.user?.setStatus('invisible');
-                server ? process.kill(process.pid, 'SIGTERM') : process.exit(1)
-            })
+            console.log(`${LOG.SYSTEM_SHUTDOWN} by ${message.author.tag}`);
+            client.user?.setStatus('invisible');
+            server ? process.kill(process.pid, 'SIGTERM') : process.exit(1)
+
         } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)

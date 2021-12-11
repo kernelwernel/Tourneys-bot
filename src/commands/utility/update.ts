@@ -15,11 +15,11 @@ export default {
     ownerOnly: false,
     testOnly: true,
 
-    callback: ({ message, client, interaction, text }) => {
+    callback: ({ message }) => {
         try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
             const embed = new MessageEmbed()
-                .setTitle(`🏷️ Tourneys bot v${config.version} updates 🏷️`)
+                .setTitle(`🏷️ Tourneys bot ${config.version} updates 🏷️`)
                 .setDescription(`
 - Added snipe command
 - Made the announce command public
