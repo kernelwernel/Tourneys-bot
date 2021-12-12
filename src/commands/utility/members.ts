@@ -5,7 +5,7 @@ import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
 
 export default {
-    category: "General",
+    category: "Utility",
     description: "Replies with pong",
     aliases: ["membercount", "member"],
     
