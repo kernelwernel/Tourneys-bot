@@ -41,7 +41,6 @@ const client = new DiscordJS.Client({
 const commands: Array<string> = [];
 var d = new Date();
 var time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-export { time, client }
 
 client.on('ready', async (client) => {
     let logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
@@ -114,6 +113,8 @@ client.on('ready', async (client) => {
         }).save()
     }, 1000);
 });
+
+export { time, client, commands }
 
 client.on('messageCreate', (message) => {
     let dmchannel: TextChannel = client.channels.cache.get(config["channel"].dm) as TextChannel;

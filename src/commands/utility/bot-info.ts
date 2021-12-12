@@ -51,7 +51,8 @@ export default {
                     { name: "__**Tourneys bot source code:**__", value: `> <:github:798841111338680330> - **${config.repo_link}**`, inline: false },
                     { name: "__**Docker container:**__", value: "> <:docker:910267595045883914> - **https://hub.docker.com/r/nonce1/tourneys-bot**", inline: false },
                     { name: `__**Credits**__`, value: `>>> <:777964368717414410:798168215020109895> - **${config.author}**
-<:BugHunter:799700882404147242> - **Dillon#1690**`, inline: false },
+<:BugHunter:799700882404147242> - **Dillon#1690**
+<:BugHunter:799700882404147242> - **threat#8574**`, inline: false },
                 );
             message.channel.send({
                 embeds: [embed]

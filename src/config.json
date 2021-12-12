@@ -31,15 +31,15 @@
     },
 
     "title": {
-        "admin": "🛠 Admin panel 🛠",
-        "warn": "⚠️ Bot warning ⚠️",
-        "serverwarn": "⚠️ Server warning ⚠️",
-        "error": "🚫 Error 🚫",
-        "alert": "🛃 Potential alt account detected 🛃",
-        "raid_alert": "🚨 POTENTIAL RAID ALERT 🚨"
+        "admin": "🛠 Admin panel",
+        "warn": "⚠️ Bot warning",
+        "serverwarn": "⚠️ Server warning",
+        "error": "🚫 Error",
+        "alert": "🛃 Potential alt account detected",
+        "raid_alert": "🚨 POTENTIAL RAID ALERT"
     },
 
-    "author": "nonce#7444",
+    "author": "nonce#0001",
     "license": "MIT",
     "repo_link": "https://github.com/Existential-nonce/Tourneys-bot",
 
@@ -55,7 +55,10 @@
             "299876224233373698",
             "270325321419587604",
             "580415117674545152",
-            "421838950525698050"
+            "421838950525698050",
+            "589960682452156416",
+            "351023689581461519",
+            "376799302485409812"
         ],
         "blacklisted": [
             "302895164161130499"

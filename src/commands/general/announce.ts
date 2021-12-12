@@ -38,8 +38,8 @@ export default {
                 adminExecute == false
             }
             
-            const error1: string = `> Invalid argument! Please try again.\nCorrect usage:\n${config.prefix}announce <general | secret> <message>`
-            const error2: string = `> Invalid channel argument! Make sure the argument is either "general" or "secret"\nExample:\n  ;announce general hello chat`
+            const error1: string = `Invalid argument! Please try again.\nCorrect usage:\n${config.prefix}announce <general | secret> <message>`
+            const error2: string = `Invalid channel argument! Make sure the argument is either "general" or "secret"\nExample:\n  ;announce general hello chat`
 
             let bypassMessage: string
             let generalchannel: TextChannel = client.channels.cache.get(config["channel"].general) as TextChannel;
@@ -61,11 +61,11 @@ export default {
                     /*
                     * for anybody looking at this, i'm only writting these
                     * slurs/derogative words in the context to detect
-                    * and stop people from bypassing these.
+                    * and stop people from bypassing.
                     * I'm not writing these for any kind of discriminatorial
-                    * reason or anything based on my racial beliefs.
+                    * reason or anything based on my personal/racial or any offensive beliefs whatsoever.
                     */
-                    const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag/
+                    const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag|@everyone|@here/
                     bypassMessage = message.content
                     bypassMessage = message.content.replace("1", "i")
                     bypassMessage = message.content.replace("3", "e")
@@ -75,7 +75,7 @@ export default {
                     if (bypassMessage.toLowerCase().match(antibypass)) {
                         const BypassEmbed = new MessageEmbed()
                             .setTitle(config["title"].error)
-                            .setDescription(`\`\`\`> The inputted message contains a bypassed word, please replace it or the message will not be announced.\`\`\``)
+                            .setDescription(`\`\`\`The inputted message contains a bypassed word or a ping, please replace it or the message will not be announced.\`\`\``)
                             .setColor(`#${config["color"].error}`);
                         message.channel.send({ embeds: [BypassEmbed] });
                         return;
@@ -117,10 +117,12 @@ export default {
                             }
                             auditchannel.bulkDelete(1)
                         } else if (noLog == false) {
-                            const SentEmbed = new MessageEmbed()
-                                .setDescription(`**Message sent in <#${channelID}>!**`)
-                                .setColor(`#${config["color"].default}`);
-                            message.channel.send({ embeds: [SentEmbed] })
+                            if ((message.channel.id != "906386495441612800") && (SendID == ("g" || "gen" || "general"))) {
+                                const SentEmbed = new MessageEmbed()
+                                    .setDescription(`**Message sent in <#${channelID}>!**`)
+                                    .setColor(`#${config["color"].default}`);
+                                message.channel.send({ embeds: [SentEmbed] })
+                            }
                             const CommandEmbed = new MessageEmbed()
                                 .setColor(`#${config["color"].discord}`)
                                 .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
