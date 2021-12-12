@@ -16,7 +16,9 @@
         "dm": "adbbff",
         "warn": "ffb405",
         "serverwarn": "ffb405",
-        "alert": "ff584d"
+        "alert": "ff584d",
+        "assassin": "9500ff",
+        "utility": "ffb92e"
     },
 
     "channel": {
