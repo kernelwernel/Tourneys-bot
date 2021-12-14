@@ -62,7 +62,7 @@ export default {
                         DefaultSpam = true
                     } else if (args.length >= 1) {
                         SpamType = `a custom message`
-                        SpamMessage = `${args.slice(1).join(" ")}`
+                        SpamMessage = `${args.join(" ")}`
                     } else {
                         return ErrorEmbed(`There has been an error with the client, please notify the bot developer to report this issue.`)
                     }
