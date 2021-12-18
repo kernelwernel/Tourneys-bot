@@ -48,13 +48,12 @@ export default {
             SendID = args.shift()!;
             DMmessage.toString();
 
-            switch (SendID.length) {
-                case 18:
-                    SnowflakeIsValid = true
-                    break;
-                default:
-                    SnowflakeIsValid = false
-            }
+            const User = client.users.cache.get(`${SendID}`);
+            if (User) {
+                SnowflakeIsValid = true
+            } else {
+                SnowflakeIsValid = false
+            };
 
             if (!SnowflakeIsValid) {
                 return ErrorEmbed()

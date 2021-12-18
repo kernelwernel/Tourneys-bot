@@ -42,7 +42,6 @@ export default {
             newMessage.edit({
                 embeds: [newEmbed]
             })
-
         } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)

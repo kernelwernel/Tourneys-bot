@@ -1,4 +1,4 @@
-import { MessageEmbed } from "discord.js"
+import { MessageEmbed, Client } from "discord.js"
 import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
 import * as npm from "../../../package.json"
@@ -37,6 +37,26 @@ export default {
                 docker: (Math.round((data.Dockerfile / total) * 100 * 10) / 10)
             }
 
+            var ids = [{
+                "nonce": "699310549573435423", 
+                "dillon": "841058819848536085",
+                "threat": "905599023199682650",
+                "darsh": "823402171562459177"
+            }]
+
+            let contributors: Array<string> | undefined = [
+                `${ids[0]["nonce"]}`, 
+                `${ids[0]["dillon"]}`,
+                `${ids[0]["threat"]}`,
+                `${ids[0]["darsh"]}`
+            ];
+
+            // I'm fully aware that there's better ways to do this smh
+            let user0 = await client.users.fetch(contributors[0], { cache: true });
+            let user1 = await client.users.fetch(contributors[1], { cache: true });
+            let user2 = await client.users.fetch(contributors[2], { cache: true });
+            let user3 = await client.users.fetch(contributors[3], { cache: true });
+
             const embed = new MessageEmbed()
                 .setColor(`#${config["color"].default}`)
                 .addFields(
@@ -50,9 +70,10 @@ export default {
 <:docker:910267595045883914> - **Dockerfile**  \`${langs.docker}%\``, inline: false },
                     { name: "__**Tourneys bot source code:**__", value: `> <:github:798841111338680330> - **${config.repo_link}**`, inline: false },
                     { name: "__**Docker container:**__", value: "> <:docker:910267595045883914> - **https://hub.docker.com/r/nonce1/tourneys-bot**", inline: false },
-                    { name: `__**Credits**__`, value: `>>> <:777964368717414410:798168215020109895> - **${config.author}**
-<:BugHunter:799700882404147242> - **Dillon#1690**
-<:BugHunter:799700882404147242> - **threat#8574**`, inline: false },
+                    { name: `__**Credits**__`, value: `>>> <:777964368717414410:798168215020109895> - **${user0.username}#${user0.discriminator}**
+<:BugHunter:799700882404147242> - **${user1.username}#${user1.discriminator}**
+<:BugHunter:799700882404147242> - **${user2.username}#${user2.discriminator}** 
+<:BugHunter:799700882404147242> - **${user3.username}#${user3.discriminator}**`, inline: false },
                 );
             message.channel.send({
                 embeds: [embed]

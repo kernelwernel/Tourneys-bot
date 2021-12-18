@@ -29,7 +29,8 @@
         "dm": "913948455766990888",
         "cmd": "913948495537377330",
         "dev": "912004266347081768",
-        "audit": "906392859299696681"
+        "audit": "906392859299696681",
+        "suggestions": "921786282231873566"
     },
 
     "title": {
@@ -41,7 +42,16 @@
         "raid_alert": "🚨 POTENTIAL RAID ALERT"
     },
 
+    "contributors": {
+        "nonce": "699310549573435423",
+        "Dillon": "841058819848536085",
+        "threat": "905599023199682650",
+        "darsh": "823402171562459177"
+    },
+
     "author": "nonce#0001",
+    "authorID": "699310549573435423",
+
     "license": "MIT",
     "repo_link": "https://github.com/Existential-nonce/Tourneys-bot",
 

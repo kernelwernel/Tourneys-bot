@@ -9,7 +9,7 @@ export default {
     description: "Replies with pong",
     
     slash: false,
-    cooldown: "5s",
+    cooldown: "3s",
     
     ownerOnly: false,
     testOnly: true,
