@@ -60,11 +60,11 @@ export default {
                         SpamType = `gay thug porn`
                         SpamMessage = `https://cdn.discordapp.com/attachments/909224884939419708/919652071253348362/Snapchat-914193569.mp4`
                         DefaultSpam = true
-                    } else if (args.length == 1) {
-                        SpamType = `a custom video or link`
-                        SpamMessage = `${args[0]}`
+                    } else if (args.length >= 1) {
+                        SpamType = `a custom message`
+                        SpamMessage = `${args.join(" ")}`
                     } else {
-                        return ErrorEmbed(`Please send a link as your message argument`)
+                        return ErrorEmbed(`There has been an error with the client, please notify the bot developer to report this issue.`)
                     }
 
                     const embed = new MessageEmbed()
