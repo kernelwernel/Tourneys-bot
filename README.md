@@ -101,7 +101,7 @@
     ##### `v2.3`
     - Added `;editsnipe`, `;assassinlinks`, `;suggest` and `;eval` commands
     - Added the "no log" feature so no commands will be logged if you execute either the `;send` or `;announce` command in secret general
-    - Patch the bot from being in the snipe command output
+    - Patched the bot from being in the snipe command output
     - Patched the `;announce` vulnerability where it doesn't replace pings for the second message argument
     - Patched bypassing for the snipe command (sad af)
     - Patched the `;send` bug where it would break the whole bot if the user ID didn't exist               

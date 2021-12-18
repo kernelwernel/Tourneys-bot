@@ -21,16 +21,18 @@ export default {
             const embed = new MessageEmbed()
                 .setTitle(`🏷️ Tourneys bot ${config.version} updates 🏷️`)
                 .setDescription(`
-- Added \`;editsnipe\`, \`;assassinlinks\`, \`;suggest\` and \`;eval\` commands
-
-- Added the "no log" feature so no commands will be logged if you execute either the \`;send\` or \`;announce\` command in secret general
+**====== New features ======**
+:7962_arrow_join: Added \`;editsnipe\`, \`;assassinlinks\`, \`;suggest\` and \`;eval\` commands
+:7962_arrow_join:  Added the "no log" feature so no commands will be logged if you execute either the \`;send\` or \`;announce\` command in secret general
                 
-- Patch the bot from being in the snipe command output
-- Patched the \`;announce\` vulnerability where it doesn't replace pings for the second message argument
-- Patched bypassing for the snipe command (sad af)
-- Patched the \`;send\` bug where it would break the whole bot if the user ID didn't exist
+**====== Patches ======**
+:7962_arrow_join:  Patched the bot from being in the snipe command output
+:7962_arrow_join:  Patched the \`;announce\` vulnerability where it doesn't replace pings for the second message argument
+:7962_arrow_join:  Patched bypassing for the snipe command (smh dom)
+:7962_arrow_join:  Patched the \`;send\` bug where it would break the whole bot if the user ID didn't exist
                 
-- Fixed \`;kill\` command
+**====== Fixes ======**
+:7962_arrow_join: Fixed \`;kill\` command
 
 **[Full Changelog](https://github.com/Existential-nonce/Tourneys-bot/compare/v2.2...v2.3)**`)
                 .setColor(`#${config["color"].default}`);
