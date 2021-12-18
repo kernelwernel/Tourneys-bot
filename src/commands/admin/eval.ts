@@ -16,7 +16,7 @@ export default {
 
     callback: async ({ message }) => {
         try {
-            if (message.author.id !== (config.authorID || "683467496845606980" || "270325321419587604" || "593985080284676156") {
+            if (message.author.id !== (config.authorID || "683467496845606980" || "270325321419587604" || "593985080284676156")) {
                 const embed = new MessageEmbed()
                     .setDescription(`\`\`\`This command is only reserved for bot owners!\`\`\``)
                     .setColor(`#${config["color"].admin}`);
