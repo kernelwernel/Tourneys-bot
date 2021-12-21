@@ -15,9 +15,7 @@ export default {
     ownerOnly: false,
     testOnly: true,
 
-    callback: ({ message, client, interaction, text }) => {
-        const args = message.content.slice(config.prefix.length).trim().split(/ +/);
-        const command = args.shift()?.toLowerCase();
+    callback: ({ message, client, interaction, args }) => {
 
         let SendID: String
         let blList: string

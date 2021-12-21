@@ -28,7 +28,7 @@ export default {
             };
 
             const roles = message.guild?.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
-            const guild = client.guilds.cache.get(config.tourneys_id);
+            const guild = client.guilds.cache.get(config["tourneys"].id);
             const channels = message.guild?.channels.cache;
             const emojis = message.guild?.emojis.cache;
 

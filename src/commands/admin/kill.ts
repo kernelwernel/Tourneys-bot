@@ -20,7 +20,7 @@ export default {
     ownerOnly: true,
     testOnly: true,
 
-    callback: async ({ message, client }) => {
+    callback: async ({ message, client, args }) => {
         function InvalidEmbed(err_msg: string) {
             const InvalidEmbed = new MessageEmbed()
                 .setTitle(config["title"].admin)
@@ -32,8 +32,6 @@ export default {
 
         try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
-
-            const args = message.content.slice(config.prefix.length).trim().split(/ +/);
 
             if (!args) {
                 InvalidEmbed("Please enter a valid argument. Usage:\n ;kill <local | server>")

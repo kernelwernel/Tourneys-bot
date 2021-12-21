@@ -3,14 +3,13 @@ import WOKCommands from "wokcommands"
 import path from "path"
 import testSchema from "./test-schema"
 import fs from "fs"
-import glob from "glob"
+import ytdl from "ytdl-core"
 import * as config from "./config.json"
 import * as custom from "./headers/custom.json"
 import LOG_TAGS from "./headers/logs"
 const LOG = new LOG_TAGS()
 import "dotenv/config"
 import mongoose, { mongo, Schema } from "mongoose"
-//import db from "quick.db"
 
 // importing won't work on this package for some reason
 const { AntiAltClient } = require("discord-antialts")
@@ -41,6 +40,10 @@ const client = new DiscordJS.Client({
 const commands: Array<string> = [];
 var d = new Date();
 var time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+
+client.on("clickMenu", menu => {
+    //nuggies.dropclick(client, menu)
+})
 
 client.on('ready', async (client) => {
     let logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
@@ -117,6 +120,9 @@ client.on('ready', async (client) => {
 export { time, client, commands }
 
 client.on('messageCreate', (message) => {
+    const args = message.content.slice(config.prefix.length).trim().split(/ +/);
+    const command = args.shift()?.toLowerCase();
+
     let dmchannel: TextChannel = client.channels.cache.get(config["channel"].dm) as TextChannel;
     let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
     if (/nazi/.test(message.content.toLowerCase())) {
@@ -242,4 +248,12 @@ client.once('disconnect', () => {
 
 client.login(process.env.TOKEN).then(() => {
     console.log(`\n${LOG.SYSTEM_SUCCESS} - Logged into ${client.user?.tag}`);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+    try {
+        console.error("Unhandled Rejection at: ", promise, "reason: ", reason || null);
+    } catch {
+        console.error(reason);
+    }
 });

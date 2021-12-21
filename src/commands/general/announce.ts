@@ -15,7 +15,7 @@ export default {
     ownerOnly: false,
     testOnly: false,
 
-    callback: async ({ message, client }) => {
+    callback: async ({ message, client, args }) => {
 
         function ErrorEmbed(errorMessage: string) {
             const IncorrectEmbed = new MessageEmbed()
@@ -46,9 +46,6 @@ export default {
             let secretchannel: TextChannel = client.channels.cache.get(config["channel"].secret) as TextChannel;
             let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
             let auditchannel: TextChannel = client.channels.cache.get(config["channel"].audit) as TextChannel;
-
-            const args = message.content.slice(config.prefix.length).trim().split(/ +/);
-            const command = args.shift()?.toLowerCase();
 
             if (!args.length || args.length == 1) {
                 return ErrorEmbed(error1)

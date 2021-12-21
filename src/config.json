@@ -6,6 +6,24 @@
 
     "prefix": ";",
 
+    "author": "nonce#0001",
+    "authorID": "699310549573435423",
+
+    "license": "MIT",
+    "repo_link": "https://github.com/Existential-nonce/Tourneys-bot",
+
+    "radiolink": "https://www.youtube.com/watch?v=5qap5aO4i9A",
+
+    "roles": {
+        "owner": "688511944612773909",
+        "co_owner": "688514555495710741"
+    },
+
+    "tourneys": {
+        "id": "688510763387715649",
+        "group_id": "9037165"
+    },
+
     "color": {
         "default": "27e462",
         "error": "ff584d",
@@ -30,7 +48,8 @@
         "cmd": "913948495537377330",
         "dev": "912004266347081768",
         "audit": "906392859299696681",
-        "suggestions": "921786282231873566"
+        "suggestions": "921786282231873566",
+        "radio": "922565882566283374" 
     },
 
     "title": {
@@ -48,15 +67,6 @@
         "threat": "905599023199682650",
         "darsh": "823402171562459177"
     },
-
-    "author": "nonce#0001",
-    "authorID": "699310549573435423",
-
-    "license": "MIT",
-    "repo_link": "https://github.com/Existential-nonce/Tourneys-bot",
-
-    "tourneys_id": "688510763387715649",
-    "tourneys_group_id": "9037165",
 
     "list": {
         "admin": [

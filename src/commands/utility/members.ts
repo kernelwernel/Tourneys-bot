@@ -18,7 +18,7 @@ export default {
     callback: ({ message, client }) => {
         try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
-            const guild = client.guilds.cache.get(config.tourneys_id);
+            const guild = client.guilds.cache.get(config["tourneys"].id);
             var memberCount = guild?.memberCount;
             const embed = new MessageEmbed()
                 .setDescription(`Tourneys has **${memberCount}** members`)

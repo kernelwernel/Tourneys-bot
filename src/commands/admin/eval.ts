@@ -14,11 +14,13 @@ export default {
     ownerOnly: false,
     testOnly: true,
 
-    callback: async ({ message }) => {
+    callback: async ({ message, args }) => {
         try {
-            if (message.author.id !== config.authorID) {
+            if (!message.member?.roles.cache.has(`${config["roles"].owner}`)
+                || !message.member?.roles.cache.has(`${config["roles"].co_owner}`)
+                || message.author.id != `${config.authorID}`) {
                 const embed = new MessageEmbed()
-                    .setDescription(`\`\`\`This command is only reserved for bot owners!\`\`\``)
+                    .setDescription(`\`\`\`This command is only reserved for administrators!\`\`\``)
                     .setColor(`#${config["color"].admin}`);
                 message.channel.send({ embeds: [embed] })
                 return;
@@ -39,15 +41,8 @@ export default {
                 return text;
             }
 
-            const args = message.content.split(" ").slice(1);
             const evaled = eval(args.join(" "));
             const cleaned = await clean(evaled);
-
-/*
-            var result = message.content.split(" ").slice(1).join(" ")
-            let evaled = eval(result);
-            console.log(result)
-*/
 
             const embed = new MessageEmbed()
                 .setDescription(`\`\`\`js\n${evaled}\n\`\`\``)

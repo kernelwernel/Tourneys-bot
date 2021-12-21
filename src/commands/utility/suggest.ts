@@ -10,18 +10,15 @@ export default {
     aliases: ["suggestion"],
 
     slash: false,
-    cooldown: "1m",
+    cooldown: "24h",
 
     ownerOnly: false,
     testOnly: true,
 
-    callback: async ({ message, client, interaction }) => {
+    callback: async ({ message, client, interaction, args }) => {
         try {
             let suggestionchannel: TextChannel = client.channels.cache.get(config["channel"].suggestions) as TextChannel;
             let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
-
-            const args = message.content.slice(config.prefix.length).trim().split(/ +/);
-            const command = args.shift()?.toLowerCase();
 
             let suggestion: string | undefined = args.join(" ");
 
@@ -52,7 +49,7 @@ export default {
                 bypassMessage = message.content.replace("3", "e")
                 bypassMessage = message.content.replace("0", "o")
                 bypassMessage = message.content.replace("4", "a")
-                
+
                 if (bypassMessage.toLowerCase().match(antibypass)) {
                     const BypassEmbed = new MessageEmbed()
                         .setTitle(config["title"].error)

@@ -15,7 +15,7 @@ export default {
     ownerOnly: true,
     testOnly: true,
 
-    callback: ({ message, client }) => {
+    callback: ({ message, client, args }) => {
         function ErrorEmbed() {
             const IncorrectEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
@@ -29,9 +29,6 @@ export default {
 
         try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
-
-            const args = message.content.slice(config.prefix.length).trim().split(/ +/);
-            const command = args.shift()?.toLowerCase();
 
             let SendID: string
             let SnowflakeIsValid: boolean

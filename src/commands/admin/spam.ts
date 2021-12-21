@@ -15,7 +15,7 @@ export default {
     ownerOnly: false,
     testOnly: true,
 
-    callback: ({ message, client }) => {
+    callback: ({ message, client, args }) => {
 
         function delay(ms: number) {
             return new Promise( resolve => setTimeout(resolve, ms) );
@@ -40,10 +40,6 @@ export default {
                 .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
                 .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``);
             cmdchannel.send({ embeds: [CommandEmbed] });
-
-
-            const args = message.content.slice(config.prefix.length).trim().split(/ +/);
-            const command = args.shift()?.toLowerCase();
     
             let SendID = args.shift()!;
             let SnowflakeIsValid: boolean = false
