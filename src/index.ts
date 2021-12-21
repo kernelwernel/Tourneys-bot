@@ -3,7 +3,6 @@ import WOKCommands from "wokcommands"
 import path from "path"
 import testSchema from "./test-schema"
 import fs from "fs"
-import ytdl from "ytdl-core"
 import * as config from "./config.json"
 import * as custom from "./headers/custom.json"
 import LOG_TAGS from "./headers/logs"
@@ -38,12 +37,6 @@ const client = new DiscordJS.Client({
 });
 
 const commands: Array<string> = [];
-var d = new Date();
-var time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-
-client.on("clickMenu", menu => {
-    //nuggies.dropclick(client, menu)
-})
 
 client.on('ready', async (client) => {
     let logchannel: TextChannel = client.channels.cache.get(config["channel"].log) as TextChannel;
@@ -117,7 +110,7 @@ client.on('ready', async (client) => {
     }, 1000);
 });
 
-export { time, client, commands }
+export { client, commands }
 
 client.on('messageCreate', (message) => {
     const args = message.content.slice(config.prefix.length).trim().split(/ +/);
