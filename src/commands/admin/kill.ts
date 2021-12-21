@@ -41,7 +41,7 @@ export default {
             let local: boolean = false;
             let server: boolean = false;
 
-            switch (args[1]) {
+            switch (args[0]) {
                 case "locally":
                 case "local":
                     shutdown = "locally"

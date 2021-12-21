@@ -16,9 +16,7 @@ export default {
 
     callback: async ({ message, args }) => {
         try {
-            if (!message.member?.roles.cache.has(`${config["roles"].owner}`)
-                || !message.member?.roles.cache.has(`${config["roles"].co_owner}`)
-                || message.author.id != `${config.authorID}`) {
+            if (!config["list"].eval_access.includes(message.author.id)) {
                 const embed = new MessageEmbed()
                     .setDescription(`\`\`\`This command is only reserved for administrators!\`\`\``)
                     .setColor(`#${config["color"].admin}`);
