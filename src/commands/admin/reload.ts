@@ -9,7 +9,7 @@ const LOG = new LOG_TAGS()
 export default {
     category: "Admin",
     description: "Reloads all the commands and .ts files of the bot",
-    aliases: ["refresh", "reboot"],
+    aliases: ["refresh"],
 
     slash: false,
     cooldown: "5s",
