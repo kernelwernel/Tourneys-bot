@@ -1,12 +1,9 @@
 import { ICommand } from "wokcommands"
 import { MessageEmbed } from "discord.js"
 import * as config from "../../config.json"
+import fs from "fs"
 import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
-/*
-import Heroku from 'heroku-client'
-const heroku = new Heroku({ token: process.env.HEROKU_API_TOKEN })
-*/
 
 export default {
     category: "Admin",
@@ -16,7 +13,7 @@ export default {
     slash: false,
     cooldown: "5s",
     
-    permissions: ["ADMINISTRATOR"],
+    permissions: ["MANAGE_GUILD"],
     ownerOnly: true,
     testOnly: true,
 

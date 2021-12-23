@@ -2,6 +2,7 @@ import { MessageEmbed } from "discord.js"
 import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
 import glob from "glob"
+const restart = require("restart")
 import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
 
@@ -23,7 +24,7 @@ export default {
             console.log(`${LOG.SYSTEM_RELOADING}`);
 
             client.user?.setActivity(`for ${config.prefix}help`, { type: "WATCHING" });
-            
+
             const embed = new MessageEmbed()
                 .setTitle(`🛠 Admin panel 🛠`)
                 .setDescription(`\`\`\`> Commands have been reloaded\`\`\``)

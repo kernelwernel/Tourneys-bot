@@ -9,7 +9,6 @@ export default {
     description: "Evaluation command",
     
     slash: false,
-    cooldown: "5s",
     
     ownerOnly: false,
     testOnly: true,
@@ -24,30 +23,21 @@ export default {
                 return;
             }
 
-            const clean = async (text: string) => {
-                if (text && text.constructor.name == "Promise") {
-                    text = text;
-                }
-    
-                if (typeof text !== "string") {
-                    text = require("util").inspect(text, { depth: 1 });
-                }
-                
-                text = text
-                    .replace(/`/g, "`" + String.fromCharCode(8203))
-                    .replace(/@/g, "@" + String.fromCharCode(8203));
-                return text;
+            if (message.content === (config.prefix + 'eval process.env.TOKEN')) {
+                message.channel.send(`bruh <:smh:859528238077706240>`)
+                return
             }
 
-            const evaled = eval(args.join(" "));
-            const cleaned = await clean(evaled);
+            var result = message.content.split(" ").slice(1).join(" ")
+            result = result.replace(/```js/g, "")
+            result = result.replace(/```/g, "")
+            console.log(result)
+            let evaled = await eval(result);
 
             const embed = new MessageEmbed()
                 .setDescription(`\`\`\`js\n${evaled}\n\`\`\``)
                 .setColor(`#${config["color"].admin}`);
             message.channel.send({ embeds: [embed] })
-
-
         } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)

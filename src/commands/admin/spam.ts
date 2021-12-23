@@ -46,7 +46,7 @@ export default {
             let SpamMessage: string
             let DefaultSpam: boolean
             let SpamType: string | undefined
-    
+
             switch (SendID.length) {
                 case 18:
                     SnowflakeIsValid = true
@@ -69,12 +69,7 @@ export default {
                     message.channel.send({ embeds: [embed] })
                     client.users.fetch(`${SendID}`).then(async (user: { send: (arg0: string) => void }) => {
                         while (true) {
-                            try { 
-                                user.send(`${SpamMessage}`)
-                            } catch (error) {
-                                console.log(error)
-                                return ErrorEmbed(`${error}`)
-                            }
+                            user.send(`${SpamMessage}`)
                             await delay(100);
                         }
                     })
