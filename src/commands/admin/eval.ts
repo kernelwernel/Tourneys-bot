@@ -23,16 +23,16 @@ export default {
                 return;
             }
 
-            if (message.content === (config.prefix + 'eval process.env.TOKEN')) {
-                message.channel.send(`bruh <:smh:859528238077706240>`)
-                return
-            }
-
             var result = message.content.split(" ").slice(1).join(" ")
             result = result.replace(/```js/g, "")
             result = result.replace(/```/g, "")
             console.log(result)
             let evaled = await eval(result);
+
+            if (evaled.match(process.env.TOKEN)) {
+                message.channel.send(`bruh <:smh:859528238077706240>`)
+                return;
+            }
 
             const embed = new MessageEmbed()
                 .setDescription(`\`\`\`js\n${evaled}\n\`\`\``)

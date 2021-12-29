@@ -1,7 +1,7 @@
 /*
  * Credit for the snipe code goes to https://github.com/DankMemer/sniper.
  * If you're the owner of the above mentioned repository
- * and you want me to remove the code, please dm me on discord at nonce#7444.
+ * and you want me to remove the code, please dm me on discord at nonce#0001.
 */
 
 import { Message, MessageEmbed } from "discord.js";
@@ -55,6 +55,7 @@ export default {
             * I'm not writing these for any kind of discriminatorial
             * reason or anything based on my personal/racial or any offensive beliefs whatsoever.
             */
+/*
             const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag/
             let bypassMessage = snipe.content
             bypassMessage = snipe.content.replace("1", "i")
@@ -73,6 +74,15 @@ export default {
                 snipe.image ? SnipeEmbed.setImage(snipe.image) : null;
                 bypass ? SnipeEmbed.setDescription(`\`\`\`The sniped message contains a bypassed word.\`\`\``) : null;
                 bypass ? SnipeEmbed.setFooter(`blame dom for this he made me add this shit feature lol`) : null;
+            await message.channel.send({ embeds: [SnipeEmbed] });
+*/
+            const SnipeEmbed = new MessageEmbed()
+            .setAuthor(`${snipe.author.tag}`, `${snipe.author.displayAvatarURL({dynamic: true})}`)
+            bypass ? SnipeEmbed.setColor(`#${config["color"].error}`) : SnipeEmbed.setColor(`#${config["color"].default}`) 
+            snipe.content ? SnipeEmbed.setDescription(`\`\`\`${snipe.content}\`\`\``) : null;
+            snipe.image ? SnipeEmbed.setImage(snipe.image) : null;
+            bypass ? SnipeEmbed.setDescription(`\`\`\`The sniped message contains a bypassed word.\`\`\``) : null;
+            bypass ? SnipeEmbed.setFooter(`blame dom for this he made me add this shit feature lol`) : null;
             await message.channel.send({ embeds: [SnipeEmbed] });
         } catch (error) {
             const ErrorEmbed = new MessageEmbed()

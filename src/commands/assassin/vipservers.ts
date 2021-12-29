@@ -18,9 +18,7 @@ export default {
         try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
             const embed = new MessageEmbed()
-                .setTitle(`Public VIP Servers`)
                 .setColor(`#${config["color"].default}`)
-                .setDescription(`We have multiple VIP servers that are funded for you to use for anything; 1v1s, Scrims, etc.`)
                 .addFields(
                     {
                         name: `__**Chicken**__`,

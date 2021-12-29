@@ -6,7 +6,7 @@ const LOG = new LOG_TAGS()
 
 export default {
     category: "Admin",
-    description: "Just a simple test command to see if the bot works",
+    description: "Spams the DM of any user id in the server",
     
     slash: false,
     cooldown: "5s",
@@ -32,9 +32,8 @@ export default {
 
         try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
-
             console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`);
-            let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
+            let cmdchannel: TextChannel = client.channels.cache.get(config["channels"].cmd) as TextChannel;
             const CommandEmbed = new MessageEmbed()
                 .setColor(`#${config["color"].discord}`)
                 .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)

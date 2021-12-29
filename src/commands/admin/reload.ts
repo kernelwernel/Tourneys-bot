@@ -2,14 +2,12 @@ import { MessageEmbed } from "discord.js"
 import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
 import glob from "glob"
-const restart = require("restart")
 import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
 
 export default {
     category: "Admin",
     description: "Reloads all the commands and .ts files of the bot",
-    aliases: ["refresh"],
 
     slash: false,
     cooldown: "5s",

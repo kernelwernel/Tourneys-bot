@@ -20,9 +20,9 @@ export default {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
             const embed = new MessageEmbed()
                 .setDescription(`
-<@${config["list"]["admin"][2]}> - **The server blackie**
-
 <@${config["list"]["admin"][1]}> - (no description)
+
+<@${config["list"]["admin"][2]}> - **The server blackie**
 
 <@${config["list"]["admin"][4]}> - **The type of guy who would cum after listening to 2 seconds of juice world's new album**
 

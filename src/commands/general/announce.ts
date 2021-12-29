@@ -1,8 +1,8 @@
 import { Interaction, Message, MessageEmbed, TextChannel } from "discord.js";
 import { ICommand } from "wokcommands";
+import * as config from "../../config.json"
 import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
-import * as config from "../../config.json"
 
 export default {
     category: "Admin",
@@ -16,7 +16,6 @@ export default {
     testOnly: false,
 
     callback: async ({ message, client, args }) => {
-
         function ErrorEmbed(errorMessage: string) {
             const IncorrectEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
@@ -41,12 +40,6 @@ export default {
             const error1: string = `Invalid argument! Please try again.\nCorrect usage:\n${config.prefix}announce <general | secret> <message>`
             const error2: string = `Invalid channel argument! Make sure the argument is either "general" or "secret"\nExample:\n  ;announce general hello chat`
 
-            let bypassMessage: string
-            let generalchannel: TextChannel = client.channels.cache.get(config["channel"].general) as TextChannel;
-            let secretchannel: TextChannel = client.channels.cache.get(config["channel"].secret) as TextChannel;
-            let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
-            let auditchannel: TextChannel = client.channels.cache.get(config["channel"].audit) as TextChannel;
-
             if (!args.length || args.length == 1) {
                 return ErrorEmbed(error1)
             } else {
@@ -62,8 +55,13 @@ export default {
                     * I'm not writing these for any kind of discriminatorial
                     * reason or anything based on my personal/racial or any offensive beliefs whatsoever.
                     */
-                    const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag|@everyone|@here/
-                    bypassMessage = message.content
+                    const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag|@everyone|@here|@player|@regular/
+                    let bypassMessage: string = message.content
+                    let generalchannel: TextChannel = client.channels.cache.get(config["channels"].general) as TextChannel;
+                    let secretchannel: TextChannel = client.channels.cache.get(config["channels"].secret) as TextChannel;
+                    let cmdchannel: TextChannel = client.channels.cache.get(config["channels"].cmd) as TextChannel;
+                    let auditchannel: TextChannel = client.channels.cache.get(config["channels"].audit) as TextChannel;
+
                     bypassMessage = message.content.replace("1", "i")
                     bypassMessage = message.content.replace("3", "e")
                     bypassMessage = message.content.replace("0", "o")
@@ -78,7 +76,6 @@ export default {
                         return;
                     }
 
-                    let result = announce_message.replace(/@/i, "(@)");
                     let channelID: string | undefined;
                     let validChannel: boolean | undefined;
                     let noLog: boolean;
@@ -88,14 +85,14 @@ export default {
                         case "general":
                             validChannel = true
                             channelID = "906386495441612800"
-                            await generalchannel.send(result);
+                            await generalchannel.send(announce_message);
                             break;
                         case "s":
                         case "secret":
                         case "secret-general":
                             validChannel = true
                             channelID = "911060120400695316"
-                            await secretchannel.send(result);
+                            await secretchannel.send(announce_message);
                             break;
                         default:
                             validChannel = false
@@ -134,7 +131,6 @@ export default {
                     }
                 }
             }
-
         } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)

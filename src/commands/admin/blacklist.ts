@@ -17,7 +17,7 @@ export default {
 
     callback: ({ message, client, interaction, args }) => {
 
-        let SendID: String
+        let ID: String
         let blList: string
         let blacklistUser: string
         let SnowflakeIsValid: boolean

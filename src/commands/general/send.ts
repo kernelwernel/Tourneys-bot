@@ -32,8 +32,9 @@ export default {
 
             let SendID: string
             let SnowflakeIsValid: boolean
-            let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
-            let auditchannel: TextChannel = client.channels.cache.get(config["channel"].audit) as TextChannel;
+            let cmdchannel: TextChannel = client.channels.cache.get(config["channels"].cmd) as TextChannel;
+            let auditchannel: TextChannel = client.channels.cache.get(config["channels"].audit) as TextChannel;
+
             const adminchannels = new Array<string>("913948455766990888", "913948495537377330", "909224884939419708", "912004266347081768");
             let noLog: boolean | undefined;
 
@@ -62,7 +63,7 @@ export default {
                     client.users.fetch(`${SendID}`).then((user) => {
                         try { user.send(`${DMmessage}`) } catch { return ErrorEmbed() }
 
-                        if (message.channel.id != `${config["channel"].secret}`) {
+                        if (message.channel.id != `${config["channels"].secret}`) {
                             const SentEmbed = new MessageEmbed()
                                 .setDescription(`**Message to <@${SendID}> sent!**`)
                                 .setColor(`#${config["color"].default}`);

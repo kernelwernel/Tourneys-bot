@@ -1,8 +1,8 @@
 import { Interaction, Message, MessageEmbed, TextChannel } from "discord.js";
 import { ICommand } from "wokcommands";
+import * as config from "../../config.json"
 import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
-import * as config from "../../config.json"
 
 export default {
     category: "Utility",
@@ -17,9 +17,8 @@ export default {
 
     callback: async ({ message, client, interaction, args }) => {
         try {
-            let suggestionchannel: TextChannel = client.channels.cache.get(config["channel"].suggestions) as TextChannel;
-            let cmdchannel: TextChannel = client.channels.cache.get(config["channel"].cmd) as TextChannel;
-
+            let suggestionchannel: TextChannel = client.channels.cache.get(config["channels"].suggestions) as TextChannel;
+            let cmdchannel: TextChannel = client.channels.cache.get(config["channels"].cmd) as TextChannel;
             let suggestion: string | undefined = args.join(" ");
 
             console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`);

@@ -7,6 +7,7 @@ const LOG = new LOG_TAGS()
 export default {
     category: "Admin",
     description: "Reboots the bot process, used if you wanna stop it from spamming",
+    aliases: ["refresh"],
 
     slash: false,
     

@@ -7,8 +7,8 @@
 import { Message, MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 import * as config from "../../config.json"
-import LOG_TAGS from "../../headers/logs"
 import { client } from "../../index"
+import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
 
 const editSnipes = {};

@@ -44,7 +44,7 @@
 ## Assassin Commands
 | Command | Description | Alias(es) |
 |---|---|---|
-| `;members` | This will do a coinflip and output either Heads or Tails | coin, flip, coin-flip, cf |
+| `;coinflip` | This will do a coinflip and output either Heads or Tails | coin, flip, coin-flip, cf |
 | `;vipservers` | This will display the available vip server links | VIP, server, VIP-servers, VIP-server, VIPserver, servers, jxemo, chicken, cobra, dillon |
 
 - - -
@@ -71,10 +71,10 @@
 - Added Dockerfile for heroku to host
 - Added catch net for each command if error occurs
 - Added/Updated the following commands:
-    - `bot-info`
-    - `help`
-    - `send`
-    - `server-info`
+    - `;bot-info`
+    - `;help`
+    - `;send`
+    - `;server-info`
 - Added new command categoty section called "assassin"
 - Udated and improved admin-only commands
 - Updated `README.md` for better documentation
@@ -84,19 +84,19 @@
     ##### `v2.1`
     - Added anti-raid feature
     - Added anti-alt feature
-    - Added the `announce` and `update` commands
+    - Added the `;announce` and `;update` commands
     - Added the `Utility` section of commands
     - Added new client events in `index.ts`
-    - Finished the `server-info` command
+    - Finished the `;server-info` command
 
     ##### `v2.2`
-    - Added snipe command
-    - Made the announce command public
-    - Created channel shortcuts for the announce command
-    - Fixed announce command bug
-    - Patched bypassing for the announce command
+    - Added `;snipe` command
+    - Made the `;announce` command public
+    - Created channel shortcuts for the `;announce`; command
+    - Fixed `;announce` command bug
+    - Patched bypassing for the `;announce` command
     - Corrected some typos in the documentation
-    - Added coinflip command
+    - Added `;coinflip` command
 
     ##### `v2.3`
     - Added `;editsnipe`, `;assassinlinks`, `;suggest` and `;eval` commands

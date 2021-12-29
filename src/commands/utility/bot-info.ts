@@ -29,7 +29,7 @@ export default {
 
             const uri = "https://api.github.com/repos/Existential-nonce/Tourneys-bot/languages"
             const { data } = await axios.get(uri)
-            let total:number = data.TypeScript + data.Shell + data.Makefile + data.Dockerfile
+            let total: number = data.TypeScript + data.Shell + data.Makefile + data.Dockerfile
             const langs = {
                 ts: (Math.round((data.TypeScript / total) * 100 * 10) / 10),
                 shell: (Math.round((data.Shell / total) * 100 * 10) / 10),
