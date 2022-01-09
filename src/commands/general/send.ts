@@ -12,7 +12,7 @@ export default {
     slash: false,
     cooldown: "5s",
     
-    ownerOnly: true,
+    ownerOnly: false,
     testOnly: true,
 
     callback: ({ message, client, args }) => {
