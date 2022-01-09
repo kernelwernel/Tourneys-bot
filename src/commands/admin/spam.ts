@@ -11,7 +11,6 @@ export default {
     slash: false,
     cooldown: "5s",
     
-    permissions: ["MANAGE_GUILD"],
     ownerOnly: false,
     testOnly: true,
 
