@@ -51,8 +51,8 @@ export default {
                     if (!args) {
                         return ErrorEmbed(`Please enter an ID as your argument!\nUsage:\n ;spam <id> [message]`)
                     } else if (args.length == 0) {
-                        SpamType = `gay thug porn`
-                        SpamMessage = `https://cdn.discordapp.com/attachments/909224884939419708/919652071253348362/Snapchat-914193569.mp4`
+                        SpamType = `a default image`
+                        SpamMessage = `https://media.discordapp.net/attachments/816669196565741629/929850029341016094/E_HXiZqX0Ac2UyZ.jpg`
                         DefaultSpam = true
                     } else if (args.length >= 1) {
                         SpamType = `a custom message`
