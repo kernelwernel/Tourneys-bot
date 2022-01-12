@@ -55,7 +55,7 @@ export default {
             * I'm not writing these for any kind of discriminatorial
             * reason or anything based on my personal/racial or any offensive beliefs whatsoever.
             */
-/*
+
             const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag/
             let bypassMessage = snipe.content
             bypassMessage = snipe.content.replace("1", "i")
@@ -73,9 +73,9 @@ export default {
                 snipe.content ? SnipeEmbed.setDescription(`\`\`\`${bypassMessage}\`\`\``) : null;
                 snipe.image ? SnipeEmbed.setImage(snipe.image) : null;
                 bypass ? SnipeEmbed.setDescription(`\`\`\`The sniped message contains a bypassed word.\`\`\``) : null;
-                bypass ? SnipeEmbed.setFooter(`blame dom for this he made me add this shit feature lol`) : null;
+                bypass ? SnipeEmbed.setFooter(`blame folder for this he made me add this shit feature that i already removed smh`) : null;
             await message.channel.send({ embeds: [SnipeEmbed] });
-*/
+
             const SnipeEmbed = new MessageEmbed()
             .setAuthor(`${snipe.author.tag}`, `${snipe.author.displayAvatarURL({dynamic: true})}`)
             bypass ? SnipeEmbed.setColor(`#${config["color"].error}`) : SnipeEmbed.setColor(`#${config["color"].default}`) 
