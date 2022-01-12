@@ -76,6 +76,7 @@ export default {
                 bypass ? SnipeEmbed.setFooter(`blame folder for this he made me add this shit feature that i already removed smh`) : null;
             await message.channel.send({ embeds: [SnipeEmbed] });
 
+            /*
             const SnipeEmbed = new MessageEmbed()
             .setAuthor(`${snipe.author.tag}`, `${snipe.author.displayAvatarURL({dynamic: true})}`)
             bypass ? SnipeEmbed.setColor(`#${config["color"].error}`) : SnipeEmbed.setColor(`#${config["color"].default}`) 
@@ -84,6 +85,7 @@ export default {
             bypass ? SnipeEmbed.setDescription(`\`\`\`The sniped message contains a bypassed word.\`\`\``) : null;
             bypass ? SnipeEmbed.setFooter(`blame dom for this he made me add this shit feature lol`) : null;
             await message.channel.send({ embeds: [SnipeEmbed] });
+            */
         } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
