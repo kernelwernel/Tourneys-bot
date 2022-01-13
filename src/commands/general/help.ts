@@ -220,9 +220,9 @@ export default {
                 const value = collected.values[0]
                 switch (value) {
                     case "1": collected.reply({ embeds: [GeneralEmbed], ephemeral: true }); break;
-                    case "2": collected.reply({ embeds: [UtilityEmbed] }); break;
-                    case "3": collected.reply({ embeds: [AssassinEmbed] }); break;
-                    case "4": collected.reply({ embeds: [AdminEmbed] }); break;
+                    case "2": collected.reply({ embeds: [UtilityEmbed], ephemeral: true }); break;
+                    case "3": collected.reply({ embeds: [AssassinEmbed], ephemeral: true }); break;
+                    case "4": collected.reply({ embeds: [AdminEmbed], ephemeral: true }); break;
                 }
             })
         } catch (error) {
