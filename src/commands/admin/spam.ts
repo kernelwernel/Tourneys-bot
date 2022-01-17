@@ -13,6 +13,7 @@ export default {
     
     ownerOnly: false,
     testOnly: true,
+    permissions: ["MANAGE_GUILD"],
 
     callback: ({ message, client, args }) => {
 
