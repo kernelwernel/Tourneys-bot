@@ -36,7 +36,7 @@
     "@types/edit-json-file": "1.7.0",
     "@types/glob": "7.2.0",
     "@types/heroku-client": "3.1.0",
-    "eslint": "8.7.0",
+    "eslint": "8.8.0",
     "restart": "^2.0.0"
   }
 }
