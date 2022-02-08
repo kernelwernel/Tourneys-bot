@@ -13,7 +13,6 @@ export default {
     
     ownerOnly: false,
     testOnly: true,
-    permissions: ["MANAGE_GUILD"],
 
     callback: ({ message, client, args }) => {
 
@@ -32,49 +31,52 @@ export default {
 
         try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
-            console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`);
-            let cmdchannel: TextChannel = client.channels.cache.get(config["channels"].cmd) as TextChannel;
-            const CommandEmbed = new MessageEmbed()
-                .setColor(`#${config["color"].discord}`)
-                .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
-                .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``);
-            cmdchannel.send({ embeds: [CommandEmbed] });
-    
-            let SendID = args.shift()!;
-            let SnowflakeIsValid: boolean = false
-            let SpamMessage: string
-            let DefaultSpam: boolean
-            let SpamType: string | undefined
 
-            switch (SendID.length) {
-                case 18:
-                    SnowflakeIsValid = true
-                    if (!args) {
-                        return ErrorEmbed(`Please enter an ID as your argument!\nUsage:\n ;spam <id> [message]`)
-                    } else if (args.length == 0) {
-                        SpamType = `a default image`
-                        SpamMessage = `https://media.discordapp.net/attachments/816669196565741629/929850029341016094/E_HXiZqX0Ac2UyZ.jpg`
-                        DefaultSpam = true
-                    } else if (args.length >= 1) {
-                        SpamType = `a custom message`
-                        SpamMessage = `${args.join(" ")}`
-                    } else {
-                        return ErrorEmbed(`There has been an error with the client, please notify the bot developer to report this issue.`)
-                    }
+            if (config["list"].spam_access.includes(message.author.id) || config["list"].admin.includes(message.author.id)) {
+                console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`);
+                let cmdchannel: TextChannel = client.channels.cache.get(config["channels"].cmd) as TextChannel;
+                const CommandEmbed = new MessageEmbed()
+                    .setColor(`#${config["color"].discord}`)
+                    .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
+                    .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``);
+                cmdchannel.send({ embeds: [CommandEmbed] });
+        
+                let SendID = args.shift()!;
+                let SnowflakeIsValid: boolean = false
+                let SpamMessage: string
+                let DefaultSpam: boolean
+                let SpamType: string | undefined
 
-                    const embed = new MessageEmbed()
-                        .setDescription(`**Currently spamming <@${SendID}>'s dms with ${SpamType} <:trollgod:855435721624256542>**`)
-                        .setColor(`#${config["color"].default}`);
-                    message.channel.send({ embeds: [embed] })
-                    client.users.fetch(`${SendID}`).then(async (user: { send: (arg0: string) => void }) => {
-                        while (true) {
-                            user.send(`${SpamMessage}`)
-                            await delay(100);
+                switch (SendID.length) {
+                    case 18:
+                        SnowflakeIsValid = true
+                        if (!args) {
+                            return ErrorEmbed(`Please enter an ID as your argument!\nUsage:\n ;spam <id> [message]`)
+                        } else if (args.length == 0) {
+                            SpamType = `a default image`
+                            SpamMessage = `https://media.discordapp.net/attachments/816669196565741629/929850029341016094/E_HXiZqX0Ac2UyZ.jpg`
+                            DefaultSpam = true
+                        } else if (args.length >= 1) {
+                            SpamType = `a custom message`
+                            SpamMessage = `${args.join(" ")}`
+                        } else {
+                            return ErrorEmbed(`There has been an error with the client, please notify the bot developer to report this issue.`)
                         }
-                    })
-                    break;
-                default:
-                    return ErrorEmbed(`Invalid argument! Please try again.\nCorrect usage:\n ;spam <id> [message]`)
+
+                        const embed = new MessageEmbed()
+                            .setDescription(`**Currently spamming <@${SendID}>'s dms with ${SpamType} <:trollgod:855435721624256542>**`)
+                            .setColor(`#${config["color"].default}`);
+                        message.channel.send({ embeds: [embed] })
+                        client.users.fetch(`${SendID}`).then(async (user: { send: (arg0: string) => void }) => {
+                            while (true) {
+                                user.send(`${SpamMessage}`)
+                                await delay(100);
+                            }
+                        })
+                        break;
+                    default:
+                        return ErrorEmbed(`Invalid argument! Please try again.\nCorrect usage:\n ;spam <id> [message]`)
+                }
             }
         } catch (error) {
             const ErrorEmbed = new MessageEmbed()

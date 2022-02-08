@@ -33,7 +33,9 @@ const client = new DiscordJS.Client({
     ],
     partials: [
         "USER", "CHANNEL", "GUILD_MEMBER", "MESSAGE", "REACTION"
-    ]
+    ],
+
+    allowedMentions: { parse: ['users', 'roles'], repliedUser: true }
 });
 
 const commands: Array<string> = [];
