@@ -41,17 +41,24 @@ export default {
                     .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``);
                 cmdchannel.send({ embeds: [CommandEmbed] });
         
-                let SendID = args.shift()!;
+                let SendID: string | undefined = args.shift()!;
                 let SnowflakeIsValid: boolean = false
                 let SpamMessage: string
                 let DefaultSpam: boolean
                 let SpamType: string | undefined
 
+                if (SendID.startsWith("<@")) {
+                    SendID = `${SendID.replace(/<@/, "").replace(/!/, "").replace(/>/, "")}`
+                    console.log(SendID)
+                }
+                
                 switch (SendID.length) {
+                    case 17:
+                    case 19:
                     case 18:
                         SnowflakeIsValid = true
                         if (!args) {
-                            return ErrorEmbed(`Please enter an ID as your argument!\nUsage:\n ;spam <id> [message]`)
+                            return ErrorEmbed(`Please enter an ID as your argument!\nUsage:\n ;spam <id | @user> [message]`)
                         } else if (args.length == 0) {
                             SpamType = `a default image`
                             SpamMessage = `https://media.discordapp.net/attachments/816669196565741629/929850029341016094/E_HXiZqX0Ac2UyZ.jpg`
@@ -62,21 +69,28 @@ export default {
                         } else {
                             return ErrorEmbed(`There has been an error with the client, please notify the bot developer to report this issue.`)
                         }
-
-                        const embed = new MessageEmbed()
-                            .setDescription(`**Currently spamming <@${SendID}>'s dms with ${SpamType} <:trollgod:855435721624256542>**`)
-                            .setColor(`#${config["color"].default}`);
-                        message.channel.send({ embeds: [embed] })
-                        client.users.fetch(`${SendID}`).then(async (user: { send: (arg0: string) => void }) => {
-                            while (true) {
-                                user.send(`${SpamMessage}`)
-                                await delay(100);
-                            }
-                        })
                         break;
                     default:
                         return ErrorEmbed(`Invalid argument! Please try again.\nCorrect usage:\n ;spam <id> [message]`)
                 }
+
+                if (SnowflakeIsValid == true) {
+                    const embed = new MessageEmbed()
+                        .setDescription(`**Currently spamming <@${SendID}>'s dms with ${SpamType} <:trollgod:855435721624256542>**`)
+                        .setColor(`#${config["color"].default}`);
+                    message.channel.send({ embeds: [embed] })
+                    client.users.fetch(`${SendID}`).then(async (user: { send: (arg0: string) => void }) => {
+                        while (true) {
+                            user.send(`${SpamMessage}`)
+                            await delay(100);
+                        }
+                    })
+                }
+            } else {
+                const embed = new MessageEmbed()
+                    .setDescription(`**You do not have access to spam! Either get 9k+ pings from the bot spamming you or you will need to be a staff!**`)
+                    .setColor(`#${config["color"].error}`);
+                message.channel.send({ embeds: [embed] })
             }
         } catch (error) {
             const ErrorEmbed = new MessageEmbed()

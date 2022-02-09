@@ -8,7 +8,6 @@ import * as custom from "./headers/custom.json"
 import LOG_TAGS from "./headers/logs"
 const LOG = new LOG_TAGS()
 import "dotenv/config"
-import mongoose, { mongo, Schema } from "mongoose"
 
 // importing won't work on this package for some reason
 const { AntiAltClient } = require("discord-antialts")
@@ -89,10 +88,6 @@ client.on('ready', async (client) => {
           //"351023689581461519", // TheRealMMR#0001 <= cringe as fuck
             "270325321419587604", // reknT#6594
         ],
-        mongoUri: process.env.MONGO_URI,
-        dbOptions: {
-            keepAlive: true
-        },
 
         defaultLanguage: 'english',
         ignoreBots: false,
@@ -104,12 +99,6 @@ client.on('ready', async (client) => {
     })
     .setDefaultPrefix(config.prefix)
     .setColor(config["color"].default);
-
-    setTimeout(async () => {
-        await new testSchema({
-            message: "testing",
-        }).save()
-    }, 1000);
 });
 
 client.on('messageCreate', (message) => {
