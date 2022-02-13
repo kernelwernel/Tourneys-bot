@@ -7,7 +7,7 @@ COPY package.json ./
 RUN apk update && apk upgrade \
 && apk add --no-cache curl \
 && apk add --no-cache nodejs-current \
-&& curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+&& curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash \
 && npm install -g nodemon \
 && npm install -g ts-node \
 && npm install typescript \
