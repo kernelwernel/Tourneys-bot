@@ -110,7 +110,7 @@ client.on('messageCreate', (message) => {
 
     let dmchannel: TextChannel = client.channels.cache.get(config["channels"].dm) as TextChannel;
     let cmdchannel: TextChannel = client.channels.cache.get(config["channels"].cmd) as TextChannel;
-    if (/nazi/.test(message.content.toLowerCase())) {
+    if (/nazi/.test(message.content.toLowerCase()) || /german/.test(message.content.toLowerCase())) {
         message.channel.send(custom.text)
     }
 
