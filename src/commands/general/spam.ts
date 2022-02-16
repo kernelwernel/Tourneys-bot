@@ -46,6 +46,10 @@ export default {
                 let SpamMessage: string
                 let DefaultSpam: boolean
                 let SpamType: string | undefined
+                if (args.length == 0) {
+                    ErrorEmbed(`Please enter an ID as your argument!\nUsage:\n ;spam <id | @user> [message]`)
+                    return
+                }
 
                 if (SendID.startsWith("<@")) {
                     SendID = `${SendID.replace(/<@/, "").replace(/!/, "").replace(/>/, "")}`
