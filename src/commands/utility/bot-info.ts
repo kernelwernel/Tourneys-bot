@@ -40,14 +40,12 @@ export default {
             var ids = [{
                 "nonce": "699310549573435423", 
                 "dillon": "841058819848536085",
-                "threat": "905599023199682650",
-                "darsh": "823402171562459177"
+                "darsh": "942545370079199232"
             }]
 
             let contributors: Array<string> | undefined = [
                 `${ids[0]["nonce"]}`, 
                 `${ids[0]["dillon"]}`,
-                `${ids[0]["threat"]}`,
                 `${ids[0]["darsh"]}`
             ];
 
@@ -55,7 +53,6 @@ export default {
             let user0 = await client.users.fetch(contributors[0], { cache: true });
             let user1 = await client.users.fetch(contributors[1], { cache: true });
             let user2 = await client.users.fetch(contributors[2], { cache: true });
-            let user3 = await client.users.fetch(contributors[3], { cache: true });
 
             const embed = new MessageEmbed()
                 .setColor(`#${config["color"].default}`)
@@ -72,8 +69,7 @@ export default {
                     { name: "__**Docker container:**__", value: "> <:docker:910267595045883914> - **https://hub.docker.com/r/nonce1/tourneys-bot**", inline: false },
                     { name: `__**Credits**__`, value: `>>> <:777964368717414410:798168215020109895> - **${user0.username}#${user0.discriminator}**
 <:goldenbughunter:929856004496195614> - **${user1.username}#${user1.discriminator}**
-<:BugHunter:799700882404147242> - **${user2.username}#${user2.discriminator}** 
-<:BugHunter:799700882404147242> - **${user3.username}#${user3.discriminator}**`, inline: false },
+<:BugHunter:799700882404147242> - **${user2.username}#${user2.discriminator}**`, inline: false },
                 );
             message.channel.send({
                 embeds: [embed]
