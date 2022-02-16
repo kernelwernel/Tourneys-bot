@@ -87,6 +87,7 @@ client.on('ready', async (client) => {
             "593985080284676156", // Huzaifa#0001
             "351023689581461519", // TheRealMMR#0001 <= cringe as fuck
             "270325321419587604", // reknT#6594
+            "841058819848536085"
         ],
 
         defaultLanguage: 'english',
