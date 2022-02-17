@@ -29,7 +29,7 @@ export default {
 
             const embed = new MessageEmbed()
                 .setColor(`#${config["color"].default}`)
-                .setDescription(`__**⏲ Bot uptime: **__ - **${days} days, ${hours} hours, ${minutes} minutes**`)
+                .setDescription(`⏲ __**Bot uptime:**__ - **${days} days, ${hours} hours, ${minutes} minutes**`)
             message.channel.send({ embeds: [embed] })
 
         } catch (error) {
