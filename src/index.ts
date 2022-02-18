@@ -5,8 +5,6 @@ import testSchema from "./test-schema"
 import fs from "fs"
 import * as config from "./config.json"
 import * as custom from "./headers/custom.json";
-const Gen = require("sentence-generator")
-const gen = Gen('src/phrase_template.txt')
 import LOG_TAGS from "./headers/logs"
 const LOG = new LOG_TAGS()
 import "dotenv/config"
