@@ -3,8 +3,6 @@ import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
 import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
-const Gen = require("sentence-generator")
-const gen = Gen('src/phrase_template.txt')
 const fs = require('fs');
 
 export default {
