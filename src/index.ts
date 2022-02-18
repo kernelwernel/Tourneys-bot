@@ -104,7 +104,7 @@ client.on('ready', async (client) => {
 
 client.on('messageCreate', (message) => {
     if (message.author.id == "397176433186701316") {
-        message.channel.send({ content: "Fuck off sk" })
+        message.channel.send({ content: "<@397176433186701316> Fuck off sk" })
         return
     }
 
