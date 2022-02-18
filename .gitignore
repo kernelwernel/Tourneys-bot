@@ -112,3 +112,4 @@ archive/
 deploy.yml
 src/archive/**
 .vscode
+phrase_template.txt
