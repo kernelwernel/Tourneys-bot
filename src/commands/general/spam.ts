@@ -92,7 +92,7 @@ export default {
                 }
             } else {
                 const embed = new MessageEmbed()
-                    .setDescription(`**You do not have access to spam! Either get 9k+ pings from the bot spamming you or you will need to be a staff!**`)
+                    .setDescription(`**You do not have access to spam! Either get 10k+ pings from the bot spamming you or you will need to be a staff!**`)
                     .setColor(`#${config["color"].error}`);
                 message.channel.send({ embeds: [embed] })
             }
