@@ -10,7 +10,7 @@ export default {
     aliases: ["suggestion"],
 
     slash: false,
-    cooldown: "24h",
+    cooldown: "6h",
 
     ownerOnly: false,
     testOnly: true,
