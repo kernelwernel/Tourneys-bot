@@ -1,3 +1,5 @@
+/*
+
 import { MessageEmbed, MessageActionRow, MessageSelectMenu } from "discord.js"
 import { ICommand } from "wokcommands"
 import * as config from "../../config.json"
@@ -121,3 +123,4 @@ export default {
         }
     }
 }
+*/
