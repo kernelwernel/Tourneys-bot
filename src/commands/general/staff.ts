@@ -20,8 +20,6 @@ export default {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
             const embed = new MessageEmbed()
                 .setDescription(`
-<@${config["list"]["admin"][1]}> - (no description)
-
 <@${config["list"]["admin"][2]}> - **The server blackie**
 
 <@${config["list"]["admin"][4]}> - **The type of guy who would cum after listening to 2 seconds of juice world's new album**
@@ -29,8 +27,6 @@ export default {
 <@${config["list"]["admin"][3]}> - **The guy with the edgelord hacker pfp**
 
 <@${config["list"]["admin"][0]}> - **The retarded programmer**
-
-<@${config["list"]["admin"][8]}> - **The edater**
 
 <@${config["list"]["admin"][10]}> - **The server sex offender**
 
@@ -40,7 +36,9 @@ export default {
 
 <@${config["list"]["admin"][7]}> - **The one who would watch scarlxrd porn**
 
-<@${config["list"]["admin"][6]}> - **The brit**`)
+<@${config["list"]["admin"][6]}> - **The brit**
+
+<@841058819848536085> - **The bot developer**`)
                 .setColor(`#${config["color"].default}`);
             message.channel.send({
                 embeds: [embed]
