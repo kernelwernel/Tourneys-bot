@@ -13,7 +13,7 @@
     "nvm": "^0.0.4",
     "sentence-generator": "^1.0.1",
     "ts-node": "^10.5.0",
-    "typescript": "^4.5.5",
+    "typescript": "^4.6.2",
     "wokcommands": "^1.5.3"
   },
   "name": "tourneys-bot",
