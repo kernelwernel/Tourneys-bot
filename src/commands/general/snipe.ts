@@ -12,15 +12,46 @@ import { client } from "../../index"
 const LOG = new LOG_TAGS()
 
 const snipes = {};
+var snipearray = Array();
 
 client.on("messageDelete", async (message) => {
+
+    /*
+    * for anybody looking at this, i'm only writing these
+    * slurs/derogative words in the context to detect
+    * and stop people from bypassing.
+    * I'm not writing these for any kind of discriminatorial
+    * reason or anything based on my personal/racial or any offensive beliefs whatsoever.
+    */
+
+    const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag/
+
     if (message.partial || (message.embeds.length && !message.content) || message.author.bot) { return; }
+    let bypassMessage = message.content
+    bypassMessage = bypassMessage.replace("1", "i")
+    bypassMessage = bypassMessage.replace("3", "e")
+    bypassMessage = bypassMessage.replace("0", "o")
+    bypassMessage = bypassMessage.replace("4", "a")
+    bypassMessage = bypassMessage.replace("@everyone", "(@)everyone")
+    bypassMessage = bypassMessage.replace("@here", "(@)here")
+
+    var bypassTest: boolean;
+
+    if (bypassMessage.toLowerCase().match(antibypass)) {
+        bypassTest = true
+    } else {
+        bypassTest = false
+    }
+
     snipes[message.channel.id] = {
         author: message.author,
         content: message.content,
         createdAt: message.createdTimestamp,
         image: message.attachments.first() ? message.attachments.first()?.proxyURL : null,
+        bypass: bypassTest
     };
+    snipearray.unshift(snipes[message.channel.id]);
+    console.log(snipes[message.channel.id]);
 });
 
 export default {
@@ -28,16 +59,24 @@ export default {
     description: "snipe command",
 
     slash: false,
-    cooldown: "5s",
 
     ownerOnly: false,
     testOnly: true,
 
-    callback: async ({ message, channel }) => {
+    callback: async ({ message, channel, args }) => {
+        function ErrorEmbed(errorMessage: string) {
+            const IncorrectEmbed = new MessageEmbed()
+                .setTitle(config["title"].error)
+                .setDescription(`\`\`\`${errorMessage}\`\`\``)
+                .setColor(`#${config["color"].error}`);
+            message.channel.send({ embeds: [IncorrectEmbed] });
+            return;
+        }
+
         try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
-
-            const snipe = snipes[channel.id];
+    
+            var snipe: any = snipes[channel.id];
             let bypass: boolean = false
 
             if (!snipe) {
@@ -47,45 +86,57 @@ export default {
                 message.channel.send({ embeds: [NoSnipeEmbed]});
                 return;
             }
+            
+            if (args[0] == undefined) {
+                const SnipeEmbed = new MessageEmbed()
+                    .setAuthor(`${snipe.author.tag}`, `${snipe.author.displayAvatarURL({dynamic: true})}`)
+                    snipe.bypass ? SnipeEmbed.setColor(`#${config["color"].error}`) : SnipeEmbed.setColor(`#${config["color"].default}`) 
+                    snipe.content ? SnipeEmbed.setDescription(`\`\`\`${snipe.content}\`\`\``) : null;
+                    snipe.image ? SnipeEmbed.setImage(snipe.image) : null;
+                    snipe.bypass ? SnipeEmbed.setDescription(`\`\`\`The sniped message contains a bypassed word.\`\`\``) : null;
+                    snipe.bypass ? SnipeEmbed.setFooter(`blame folder for this he made me add this shit feature that i already removed smh`) : null;
+                await message.channel.send({ embeds: [SnipeEmbed] });
+            } else {
+                if (!isNaN(Number(args[0]))) {
+                    var history = Number(args[0]) - 1
+                    if (history < 0) {
+                        ErrorEmbed(`Please enter a number larger than 0!`)
+                        return
+                    }
 
-            /*
-            * for anybody looking at this, i'm only writting these
-            * slurs/derogative words in the context to detect
-            * and stop people from bypassing.
-            * I'm not writing these for any kind of discriminatorial
-            * reason or anything based on my personal/racial or any offensive beliefs whatsoever.
-            */
+                    console.log("length: " + snipearray.length)
+                    console.log("history: " + history)
 
-            const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag/
-            let bypassMessage = snipe.content
-            bypassMessage = snipe.content.replace("1", "i")
-            bypassMessage = snipe.content.replace("3", "e")
-            bypassMessage = snipe.content.replace("0", "o")
-            bypassMessage = snipe.content.replace("4", "a")
+                    if (snipearray.length <= history) {
+                        ErrorEmbed(`Please enter a number smaller or equal to the sniped messages count! (${snipearray.length})`)
+                        return
+                    }
 
-            if (bypassMessage.toLowerCase().match(antibypass)) {
-                bypass = true
+                    const SnipeEmbed = new MessageEmbed()
+                        .setAuthor(`${snipearray[history].author.tag}`, `${snipearray[history].author.displayAvatarURL({dynamic: true})}`)
+                        snipearray[history].bypass ? SnipeEmbed.setColor(`#${config["color"].error}`) : SnipeEmbed.setColor(`#${config["color"].default}`) 
+                        snipearray[history].content ? SnipeEmbed.setDescription(`\`\`\`${snipearray[history].content}\`\`\``) : null;
+                        snipearray[history].image ? SnipeEmbed.setImage(snipearray[history].image) : null;
+                        snipearray[history].bypass ? SnipeEmbed.setDescription(`\`\`\`The sniped message contains a bypassed word.\`\`\``) : null;
+                        snipearray[history].bypass ? SnipeEmbed.setFooter(`blame folder for this he made me add this shit feature that i already removed smh`) : null;
+                    await message.channel.send({ embeds: [SnipeEmbed] });
+                } else {
+                    ErrorEmbed(`${args[0]} is not a valid number!`)
+                    return
+                }
+/*
+
+                const SnipeEmbed = new MessageEmbed()
+                    .setAuthor(`${snipe.author.tag[0]}`, `${snipe.author.displayAvatarURL({dynamic: true})}`)
+                    bypass ? SnipeEmbed.setColor(`#${config["color"].error}`) : SnipeEmbed.setColor(`#${config["color"].default}`) 
+                    snipe.content[0] ? SnipeEmbed.setDescription(`\`\`\`${snipe.content[0]}\`\`\``) : null;
+                    snipe.image[0] ? SnipeEmbed.setImage(snipe.image) : null;
+                    bypass ? SnipeEmbed.setDescription(`\`\`\`The sniped message contains a bypassed word.\`\`\``) : null;
+                    bypass ? SnipeEmbed.setFooter(`blame folder for this he made me add this shit feature that i already removed smh`) : null;
+                await message.channel.send({ embeds: [SnipeEmbed] });
+*/
             }
 
-            const SnipeEmbed = new MessageEmbed()
-                .setAuthor(`${snipe.author.tag}`, `${snipe.author.displayAvatarURL({dynamic: true})}`)
-                bypass ? SnipeEmbed.setColor(`#${config["color"].error}`) : SnipeEmbed.setColor(`#${config["color"].default}`) 
-                snipe.content ? SnipeEmbed.setDescription(`\`\`\`${bypassMessage}\`\`\``) : null;
-                snipe.image ? SnipeEmbed.setImage(snipe.image) : null;
-                bypass ? SnipeEmbed.setDescription(`\`\`\`The sniped message contains a bypassed word.\`\`\``) : null;
-                bypass ? SnipeEmbed.setFooter(`blame folder for this he made me add this shit feature that i already removed smh`) : null;
-            await message.channel.send({ embeds: [SnipeEmbed] });
-
-            /*
-            const SnipeEmbed = new MessageEmbed()
-            .setAuthor(`${snipe.author.tag}`, `${snipe.author.displayAvatarURL({dynamic: true})}`)
-            bypass ? SnipeEmbed.setColor(`#${config["color"].error}`) : SnipeEmbed.setColor(`#${config["color"].default}`) 
-            snipe.content ? SnipeEmbed.setDescription(`\`\`\`${snipe.content}\`\`\``) : null;
-            snipe.image ? SnipeEmbed.setImage(snipe.image) : null;
-            bypass ? SnipeEmbed.setDescription(`\`\`\`The sniped message contains a bypassed word.\`\`\``) : null;
-            bypass ? SnipeEmbed.setFooter(`blame dom for this he made me add this shit feature lol`) : null;
-            await message.channel.send({ embeds: [SnipeEmbed] });
-            */
         } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
