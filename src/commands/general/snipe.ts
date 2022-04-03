@@ -109,7 +109,7 @@ export default {
 
                     if (snipearray.length <= history) {
                         //ErrorEmbed(`Please enter a number smaller or equal to the sniped messages count! (${snipearray.length})`)
-                        ErrorEmbed(`Snipe message number ${history} does not exist! Try a number smaller than ${snipearray.length}!`)
+                        ErrorEmbed(`Snipe message number ${Number(args[0])} does not exist! Try a number smaller than ${snipearray.length}!`)
                         return
                     }
 
