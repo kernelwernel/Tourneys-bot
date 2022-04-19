@@ -22,10 +22,14 @@ export default {
             let suggestion: string | undefined = args.join(" ");
 
             console.log(`${LOG.CLIENT_COMMAND} ${message.author.tag} - ${message.content}`);
+
+            var attachment = message.attachments.first();
+            var url = attachment ? attachment.url : null;
+
             const CommandEmbed = new MessageEmbed()
                 .setColor(`#${config["color"].discord}`)
                 .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
-                .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``);
+                .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``)
             cmdchannel.send({ embeds: [CommandEmbed] });
 
             if (!args || args[0] == undefined) {
@@ -60,13 +64,14 @@ export default {
 
                 const SentEmbed = new MessageEmbed()
                     .setDescription(`**Your suggestion has been sent!  <:yes:798918006876799008>**`)
-                    .setColor(`#${config["color"].default}`);
+                    .setColor(`#${config["color"].default}`)
                 message.channel.send({ embeds: [SentEmbed] })
 
                 const SuggestionEmbed = new MessageEmbed()
                     .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
                     .setDescription(`**${suggestion}**`)
                     .setColor(`#${config["color"].default}`);
+                    attachment ? SuggestionEmbed.setImage(`${url}`) : null;
                 await suggestionchannel.send({ embeds: [SuggestionEmbed] }).then((message) => {
                     message.react("<:yes:798918006876799008>")
                     message.react("<:no:798917986966437908>")
