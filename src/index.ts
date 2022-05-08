@@ -4,7 +4,6 @@ import path from "path"
 import testSchema from "./test-schema"
 import fs from "fs"
 import * as config from "./config.json"
-import * as custom from "./headers/custom.json";
 import LOG_TAGS from "./headers/logs"
 const LOG = new LOG_TAGS()
 import "dotenv/config"
@@ -112,9 +111,6 @@ client.on('messageCreate', (message) => {
 
     let dmchannel: TextChannel = client.channels.cache.get(config["channels"].dm) as TextChannel;
     let cmdchannel: TextChannel = client.channels.cache.get(config["channels"].cmd) as TextChannel;
-    if (/((nazi)|(german)|(jew)|(hitler)|(sieg)|(heil))/.test(message.content.toLowerCase())) {
-        message.channel.send(custom.text)
-    }
 
     if (message.channel.type === 'DM' && !message.author.bot) {
         if (message.attachments.size > 0) { return; }
