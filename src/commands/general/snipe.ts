@@ -86,6 +86,14 @@ export default {
                 message.channel.send({ embeds: [NoSnipeEmbed]});
                 return;
             }
+
+            if (message.channel.id == "911060120400695316") {
+                const NoSnipeEmbed = new MessageEmbed()
+                    .setColor(`#${config["color"].error}`)
+                    .setDescription(`**Sniping is not allowed in this channel!**`)
+                message.channel.send({ embeds: [NoSnipeEmbed]});
+                return;
+            }
             
             if (args[0] == undefined) {
                 const SnipeEmbed = new MessageEmbed()
