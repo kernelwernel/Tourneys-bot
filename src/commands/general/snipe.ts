@@ -51,7 +51,6 @@ client.on("messageDelete", async (message) => {
         bypass: bypassTest
     };
     snipearray.unshift(snipes[message.channel.id]);
-    console.log(snipes[message.channel.id]);
 });
 
 export default {

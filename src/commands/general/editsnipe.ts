@@ -11,7 +11,9 @@ import { client } from "../../index"
 import LOG_TAGS from "../../headers/logs"
 const LOG = new LOG_TAGS()
 
-const editSnipes = {};
+var editSnipes = {};
+var editSnipeArray = Array();
+
 
 client.on("messageUpdate", async (oldMessage, newMessage) => {
 	if (oldMessage.partial) { return; }
@@ -20,8 +22,10 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
 		author: oldMessage.author,
 		oldcontent: oldMessage.content,
         newcontent: newMessage.content,
-		createdAt: newMessage.editedTimestamp,
 	};
+
+    editSnipeArray.unshift(editSnipes[oldMessage.channel.id]);
+    console.log(editSnipeArray)
 });
 
 export default {
@@ -34,28 +38,69 @@ export default {
     ownerOnly: false,
     testOnly: true,
 
-    callback: async ({ message, channel }) => {
+    callback: async ({ message, channel, args }) => {
+        function ErrorEmbed(errorMessage: string) {
+            const IncorrectEmbed = new MessageEmbed()
+                .setTitle(config["title"].error)
+                .setDescription(`\`\`\`${errorMessage}\`\`\``)
+                .setColor(`#${config["color"].error}`);
+            message.channel.send({ embeds: [IncorrectEmbed] });
+            return;
+        }
+
         try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
 
-            const snipe = editSnipes[channel.id];
+            var snipe: any = editSnipes[channel.id];
 
-            await message.channel.send(
-                snipe ? {
-                    embeds: [
-                        new MessageEmbed()
-                            .setColor(`#${config["color"].default}`)
-                            .setDescription(`Old message: \`\`\`${snipe.oldcontent}\`\`\`\nEdited message: \`\`\`${snipe.newcontent}\`\`\``)
-                            .setAuthor(`${snipe.author.tag}`, `${snipe.author.displayAvatarURL({dynamic: true})}`)
-                    ]
-                } : {
-                    embeds: [
-                        new MessageEmbed()
-                            .setDescription(`**There is nothing to snipe!**`)
-                            .setColor(`#${config["color"].error}`)
-                    ]
+            if (message.channel.id == "911060120400695316") {
+                const NoSecretChannelEmbed = new MessageEmbed()
+                    .setColor(`#${config["color"].error}`)
+                    .setDescription(`**Sniping is not allowed in this channel!**`)
+                message.channel.send({ embeds: [NoSecretChannelEmbed]});
+                return;
+            }
+
+            if (args[0] == undefined) {
+                await message.channel.send(
+                    snipe ? {
+                        embeds: [
+                            new MessageEmbed()
+                                .setColor(`#${config["color"].default}`)
+                                .setDescription(`Old message: \`\`\`${snipe.oldcontent}\`\`\`\nEdited message: \`\`\`${snipe.newcontent}\`\`\``)
+                                .setAuthor(`${snipe.author.tag}`, `${snipe.author.displayAvatarURL({dynamic: true})}`)
+                        ]
+                    } : {
+                        embeds: [
+                            new MessageEmbed()
+                                .setDescription(`**There is nothing to snipe!**`)
+                                .setColor(`#${config["color"].error}`)
+                        ]
+                    }
+                );
+            } else {
+                if (!isNaN(Number(args[0]))) {
+                    var history = Number(args[0]) - 1
+                    if (history < 0) {
+                        ErrorEmbed(`Please enter a number larger than 0!`)
+                        return
+                    }
+
+                    if (editSnipeArray.length <= history) {
+                        ErrorEmbed(`Snipe message number ${Number(args[0])} does not exist! Try a number smaller or equal to ${editSnipeArray.length}!`)
+                        return
+                    }
+
+                    const SnipeEmbed = new MessageEmbed()
+                        .setAuthor(`${editSnipeArray[history].author.tag}`, `${editSnipeArray[history].author.displayAvatarURL({dynamic: true})}`)
+                        .setColor(`#${config["color"].default}`)
+                        .setDescription(`Old message: \`\`\`${snipe[history].oldcontent}\`\`\`\nEdited message: \`\`\`${snipe[history].newcontent}\`\`\``)
+                    await message.channel.send({ embeds: [SnipeEmbed] });
+                } else {
+                    ErrorEmbed(`${args[0]} is not a valid number!`)
+                    return
                 }
-            );
+            }
         } catch (error) {
             const ErrorEmbed = new MessageEmbed()
                 .setTitle(config["title"].error)
