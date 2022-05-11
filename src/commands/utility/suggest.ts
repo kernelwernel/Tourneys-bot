@@ -32,34 +32,39 @@ export default {
                 .setDescription(`**Command executed:**\`\`\`${message.content}\`\`\``)
             cmdchannel.send({ embeds: [CommandEmbed] });
 
-            if (!args || args[0] == undefined) {
+            if ((!args || args[0] == undefined) && url == null) {
                 const ErrorEmbed = new MessageEmbed()
                     .setDescription(`**Please enter a valid suggestion!\nUsage:**\`\`\`;suggest <message>\`\`\``)
                     .setColor(`#${config["color"].error}`);
                 message.channel.send({ embeds: [ErrorEmbed] });
-                return ;
+                return;
             } else {
-                /*
-                * for anybody looking at this, i'm only writting these
-                * slurs/derogative words in the context to detect
-                * and stop people from bypassing.
-                * I'm not writing these for any kind of discriminatorial
-                * reason or anything based on my personal/racial or any offensive beliefs whatsoever.
-                */
-                const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag/
-                let bypassMessage = message.content
-                bypassMessage = message.content.replace("1", "i")
-                bypassMessage = message.content.replace("3", "e")
-                bypassMessage = message.content.replace("0", "o")
-                bypassMessage = message.content.replace("4", "a")
+                var text = true
+                if (!args || args[0] == undefined) {
+                    text = false
+                } else {
+                    /*
+                    * for anybody looking at this, i'm only writting these
+                    * slurs/derogative words in the context to detect
+                    * and stop people from bypassing.
+                    * I'm not writing these for any kind of discriminatorial
+                    * reason or anything based on my personal/racial or any offensive beliefs whatsoever.
+                    */
+                    const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag/
+                    let bypassMessage = message.content
+                    bypassMessage = message.content.replace("1", "i")
+                    bypassMessage = message.content.replace("3", "e")
+                    bypassMessage = message.content.replace("0", "o")
+                    bypassMessage = message.content.replace("4", "a")
 
-                if (bypassMessage.toLowerCase().match(antibypass)) {
-                    const BypassEmbed = new MessageEmbed()
-                        .setTitle(config["title"].error)
-                        .setDescription(`\`\`\`The message contains a bypassed word, please replace it or the message will not be suggested.\`\`\``)
-                        .setColor(`#${config["color"].error}`);
-                    message.channel.send({ embeds: [BypassEmbed] });
-                    return;
+                    if (bypassMessage.toLowerCase().match(antibypass)) {
+                        const BypassEmbed = new MessageEmbed()
+                            .setTitle(config["title"].error)
+                            .setDescription(`\`\`\`The message contains a bypassed word, please replace it or the message will not be suggested.\`\`\``)
+                            .setColor(`#${config["color"].error}`);
+                        message.channel.send({ embeds: [BypassEmbed] });
+                        return;
+                    }
                 }
 
                 const SentEmbed = new MessageEmbed()
@@ -69,8 +74,8 @@ export default {
 
                 const SuggestionEmbed = new MessageEmbed()
                     .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
-                    .setDescription(`**${suggestion}**`)
-                    .setColor(`#${config["color"].default}`);
+                    .setColor(`#${config["color"].default}`)
+                    text ? SuggestionEmbed.setDescription(`**${suggestion}**`) : null;
                     attachment ? SuggestionEmbed.setImage(`${url}`) : null;
                 await suggestionchannel.send({ embeds: [SuggestionEmbed] }).then((message) => {
                     message.react("<:yes:798918006876799008>")
