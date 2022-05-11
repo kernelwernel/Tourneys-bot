@@ -88,10 +88,10 @@ export default {
             }
 
             if (message.channel.id == "911060120400695316") {
-                const NoSnipeEmbed = new MessageEmbed()
+                const NoSecretChannelEmbed = new MessageEmbed()
                     .setColor(`#${config["color"].error}`)
                     .setDescription(`**Sniping is not allowed in this channel!**`)
-                message.channel.send({ embeds: [NoSnipeEmbed]});
+                message.channel.send({ embeds: [NoSecretChannelEmbed]});
                 return;
             }
             
