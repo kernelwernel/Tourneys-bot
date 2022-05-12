@@ -16,7 +16,7 @@ var editSnipeArray = Array();
 
 
 client.on("messageUpdate", async (oldMessage, newMessage) => {
-	if (oldMessage.partial) { return; }
+    if (oldMessage.partial || (oldMessage.embeds.length && !oldMessage.content) || oldMessage.author.bot) { return; }
 
 	editSnipes[oldMessage.channel.id] = {
 		author: oldMessage.author,
@@ -33,7 +33,6 @@ export default {
     description: "snipes an edit",
 
     slash: false,
-    cooldown: "5s",
 
     ownerOnly: false,
     testOnly: true,
@@ -81,6 +80,7 @@ export default {
             } else {
                 if (!isNaN(Number(args[0]))) {
                     var history = Number(args[0]) - 1
+
                     if (history < 0) {
                         ErrorEmbed(`Please enter a number larger than 0!`)
                         return
@@ -94,7 +94,7 @@ export default {
                     const SnipeEmbed = new MessageEmbed()
                         .setAuthor(`${editSnipeArray[history].author.tag}`, `${editSnipeArray[history].author.displayAvatarURL({dynamic: true})}`)
                         .setColor(`#${config["color"].default}`)
-                        .setDescription(`Old message: \`\`\`${snipe[history].oldcontent}\`\`\`\nEdited message: \`\`\`${snipe[history].newcontent}\`\`\``)
+                        .setDescription(`Old message: \`\`\`${editSnipeArray[history].oldcontent}\`\`\`\nEdited message: \`\`\`${editSnipeArray[history].newcontent}\`\`\``)
                     await message.channel.send({ embeds: [SnipeEmbed] });
                 } else {
                     ErrorEmbed(`${args[0]} is not a valid number!`)
