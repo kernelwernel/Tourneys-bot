@@ -12,7 +12,7 @@
     "nodemon": "^2.0.15",
     "sentence-generator": "^1.0.1",
     "ts-node": "^10.7.0",
-    "typescript": "^4.6.3",
+    "typescript": "^4.7.4",
     "wokcommands": "^1.5.3"
   },
   "name": "tourneys-bot",
