@@ -17,6 +17,8 @@ export default {
 
     callback: async ({ message, client, interaction, args }) => {
         try {
+            if (config["list"].blacklisted.includes(message.author.id)) { return; }
+            
             let suggestionchannel: TextChannel = client.channels.cache.get(config["channels"].suggestions) as TextChannel;
             let cmdchannel: TextChannel = client.channels.cache.get(config["channels"].cmd) as TextChannel;
             let discussion: string | undefined = args.join(" ");
