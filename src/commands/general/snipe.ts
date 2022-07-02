@@ -24,6 +24,8 @@ client.on("messageDelete", async (message) => {
     * reason or anything based on my personal/racial or any offensive beliefs whatsoever.
     */
 
+    if (message.channel.id == config["channelS"].secret) { return; }
+
     const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag/
 
     if (message.partial || (message.embeds.length && !message.content) || message.author.bot) { return; }
