@@ -16,16 +16,17 @@ var editSnipeArray = Array();
 
 
 client.on("messageUpdate", async (oldMessage, newMessage) => {
-    if (oldMessage.partial || (oldMessage.embeds.length && !oldMessage.content) || oldMessage.author.bot) { return; }
+    if (oldMessage.channel.id != "911060120400695316") {
+        if (oldMessage.partial || (oldMessage.embeds.length && !oldMessage.content) || oldMessage.author.bot) { return; }
 
-	editSnipes[oldMessage.channel.id] = {
-		author: oldMessage.author,
-		oldcontent: oldMessage.content,
-        newcontent: newMessage.content,
-	};
+        editSnipes[oldMessage.channel.id] = {
+            author: oldMessage.author,
+            oldcontent: oldMessage.content,
+            newcontent: newMessage.content,
+        };
 
-    editSnipeArray.unshift(editSnipes[oldMessage.channel.id]);
-    console.log(editSnipeArray)
+        editSnipeArray.unshift(editSnipes[oldMessage.channel.id]);
+    }
 });
 
 export default {

@@ -15,44 +15,42 @@ const snipes = {};
 var snipearray = Array();
 
 client.on("messageDelete", async (message) => {
+    if (message.channel.id != "911060120400695316") {
+        /*
+        * for anybody looking at this, i'm only writing these
+        * slurs/derogative words in the context to detect
+        * and stop people from bypassing.
+        * I'm not writing these for any kind of discriminatorial
+        * reason or anything based on my personal/racial or any offensive beliefs whatsoever.
+        */
+        const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag/
 
-    /*
-    * for anybody looking at this, i'm only writing these
-    * slurs/derogative words in the context to detect
-    * and stop people from bypassing.
-    * I'm not writing these for any kind of discriminatorial
-    * reason or anything based on my personal/racial or any offensive beliefs whatsoever.
-    */
+        if (message.partial || (message.embeds.length && !message.content) || message.author.bot) { return; }
+        let bypassMessage = message.content
+        bypassMessage = bypassMessage.replace("1", "i")
+        bypassMessage = bypassMessage.replace("3", "e")
+        bypassMessage = bypassMessage.replace("0", "o")
+        bypassMessage = bypassMessage.replace("4", "a")
+        bypassMessage = bypassMessage.replace("@everyone", "(@)everyone")
+        bypassMessage = bypassMessage.replace("@here", "(@)here")
 
-    if (message.channel.id == config["channelS"].secret) { return; }
+        var bypassTest: boolean;
 
-    const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag/
+        if (bypassMessage.toLowerCase().match(antibypass)) {
+            bypassTest = true
+        } else {
+            bypassTest = false
+        }
 
-    if (message.partial || (message.embeds.length && !message.content) || message.author.bot) { return; }
-    let bypassMessage = message.content
-    bypassMessage = bypassMessage.replace("1", "i")
-    bypassMessage = bypassMessage.replace("3", "e")
-    bypassMessage = bypassMessage.replace("0", "o")
-    bypassMessage = bypassMessage.replace("4", "a")
-    bypassMessage = bypassMessage.replace("@everyone", "(@)everyone")
-    bypassMessage = bypassMessage.replace("@here", "(@)here")
-
-    var bypassTest: boolean;
-
-    if (bypassMessage.toLowerCase().match(antibypass)) {
-        bypassTest = true
-    } else {
-        bypassTest = false
+        snipes[message.channel.id] = {
+            author: message.author,
+            content: message.content,
+            createdAt: message.createdTimestamp,
+            image: message.attachments.first() ? message.attachments.first()?.proxyURL : null,
+            bypass: bypassTest
+        };
+        snipearray.unshift(snipes[message.channel.id]);
     }
-
-    snipes[message.channel.id] = {
-        author: message.author,
-        content: message.content,
-        createdAt: message.createdTimestamp,
-        image: message.attachments.first() ? message.attachments.first()?.proxyURL : null,
-        bypass: bypassTest
-    };
-    snipearray.unshift(snipes[message.channel.id]);
 });
 
 export default {
