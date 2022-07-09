@@ -38,8 +38,17 @@ export default {
             const adminchannels = new Array<string>("913948455766990888", "913948495537377330", "909224884939419708", "912004266347081768");
             let noLog: boolean | undefined;
 
+            let image: any = message.attachments.first() ? message.attachments.first()?.proxyURL : null
+            let messageExists: boolean = false;
+
             if (!args.length || args.length == 1) {
-                return ErrorEmbed()
+                messageExists = false;
+                if (image == null) {
+                    ErrorEmbed()
+                    return;
+                }
+            } else {
+                messageExists = true;
             }
 
             let DMmessage = args.slice(1).join(" ");
@@ -61,7 +70,15 @@ export default {
                     return;
                 } else {
                     client.users.fetch(`${SendID}`).then((user) => {
-                        try { user.send(`${DMmessage}`) } catch { return ErrorEmbed() }
+                        try {
+                            if (messageExists) {
+                                user.send(`${DMmessage}`)
+                            }
+
+                            if (image) {
+                                user.send(`${image}`)
+                            }
+                        } catch { return ErrorEmbed() }
 
                         if (message.channel.id != `${config["channels"].secret}`) {
                             const SentEmbed = new MessageEmbed()

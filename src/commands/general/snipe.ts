@@ -15,7 +15,10 @@ const snipes = {};
 var snipearray = Array();
 
 client.on("messageDelete", async (message) => {
-    if (message.channel.id != "911060120400695316") {
+    if (
+        message.channel.id != "911060120400695316" &&
+        message.channel.id != "688520264807350275"
+    ) {
         /*
         * for anybody looking at this, i'm only writing these
         * slurs/derogative words in the context to detect
