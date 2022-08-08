@@ -6,6 +6,7 @@ COPY package.json ./
 
 RUN apk update && apk upgrade \
 && apk add --no-cache nodejs-current \
+&& npm install -g npm@8.13.2 \
 && npm install -g nodemon \
 && npm install -g ts-node \
 && npm install typescript \
