@@ -26,7 +26,7 @@ client.on("messageDelete", async (message) => {
         * I'm not writing these for any kind of discriminatorial
         * reason or anything based on my personal/racial or any offensive beliefs whatsoever.
         */
-        const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag/
+        const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag|ngger|nig|nigr|ngr|nii|f@g|ggot|n1g|nigg/
 
         if (message.partial || (message.embeds.length && !message.content) || message.author.bot) { return; }
         let bypassMessage = message.content
