@@ -70,7 +70,7 @@ export default {
                 }
 
                 const SentEmbed = new MessageEmbed()
-                    .setDescription(`**Your suggestion has been sent!  <:yes:798918006876799008>**`)
+                    .setDescription(`**Your post has been sent!  <:yes:798918006876799008>**`)
                     .setColor(`#${config["color"].default}`)
                 message.channel.send({ embeds: [SentEmbed] })
 
