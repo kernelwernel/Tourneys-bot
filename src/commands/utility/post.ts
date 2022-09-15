@@ -27,7 +27,14 @@ export default {
 
             var attachment = message.attachments.first();
             var url = attachment ? attachment.url : null;
-
+/*
+            const TestEmbed = new MessageEmbed()
+                .setColor(`#${config["color"].discord}`)
+                .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
+                .setDescription(`test`)
+                attachment ? TestEmbed.setImage(`${url}`) : null;
+            cmdchannel.send({ embeds: [TestEmbed] });
+*/
             const CommandEmbed = new MessageEmbed()
                 .setColor(`#${config["color"].discord}`)
                 .setAuthor(`${message.author.tag}`, `${message.author.displayAvatarURL({dynamic: true})}`)
@@ -36,9 +43,10 @@ export default {
 
             if ((!args || args[0] == undefined) && url == null) {
                 const ErrorEmbed = new MessageEmbed()
-                    .setDescription(`**Please enter a valid suggestion!\nUsage:**\`\`\`;suggest <message>\`\`\``)
+                    .setDescription(`**Please enter a valid post!\nUsage:**\`\`\`;post <message> [image attachment]\`\`\``)
                     .setColor(`#${config["color"].error}`);
                 message.channel.send({ embeds: [ErrorEmbed] });
+                
                 return;
             } else {
                 var text = true
