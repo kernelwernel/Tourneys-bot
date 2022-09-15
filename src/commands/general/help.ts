@@ -115,7 +115,7 @@ export default {
                     },
                     {
                         name: `**${config.prefix}suggest <message>**`,
-                        value: `> - Sends a suggestion to <#${config["channels"].suggestions}>`,
+                        value: `> - Sends a suggestion to <#${config["channels"].posts}>`,
                         inline: false,
                     },
                     {
