@@ -10,7 +10,7 @@ export default {
     aliases: ["suggestion"],
 
     slash: false,
-    cooldown: "6h",
+    cooldown: "1h",
 
     ownerOnly: false,
     testOnly: true,
@@ -19,7 +19,7 @@ export default {
         try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
             
-            let suggestionchannel: TextChannel = client.channels.cache.get(config["channels"].suggestions) as TextChannel;
+            let suggestionchannel: TextChannel = client.channels.cache.get(config["channels"].posts) as TextChannel;
             let cmdchannel: TextChannel = client.channels.cache.get(config["channels"].cmd) as TextChannel;
             let discussion: string | undefined = args.join(" ");
 
