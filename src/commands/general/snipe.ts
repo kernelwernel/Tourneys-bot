@@ -59,6 +59,7 @@ client.on("messageDelete", async (message) => {
 export default {
     category: "General",
     description: "snipe command",
+    aliases: ["s"],
 
     slash: false,
 
