@@ -13,7 +13,6 @@ export default {
     slash: false,
     cooldown: "5s",
 
-    permissions: ["MANAGE_GUILD"],
     ownerOnly: true,
     testOnly: true,
 
@@ -29,6 +28,9 @@ export default {
 
         try {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
+            if(!message.member.guild.me.hasPermmission('MANAGE_GUILD')) {
+                if (message.author.id != 943610576490348614) { InvalidEmbed("This command is only reserved for admins"); }
+            }
 
             if (!args) {
                 InvalidEmbed("Please enter a valid argument. Usage:\n ;kill <local | server>")
