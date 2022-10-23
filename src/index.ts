@@ -103,6 +103,10 @@ client.on('ready', async (client) => {
 
 client.on('messageCreate', (message) => {
 
+    if (message.author.id == "855628445400694816") {
+        message.channel.send("I LOVE TRANS PEOPLE <:trolltrans:1033713948660355083>")
+    }
+
     const args = message.content.slice(config.prefix.length).trim().split(/ +/);
     const command = args.shift()?.toLowerCase();
 
