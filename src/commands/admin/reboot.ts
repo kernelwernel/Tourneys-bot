@@ -10,8 +10,7 @@ export default {
     aliases: ["refresh"],
 
     slash: false,
-    
-    permissions: ["MANAGE_GUILD"],
+
     ownerOnly: true,
     testOnly: true,
 
