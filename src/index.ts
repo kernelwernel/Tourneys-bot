@@ -102,16 +102,11 @@ client.on('ready', async (client) => {
 });
 
 client.on('messageCreate', (message) => {
-
-    console.log(Math.floor(Math.random() * 10))
-
     if (message.author.id == "855628445400694816") {
         if ((Math.floor(Math.random() * 10)) == 0) {
             message.reply("I LOVE TRANNIES <:trolltrans:1033713948660355083>")
         }
     }
-
-
 
     const args = message.content.slice(config.prefix.length).trim().split(/ +/);
     const command = args.shift()?.toLowerCase();
