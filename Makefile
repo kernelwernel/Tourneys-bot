@@ -30,6 +30,12 @@ heroku:
 herokurestart:
 	@heroku restart
 
+gh:
+	@git pull
+	@git add --all
+	@git commit -m "automated commit"
+	@git push
+
 herokupush:
 	@heroku container:login
 	@heroku container:push worker

@@ -73,6 +73,11 @@ export default {
                     }
 
                     await generalchannel.send(announce_message);
+
+                    const SentEmbed = new MessageEmbed()
+                        .setDescription(`**Message sent in <#906386495441612800>!**`)
+                        .setColor(`#${config["color"].default}`);
+                    message.channel.send({ embeds: [SentEmbed] })
                     
                     const CommandEmbed = new MessageEmbed()
                         .setColor(`#${config["color"].discord}`)
