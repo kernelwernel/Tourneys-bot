@@ -56,7 +56,7 @@
         "serverwarn": "⚠️ Server warning",
         "error": "🚫 Error",
         "alert": "🛃 Potential alt account detected",
-        "raid_alert": "🚨 POTENTIAL RAID ALERT",
+        "raid_alert": "🚨 POTENTIAL RAID ALERT"
     },
 
     "contributors": {
