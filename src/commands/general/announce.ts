@@ -39,10 +39,10 @@ export default {
                 return;
             }
 
-            if (!args.length) {
+            if (args.length == 0) {
                 return ErrorEmbed(error1)
             } else {
-                let announce_message = args.slice(1).join(" ");
+                let announce_message = args.join(" ");
                 announce_message.toString();
 
                 if (message.content.length < 2000) {
