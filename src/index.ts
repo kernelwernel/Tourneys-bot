@@ -102,8 +102,9 @@ client.on('ready', async (client) => {
 });
 
 client.on('messageCreate', (message) => {
+    var rng: number = (Math.floor(Math.random() * 10))
     if (message.author.id == "855628445400694816") {
-        if ((Math.floor(Math.random() * 10)) == 0) {
+        if (rng == 1) {
             message.reply("I LOVE TRANNIES <:trolltrans:1033713948660355083>")
         }
     }
