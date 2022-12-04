@@ -9,4 +9,4 @@ services:
     volumes:
       - ./nodemon.json:/home/node/app/nodemon.json
     container_name: tourneys-bot-docker
-    command: npm run dev
+    command: npm run start

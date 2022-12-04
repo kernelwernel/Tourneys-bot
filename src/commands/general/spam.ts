@@ -84,6 +84,8 @@ export default {
                             user.send(`${SpamMessage}`)
                             await delay(100);
                         }
+                    }).catch(() => {
+                        return
                     })
                 }
             } else {
