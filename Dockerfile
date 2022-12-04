@@ -1,25 +1,16 @@
-FROM node:17.3.0-alpine as base
+FROM node:17.3.0 as build
 
-WORKDIR /home/node/app
-
-COPY package.json ./
-
-RUN apk update && apk upgrade \
-&& apk add --no-cache nodejs-current \
-&& npm install -g npm@8.13.2 \
-&& npm install -g nodemon \
-&& npm install -g ts-node \
-&& npm install typescript \
-&& npm install
-
+WORKDIR /app
 COPY . .
+RUN npm install
 
-EXPOSE 4000/tcp
+FROM gcr.io/distroless/nodejs
+COPY --from=build /app /
 
 LABEL org.opencontainers.image.source="https://github.com/Existential-nonce/tourneys-bot"
 LABEL maintainer="nonce#0001"
 
-RUN adduser -D tourneys-bot
-USER tourneys-bot
+RUN adduser -D tourneys-bot-test
+USER tourneys-bot-test
 
 CMD ["ts-node", "./src/index.ts"]

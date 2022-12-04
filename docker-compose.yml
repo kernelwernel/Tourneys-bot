@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: base
+      target: build
     volumes:
       - ./nodemon.json:/home/node/app/nodemon.json
     container_name: tourneys-bot-docker
