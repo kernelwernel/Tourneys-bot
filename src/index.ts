@@ -77,7 +77,7 @@ client.on('ready', async (client) => {
         ],
         botOwners: [
             // ===== BOT OWNERS =====
-            "699310549573435423", // nonce#7570
+            "550095505347051546", // nonce#7570
             "768666879308202006", // spirals#1375
 
             // ===== BOT ADMINS =====
