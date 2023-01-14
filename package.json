@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "axios": "^0.26.1",
+    "axios": "^1.2.2",
     "discord-antialts": "^1.1.0",
     "discord-banners": "^1.0.1",
     "discord-get": "^0.2.0",
