@@ -55,21 +55,3 @@ export default {
         };
     }
 } as ICommand;
-
-
-function processA() {}
-function processB() {}
-function processC() {}
-var condition = null;
-
-
-
-
-if (condition == true) {
-    processA()
-    processB()
-    processC()
-}
-
-
-
