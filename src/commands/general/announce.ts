@@ -30,15 +30,6 @@ export default {
 
             const error1: string = `Invalid argument! Please try again.\nCorrect usage:\n${config.prefix}announce <message>`
 
-            if ((args[0] == "g") || args[0] == "general" || args[0] == "s" || args[0] == "secret") {
-                const BypassEmbed = new MessageEmbed()
-                    .setTitle(config["title"].warn)
-                    .setDescription(`**Sending channels to specific channels have been removed. Please use** \`;announce <message>\` **instead. (this will send the message to general by default)**`)
-                    .setColor(`#${config["color"].error}`)
-                message.channel.send({ embeds: [BypassEmbed] });
-                return;
-            }
-
             if (args.length == 0) {
                 return ErrorEmbed(error1)
             } else {

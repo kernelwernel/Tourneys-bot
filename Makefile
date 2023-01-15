@@ -8,7 +8,7 @@ IMG=tourneys_img
 all: run
 
 run:
-	@ts-node $(SRC) --module node16
+	@ts-node $(SRC)
 
 nodemon:
 	@nodemon $(SRC)
