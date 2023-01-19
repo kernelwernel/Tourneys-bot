@@ -56,7 +56,7 @@ dockerkill:
 update:
 	@git pull
 	@git clone https://github.com/Existential-Kernel/Tourneys-bot.git
-	@cd Tournets-bot/
+	@cd Tourneys-bot/
 	@mv src/ ..
 	@cd ..
-	@rm -rf Tournets-bot/
+	@rm -rf Tourneys-bot/
