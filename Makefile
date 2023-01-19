@@ -54,6 +54,7 @@ dockerkill:
 	@docker rm $(docker ps -a -q)
 
 update:
+	@git pull
 	@git clone https://github.com/Existential-Kernel/Tourneys-bot.git
 	@cd Tournets-bot/
 	@mv src/ ..

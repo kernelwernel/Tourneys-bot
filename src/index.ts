@@ -1,7 +1,6 @@
 import DiscordJS, { Client, Collection, Guild, GuildManager, Channel, Intents, Message, MessageEmbed, TextChannel } from "discord.js"
 import WOKCommands from "wokcommands"
 import path from "path"
-import testSchema from "./test-schema"
 import fs from "fs"
 import * as config from "./config.json"
 import LOG_TAGS from "./headers/logs"
