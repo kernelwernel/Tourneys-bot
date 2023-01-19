@@ -52,3 +52,10 @@ dockerkill:
 	@docker image prune -a
 	@docker stop $(docker ps -a -q)
 	@docker rm $(docker ps -a -q)
+
+update:
+	@git clone https://github.com/Existential-Kernel/Tourneys-bot.git
+	@cd Tournets-bot/
+	@mv src/ ..
+	@cd ..
+	@rm -rf Tournets-bot/
