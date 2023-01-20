@@ -4,7 +4,7 @@
     "discord-antialts": "^1.1.0",
     "discord-banners": "^1.0.1",
     "discord-get": "^0.2.0",
-    "discord.js": "^13.6.0",
+    "discord.js": "^14.7.1",
     "dotenv": "^16.0.0",
     "glob": "^8.0.1",
     "google-formify": "^1.0.2",
