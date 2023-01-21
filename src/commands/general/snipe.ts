@@ -19,8 +19,13 @@ client.on("messageDelete", async (message) => {
         message.channel.id != "911060120400695316" &&
         message.channel.id != "688520264807350275"
     ) {
-
         /*
+        * for anybody looking at this, i'm only writing these
+        * slurs/derogative words in the context to detect
+        * and stop people from bypassing.
+        * I'm not writing these for any kind of discriminatorial
+        * reason or anything based on my personal/racial or any offensive beliefs whatsoever.
+        */
         const antibypass = /nigger|niger|nigga|niga|kys|retard|faggot|fag|ngger|nig|nigr|ngr|nii|f@g|ggot|n1g|nigg/
 
         if (message.partial || (message.embeds.length && !message.content) || message.author.bot) { return; }
@@ -39,13 +44,13 @@ client.on("messageDelete", async (message) => {
         } else {
             bypassTest = false
         }
-        */
 
         snipes[message.channel.id] = {
             author: message.author,
             content: message.content,
             createdAt: message.createdTimestamp,
             image: message.attachments.first() ? message.attachments.first()?.proxyURL : null,
+            bypass: bypassTest
         };
         snipearray.unshift(snipes[message.channel.id]);
     }
@@ -75,6 +80,7 @@ export default {
             if (config["list"].blacklisted.includes(message.author.id)) { return; }
     
             var snipe: any = snipes[channel.id];
+            let bypass: boolean = false
 
             if (!snipe) {
                 const NoSnipeEmbed = new MessageEmbed()
@@ -95,9 +101,11 @@ export default {
             if (args[0] == undefined) {
                 const SnipeEmbed = new MessageEmbed()
                     .setAuthor(`${snipe.author.tag}`, `${snipe.author.displayAvatarURL({dynamic: true})}`)
-                    .setColor(`#${config["color"].default}`) 
+                    snipe.bypass ? SnipeEmbed.setColor(`#${config["color"].error}`) : SnipeEmbed.setColor(`#${config["color"].default}`) 
                     snipe.content ? SnipeEmbed.setDescription(`\`\`\`${snipe.content}\`\`\``) : null;
                     snipe.image ? SnipeEmbed.setImage(snipe.image) : null;
+                    snipe.bypass ? SnipeEmbed.setDescription(`\`\`\`The sniped message contains a bypassed word.\`\`\``) : null;
+                    snipe.bypass ? SnipeEmbed.setFooter(`blame folder for this he made me add this shit feature that i already removed smh`) : null;
                 await message.channel.send({ embeds: [SnipeEmbed] });
             } else {
                 if (!isNaN(Number(args[0]))) {
@@ -115,16 +123,17 @@ export default {
 
                     const SnipeEmbed = new MessageEmbed()
                         .setAuthor(`${snipearray[history].author.tag}`, `${snipearray[history].author.displayAvatarURL({dynamic: true})}`)
-                        .setColor(`#${config["color"].default}`) 
+                        snipearray[history].bypass ? SnipeEmbed.setColor(`#${config["color"].error}`) : SnipeEmbed.setColor(`#${config["color"].default}`) 
                         snipearray[history].content ? SnipeEmbed.setDescription(`\`\`\`${snipearray[history].content}\`\`\``) : null;
                         snipearray[history].image ? SnipeEmbed.setImage(snipearray[history].image) : null;
+                        snipearray[history].bypass ? SnipeEmbed.setDescription(`\`\`\`The sniped message contains a bypassed word.\`\`\``) : null;
+                        snipearray[history].bypass ? SnipeEmbed.setFooter(`blame folder for this he made me add this shit feature that i already removed smh`) : null;
                     await message.channel.send({ embeds: [SnipeEmbed] });
                 } else {
                     ErrorEmbed(`${args[0]} is not a valid number!`)
                     return
                 }
 /*
-
                 const SnipeEmbed = new MessageEmbed()
                     .setAuthor(`${snipe.author.tag[0]}`, `${snipe.author.displayAvatarURL({dynamic: true})}`)
                     bypass ? SnipeEmbed.setColor(`#${config["color"].error}`) : SnipeEmbed.setColor(`#${config["color"].default}`) 
